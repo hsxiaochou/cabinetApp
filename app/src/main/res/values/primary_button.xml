@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PrimaryButton" parent="@android:style/Widget.Button" mce_bogus="1">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/primary_radius</item>
+    </style>
+</resources>

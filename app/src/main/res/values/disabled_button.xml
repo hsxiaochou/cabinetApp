@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DisabledButton" parent="@android:style/Widget.Button" mce_bogus="1">
+        <item name="android:textColor">#999999</item>
+        <item name="android:background">@drawable/disabled_button</item>
+    </style>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--TODO:-->
+    <string-array name="lockboard_type">
+        <item>V5.0</item>
+        <item>V3.0</item>
+        <item>jubu</item>
+    </string-array>
+</resources>

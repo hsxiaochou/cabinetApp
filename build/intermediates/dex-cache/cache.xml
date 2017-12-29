@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\libs\zxing.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="72f66704fdaa80eaff09a47c72b4c6b3c0207965">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.networkbench.newlens.agent.android\nbs.newlens.agent\2.5.3\59870d0fabe51d98647530ab57662215b292c164\nbs.newlens.agent-2.5.3.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="59870d0fabe51d98647530ab57662215b292c164">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\libs\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+
+</items>

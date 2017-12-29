@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="550dp"
+    android:layout_height="match_parent"
+    android:background="#efefef">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gray_border"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开柜测试"
+                android:id="@+id/textView14"
+                android:padding="5dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999"></FrameLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择锁孔板"
+                    android:id="@+id/textView16"
+                    android:padding="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="1"
+                            android:id="@+id/test_board1" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="2"
+                            android:id="@+id/test_board2" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="3"
+                            android:id="@+id/test_board3" />
+                    </com.ss.testserial.Activity.SquareView>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="4"
+                            android:id="@+id/test_board4" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="5"
+                            android:id="@+id/test_board5" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_weight="1">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="6"
+                            android:id="@+id/test_board6" />
+                    </com.ss.testserial.Activity.SquareView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点击测试开锁"
+                    android:id="@+id/textView17"
+                    android:padding="5dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="1"
+                                android:id="@+id/config_lock1" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="2"
+                                android:id="@+id/config_lock2" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="3"
+                                android:id="@+id/config_lock3" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="4"
+                                android:id="@+id/config_lock4" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="5"
+                                android:id="@+id/config_lock5" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="6"
+                                android:id="@+id/config_lock6" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="7"
+                                android:id="@+id/config_lock7" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="8"
+                                android:id="@+id/config_lock8" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="9"
+                                android:id="@+id/config_lock9" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="10"
+                                android:id="@+id/config_lock10" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="11"
+                                android:id="@+id/config_lock11" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="12"
+                                android:id="@+id/config_lock12" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="13"
+                                android:id="@+id/config_lock13" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="14"
+                                android:id="@+id/config_lock14" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="15"
+                                android:id="@+id/config_lock15" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="16"
+                                android:id="@+id/config_lock16" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="17"
+                                android:id="@+id/config_lock17" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="18"
+                                android:id="@+id/config_lock18" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="19"
+                                android:id="@+id/config_lock19" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="20"
+                                android:id="@+id/config_lock20" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="21"
+                                android:id="@+id/config_lock21" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="22"
+                                android:id="@+id/config_lock22" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="23"
+                                android:id="@+id/config_lock23" />
+                        </com.ss.testserial.Activity.SquareView>
+                        <com.ss.testserial.Activity.SquareView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_weight="1">
+                            <Button
+                                style="@style/DisabledButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="24"
+                                android:id="@+id/config_lock24" />
+                        </com.ss.testserial.Activity.SquareView>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gray_border"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存配置"
+                android:id="@+id/textView18"
+                android:padding="5dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MAC地址：" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/config_mac" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="锁控板版本：" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/lockboard_type"
+                    android:id="@+id/config_lockboard_type" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择存在的锁控板"
+                    android:padding="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="1"
+                            android:id="@+id/save_board1" />
+                    </com.ss.testserial.Activity.SquareView>
+
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="2"
+                            android:id="@+id/save_board2" />
+                    </com.ss.testserial.Activity.SquareView>
+
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="3"
+                            android:id="@+id/save_board3" />
+                    </com.ss.testserial.Activity.SquareView>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="4"
+                            android:id="@+id/save_board4" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="5"
+                            android:id="@+id/save_board5" />
+                    </com.ss.testserial.Activity.SquareView>
+                    <com.ss.testserial.Activity.SquareView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp">
+                        <Button
+                            style="@style/DisabledButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="6"
+                            android:id="@+id/save_board6" />
+                    </com.ss.testserial.Activity.SquareView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="保存"
+                    android:id="@+id/save_config"
+                    android:background="@drawable/primary_radius_10"
+                    android:textColor="#fff"
+                    android:layout_margin="10dp"
+                    android:textSize="30sp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="退出程序"
+                    android:id="@+id/exit"
+                    android:background="@drawable/primary_radius_10"
+                    android:textColor="#fff"
+                    android:layout_margin="10dp"
+                    android:textSize="30sp"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
