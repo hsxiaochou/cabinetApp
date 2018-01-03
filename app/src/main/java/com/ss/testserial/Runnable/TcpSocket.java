@@ -135,7 +135,7 @@ public class TcpSocket implements Runnable {
                         if (Common.contact_phone == "null") {
                             Common.contact_phone = "";
                         }
-                        if (Common.address == "null") {          // 新增
+                        if (Common.address == "null") {         // 新增
                             Common.address = "";               // 新增
                         }                                      // 新增
                         Message message = new Message();
@@ -215,6 +215,7 @@ public class TcpSocket implements Runnable {
                             });
                         }
                     } else {
+
                         Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                     }
                     //取件开柜
