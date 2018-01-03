@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Wed Jan 03 14:31:23 CST 2018
+1.base=C\:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+2.path=lib/armeabi/libSerialAPI.so
+0.baseType=DIRECTORY
+2.base=C\:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+2.set=NATIVE_RESOURCE
+1.baseType=DIRECTORY
+count=3
+1.set=DEX
+0.path=lib/armeabi-v7a/libSerialAPI.so
+0.set=NATIVE_RESOURCE
+0.base=C\:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+2.baseType=DIRECTORY
+1.path=classes.dex
