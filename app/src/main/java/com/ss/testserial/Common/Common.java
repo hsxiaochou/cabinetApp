@@ -501,6 +501,7 @@ public class Common {
 
 
     public static void getUpVolume(int num) {
+        Log.e("TAG", "调节音量" + num);
         AudioManager mAudioManager = (AudioManager) Common.mainActivity.getSystemService(Context.AUDIO_SERVICE);
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * num / 100, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
     }

@@ -313,6 +313,10 @@ public class TcpSocket implements Runnable {
                         Common.log.write("升级：" + jsonObject.getJSONObject("data").getString("version"));
                         Common.update.update(jsonObject.getJSONObject("data").getString("url"));
                     }
+                } else if (classString.equals(Constants.VOLCLASS) && method.equals(Constants.VOLMETHOD)) {
+                    final String volumn = jsonObject.getJSONObject("data").getString("volumn");
+                    Log.e("TAG", "调节音量");
+                    Common.getUpVolume(Integer.parseInt(volumn));
                 } else {
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]");
                 }
