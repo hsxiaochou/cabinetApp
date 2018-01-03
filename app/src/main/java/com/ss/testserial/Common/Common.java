@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.nfc.Tag;
 import android.os.Environment;
 import android.os.Handler;
@@ -496,6 +497,12 @@ public class Common {
         Common.registerBoardThreadRun = true;
         Common.registerBoardThread = new Thread(new BoardInfo());
         Common.registerBoardThread.start();
+    }
+
+
+    public static void getUpVolume(int num) {
+        AudioManager mAudioManager = (AudioManager) Common.mainActivity.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * num / 100, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
     }
 
 

@@ -50,6 +50,8 @@ public class MainFrame extends Fragment {
     private TextView date = null;
     private TextView week = null;
 
+    private ImageButton query;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.frame_layout1, container, false);
@@ -136,6 +138,17 @@ public class MainFrame extends Fragment {
                 fragmentTransaction.commitAllowingStateLoss();
             }
         });
+
+        //查询按钮
+        this.query = (ImageButton) this.view.findViewById(R.id.query);
+        this.query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.getUpVolume(50);
+            }
+        });
+
+
         // 获取剩余柜子数
         Common.getCabinetLeft();
     }

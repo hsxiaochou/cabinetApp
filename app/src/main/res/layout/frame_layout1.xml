@@ -242,7 +242,7 @@
                 android:src="@drawable/get" />
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/query"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

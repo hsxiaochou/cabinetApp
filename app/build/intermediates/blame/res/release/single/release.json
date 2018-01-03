@@ -44,12 +44,12 @@
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\primary_border.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\release\\drawable_put.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\put.png"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\release\\drawable_keyboard_color.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\keyboard_color.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\release\\drawable_put.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\put.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\release\\drawable_keyboard_button_op.xml.flat",

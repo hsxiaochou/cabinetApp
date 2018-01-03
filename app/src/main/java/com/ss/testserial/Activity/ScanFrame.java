@@ -101,7 +101,9 @@ public class ScanFrame extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    Common.device.scanner.close();
+                    if (Common.device != null) {
+                        Common.device.scanner.close();
+                    }
                 } catch (Exception e) {
                     Log.e("TAG", e.toString());
                 }
@@ -114,7 +116,7 @@ public class ScanFrame extends Fragment {
             }
         });
         //初始化
-        if (Common.device.scanner != null) {
+        if (Common.device != null) {
             Common.device.scanner.setOnScanerReaded(new Scanner.ScannerInterface() {
                 @Override
                 public void onScanerReaded(String readData) {
@@ -183,7 +185,7 @@ public class ScanFrame extends Fragment {
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
                 Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
-                    lockId=Common.JUBU_ZeroId(lockId);
+                    lockId = Common.JUBU_ZeroId(lockId);
                     Jubu.openBox(boardId, lockId);
                     //回复开柜信息
                     try {
