@@ -122,7 +122,7 @@ public class TcpSocket implements Runnable {
             final JSONObject jsonObject = new JSONObject(decryptByDES);
             //验证签名sign
             if (Common.Md5FromJson(jsonObject).equals(jsonObject.getString("sign"))) {
-                Log.e("TAG", "开柜：" + jsonObject.toString());
+                Log.e("TAG", "接受的数据：" + jsonObject.toString());
                 //获取数据,根据返回执行操作
                 String classString = jsonObject.getString("class");
                 String method = jsonObject.getString("method");
@@ -308,6 +308,7 @@ public class TcpSocket implements Runnable {
                 } else if (classString.equals(Constants.UPDATE_CLASS) && method.equals(Constants.UPDATE_METHOD)) {
                     if (jsonObject.getJSONObject("data").getString("version").equals(Common.version)) {
                         Common.log.write("尝试升级但是版本一致");
+
                     } else {
                         //升级
                         Common.log.write("升级：" + jsonObject.getJSONObject("data").getString("version"));
@@ -317,6 +318,14 @@ public class TcpSocket implements Runnable {
                     final String volumn = jsonObject.getJSONObject("data").getString("volumn");
                     Log.e("TAG", "调节音量");
                     Common.getUpVolume(Integer.parseInt(volumn));
+                } else if (classString.equals(Constants.QUERY_CLASS) && method.equals(Constants.QUERY_METHOD)) {
+                    //自助查询信息返回
+                    Common.endLoad();
+                    //初始化
+                    Message msg = new Message();
+                    msg.what = Constants.QUERY_INFO;
+                    msg.obj = jsonObject.toString();
+                    Common.queryFrameHandler.sendMessage(msg);
                 } else {
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]");
                 }

@@ -26,6 +26,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ss.testserial.Activity.Config;
 import com.ss.testserial.Activity.GetFrame;
@@ -114,6 +115,10 @@ public class Common {
     public static Handler loginFrameHandler = null;
     //快递员投件页面handler
     public static Handler putFrameHandler = null;
+    //自助查询handler
+    public static Handler queryFrameHandler = null;
+
+
     //弹窗
     public static Dialog commonDialog = null;
     public static Dialog loadDialog = null;

@@ -48,12 +48,12 @@
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\gray_border.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_slide_out_left.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\anim\\slide_out_left.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_get.png.flat",
@@ -72,12 +72,20 @@
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\dialog_background.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_list_no_get_list.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\layout\\item_list_no_get_list.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_keyboard_button.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\keyboard_button.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_delete.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\delete.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_frame_layout_query.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\layout\\frame_layout_query.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_frame_layout3.xml.flat",
@@ -166,6 +174,10 @@
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_white_radius.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\white_radius.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_no_get_list.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\layout\\no_get_list.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_frame_config_password.xml.flat",

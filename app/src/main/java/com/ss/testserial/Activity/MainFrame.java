@@ -2,19 +2,13 @@ package com.ss.testserial.Activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +23,6 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,7 +135,12 @@ public class MainFrame extends Fragment {
         this.query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.getUpVolume(50);
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                QueryFrame queryFrame = new QueryFrame();
+                fragmentTransaction.replace(R.id.content, queryFrame);
+                Common.log.write("点击查询按钮");
+                fragmentTransaction.commitAllowingStateLoss();
             }
         });
 

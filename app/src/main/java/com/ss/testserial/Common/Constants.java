@@ -30,7 +30,7 @@ public interface Constants {
     /*TCP相关*/
     //服务器地址:端口
 //    public static final String HOST = "kdg.tuyingmjy.com";
-        public static final String HOST = "139.129.233.252";//测试
+    public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -87,6 +87,9 @@ public interface Constants {
     public static final int SWITCH_BANNER_MESSAGE = 0x16;
     //首页获取柜子剩余信息消息
     public static final int HOME_GET_GRID_LIST_MESSAGE = 0x17;       // 新增
+    //查询获取成功消息
+    public static final int QUERY_INFO = 0x18;
+
 
     /*和服务器端交互JSON*/
     //注册设备类名
@@ -145,6 +148,11 @@ public interface Constants {
     //增加调节音量
     public static final String VOLCLASS = "Dev";
     public static final String VOLMETHOD = "volumn";
+
+    //查询信息
+    public static final String QUERY_CLASS = "DevOp";
+    public static final String QUERY_METHOD = "packageInfo";
+
 
     /*其他*/
     //DES对称加密密钥

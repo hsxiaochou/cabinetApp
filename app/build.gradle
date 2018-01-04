@@ -30,5 +30,5 @@ dependencies {
     compile 'com.networkbench.newlens.agent.android:nbs.newlens.agent:2.5.3'
     compile files('libs/zxing.jar')
     compile files('libs/classes.jar')
-//    implementation files('libs/nbs.newlens.class.rewriter-2.5.3.jar')
+    compile 'com.google.code.gson:gson:2.8.2'
 }
