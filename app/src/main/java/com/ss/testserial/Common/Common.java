@@ -15,6 +15,7 @@ import android.nfc.Tag;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -52,6 +53,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -509,6 +512,21 @@ public class Common {
         Log.e("TAG", "调节音量" + num);
         AudioManager mAudioManager = (AudioManager) Common.mainActivity.getSystemService(Context.AUDIO_SERVICE);
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * num / 100, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+    }
+
+
+    public static void rebot() {
+
+        Process proc = null;  //关机
+        try {
+            proc = Runtime.getRuntime().exec(new String[]{"su", "-c", "reboot "});
+            proc.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

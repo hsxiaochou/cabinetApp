@@ -326,6 +326,14 @@ public class TcpSocket implements Runnable {
                     msg.what = Constants.QUERY_INFO;
                     msg.obj = jsonObject.toString();
                     Common.queryFrameHandler.sendMessage(msg);
+                } else if (classString.equals(Constants.GETQUERY_CODE_CLASS) && method.equals(Constants.GETQUERY_CODE_METHOD)) {
+                    //一键发送短信的信息返回
+                    Common.endLoad();
+                    Message msg = new Message();
+                    msg.what = Constants.QUERY_SEND_INFO;
+                    msg.obj = jsonObject.toString();
+                    Common.queryFrameHandler.sendMessage(msg);
+
                 } else {
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]");
                 }

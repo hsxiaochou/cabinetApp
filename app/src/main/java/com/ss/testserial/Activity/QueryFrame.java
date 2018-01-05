@@ -26,10 +26,9 @@ import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 import com.ss.testserial.Common.NoMenuEditText;
 import com.ss.testserial.R;
+import com.ss.testserial.bean.QueryInfoBackBean;
 import com.ss.testserial.bean.QueryInfoBean;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,6 +50,7 @@ public class QueryFrame extends Fragment {
     private Button get_query_info;
     private String code;
     private Button get_query_code;
+    private List<QueryInfoBean.DataBean.ListBean> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,18 +67,48 @@ public class QueryFrame extends Fragment {
         Common.queryFrameHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                String s = (String) msg.obj;
                 switch (msg.what) {
                     case Constants.QUERY_INFO:
-                        Log.e("TAG", (String) msg.obj);
-                        String s = (String) msg.obj;
                         QueryInfoBean queryInfoBean = new Gson().fromJson(s, QueryInfoBean.class);
-                        List<String> list = queryInfoBean.getData().getList();
+                        list = queryInfoBean.getData().getList();
                         if (list.size() > 0 && list != null) {
                             get_query_code.setVisibility(View.VISIBLE);
                             DealInfo(list);
                         } else {
                             Common.sendError("抱歉，暂时没有您的包裹，请核对物流！");
                         }
+                        break;
+
+                    case Constants.QUERY_SEND_INFO:
+                        QueryInfoBackBean queryInfoBackBean = new Gson().fromJson(s, QueryInfoBackBean.class);
+                        List<QueryInfoBackBean.DataBean.ListBean.FailBean> fail = queryInfoBackBean.getData().getList().getFail();
+                        List<QueryInfoBackBean.DataBean.ListBean.SuccessBean> success = queryInfoBackBean.getData().getList().getSuccess();
+                        String failmsg = "";
+                        String successmsg = "";
+                        if (fail.size() > 0) {
+                            for (int i = 0; i < fail.size(); i++) {
+                                failmsg += fail.get(i).getExpress_num() + " , ";
+                            }
+                        }
+                        if (success.size() > 0) {
+                            for (int i = 0; i < success.size(); i++) {
+                                successmsg += success.get(i).getExpress_num() + " , ";
+                            }
+                        }
+
+                        if (TextUtils.isEmpty(failmsg)) {
+                            Common.sendError("订单号：" + successmsg + "验证码补发成功；\n");
+                        } else {
+                            if (TextUtils.isEmpty(successmsg)) {
+                                Common.sendError("订单号：" + failmsg + "超过补发次数");
+                            } else {
+                                Common.sendError("订单号：" + successmsg + "验证码补发成功；\n" + "订单号：" + failmsg + "超过补发次数");
+                            }
+
+                        }
+
+
                         break;
                 }
             }
@@ -139,14 +169,18 @@ public class QueryFrame extends Fragment {
                 }
             }
         });
-        //获取代码按钮
+        //获取短信代码按钮
         this.get_query_code = (Button) this.view.findViewById(R.id.get_query_code);
         this.get_query_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                GetCode_Query();
+
+
             }
         });
+
 
         //软键盘
         this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD_NUM);
@@ -179,13 +213,35 @@ public class QueryFrame extends Fragment {
 
     }
 
+    private void GetCode_Query() {
+        //获取验证码
+        try {
+            JSONObject data = new JSONObject();
+            ArrayList<Object> arrylist = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                arrylist.add(list.get(i).getId());
+            }
+            data.put("id", arrylist);
+            JSONObject jsonObject = Common.packageJsonData(Constants.GETQUERY_CODE_CLASS, Constants.GETQUERY_CODE_METHOD, data);
+            if (Common.socket.isConnected() && !Common.socket.isClosed()) {
+                Common.startLoad();
+                Common.log.write("一键获取验证码：" + this.code);
+                Common.put.println(Common.encryptByDES(jsonObject.toString(), Constants.DES_KEY));
+                Common.put.flush();
+            } else {
+                Common.sendError("网络连接失败，请稍后再试");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 发送查询信息
      *
      * @param code
      */
     private void getInfo(String code) {
-        //获取验证码
         try {
             JSONObject data = new JSONObject();
             data.put("code_query", code);
@@ -204,16 +260,18 @@ public class QueryFrame extends Fragment {
     }
 
     //处理查询返回信息
-    public void DealInfo(List<String> list) {
+    public void DealInfo(List<QueryInfoBean.DataBean.ListBean> list) {
         this.lv_no_get_list.setAdapter(new MyAdapter(getActivity(), list));
     }
 
 
     class MyAdapter extends BaseAdapter {
-        private final List<String> list;
+
+
+        private final List<QueryInfoBean.DataBean.ListBean> list;
         LayoutInflater mInflater = null;
 
-        public MyAdapter(Context context, List<String> list) {
+        public MyAdapter(Context context, List<QueryInfoBean.DataBean.ListBean> list) {
             super();
             this.mInflater = LayoutInflater.from(context);
             this.list = list;
@@ -245,7 +303,7 @@ public class QueryFrame extends Fragment {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.ydh.setText(list.get(position));
+            holder.ydh.setText(list.get(position).getExpress_num());
             return convertView;
         }
     }

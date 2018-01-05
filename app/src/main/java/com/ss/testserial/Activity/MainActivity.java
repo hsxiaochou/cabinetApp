@@ -218,7 +218,7 @@ public class MainActivity extends Activity {
                             load.hide();
                             break;
                         case Constants.COMMON_ERROR_MESSAGE:
-                            Toast toast = Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
                             toast.show();
                             break;
@@ -309,6 +309,7 @@ public class MainActivity extends Activity {
                                 config_info = new JSONObject(new String(content, "UTF-8"));
                                 config_info.put("phone", Common.contact_phone);
                                 config_info.put("address", Common.address);
+
                                 out1 = new FileOutputStream(file1);
                                 out1.write(config_info.toString().getBytes("UTF-8"));
                                 out1.close();

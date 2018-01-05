@@ -2,6 +2,7 @@ package com.ss.testserial.Activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
+import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.BoardInfo;
 
@@ -141,6 +143,7 @@ public class MainFrame extends Fragment {
                 fragmentTransaction.replace(R.id.content, queryFrame);
                 Common.log.write("点击查询按钮");
                 fragmentTransaction.commitAllowingStateLoss();
+//                Common.rebot();
             }
         });
 

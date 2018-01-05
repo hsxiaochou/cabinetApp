@@ -89,6 +89,8 @@ public interface Constants {
     public static final int HOME_GET_GRID_LIST_MESSAGE = 0x17;       // 新增
     //查询获取成功消息
     public static final int QUERY_INFO = 0x18;
+    //一键查询消息返回
+    public static final int QUERY_SEND_INFO = 0x19;
 
 
     /*和服务器端交互JSON*/
@@ -152,6 +154,10 @@ public interface Constants {
     //查询信息
     public static final String QUERY_CLASS = "DevOp";
     public static final String QUERY_METHOD = "packageInfo";
+
+    //一键获取验证码
+    public static final String GETQUERY_CODE_CLASS = "DevOp";
+    public static final String GETQUERY_CODE_METHOD = "resendMsg";
 
 
     /*其他*/

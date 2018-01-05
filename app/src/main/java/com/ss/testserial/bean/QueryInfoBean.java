@@ -12,9 +12,9 @@ public class QueryInfoBean {
 
 
     /**
-     * sign : 946cc7fdd6c159eb67cbc4b5020a7681
-     * timestamp : 1515051176
-     * data : {"success":true,"list":["12345","22222","3333"]}
+     * sign : 1e15f6ac3696a54dd2c963a2f30aba9f
+     * timestamp : 1515135018
+     * data : {"success":true,"list":[{"id":306554,"phone":"15102868137","express_num":"112233"}]}
      * class : DevOp
      * method : packageInfo
      */
@@ -69,11 +69,11 @@ public class QueryInfoBean {
     public static class DataBean {
         /**
          * success : true
-         * list : ["12345","22222","3333"]
+         * list : [{"id":306554,"phone":"15102868137","express_num":"112233"}]
          */
 
         private boolean success;
-        private List<String> list;
+        private List<ListBean> list;
 
         public boolean isSuccess() {
             return success;
@@ -83,12 +83,48 @@ public class QueryInfoBean {
             this.success = success;
         }
 
-        public List<String> getList() {
+        public List<ListBean> getList() {
             return list;
         }
 
-        public void setList(List<String> list) {
+        public void setList(List<ListBean> list) {
             this.list = list;
+        }
+
+        public static class ListBean {
+            /**
+             * id : 306554
+             * phone : 15102868137
+             * express_num : 112233
+             */
+
+            private int id;
+            private String phone;
+            private String express_num;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public String getExpress_num() {
+                return express_num;
+            }
+
+            public void setExpress_num(String express_num) {
+                this.express_num = express_num;
+            }
         }
     }
 }

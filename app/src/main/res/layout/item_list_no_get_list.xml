@@ -15,9 +15,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:textSize="18sp"
             android:text="125334445" />
 
         <TextView
+            android:textSize="18sp"
             android:id="@+id/starut"
             android:layout_width="0dp"
             android:layout_height="match_parent"

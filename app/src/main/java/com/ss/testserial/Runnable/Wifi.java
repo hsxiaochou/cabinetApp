@@ -2,6 +2,7 @@ package com.ss.testserial.Runnable;
 
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.ss.testserial.Common.Common;
@@ -49,7 +50,15 @@ public class Wifi implements Runnable {
                 mac = this.getMac();
                 Thread.sleep(100);
             } while (mac == null);
+
             Common.mac = mac.replace(":", "").toUpperCase();
+            if (TextUtils.isEmpty(Common.getPreference("mac"))) {
+                Common.savePreference("mac", Common.mac);
+            }
+            if (!Common.mac.equals(Common.getPreference("mac"))) {
+                Common.mac = Common.getPreference("mac");
+            }
+
             Common.log.write("获取到MAC地址：" + Common.mac);
         } catch (InterruptedException e) {
             e.printStackTrace();
