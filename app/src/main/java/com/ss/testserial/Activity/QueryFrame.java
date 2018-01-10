@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.ss.testserial.Common.Common;
@@ -51,6 +50,7 @@ public class QueryFrame extends Fragment {
     private String code;
     private Button get_query_code;
     private List<QueryInfoBean.DataBean.ListBean> list;
+    private LinearLayout ll_query_msg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class QueryFrame extends Fragment {
                         list = queryInfoBean.getData().getList();
                         if (list.size() > 0 && list != null) {
                             get_query_code.setVisibility(View.VISIBLE);
+                            ll_query_msg.setVisibility(View.VISIBLE);
                             DealInfo(list);
                         } else {
                             Common.sendError("抱歉，暂时没有您的包裹，请核对物流！");
@@ -174,12 +175,11 @@ public class QueryFrame extends Fragment {
         this.get_query_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 GetCode_Query();
-
-
             }
         });
+
+        this.ll_query_msg = (LinearLayout) this.view.findViewById(R.id.ll_query_msg);
 
 
         //软键盘

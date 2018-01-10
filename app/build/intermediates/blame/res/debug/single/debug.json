@@ -48,12 +48,12 @@
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\gray_border.xml"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_slide_out_left.xml.flat",
-        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\anim\\slide_out_left.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_slide_out_left.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\anim\\slide_out_left.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_get.png.flat",

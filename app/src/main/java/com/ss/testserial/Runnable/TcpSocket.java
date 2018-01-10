@@ -74,6 +74,8 @@ public class TcpSocket implements Runnable {
                 e.printStackTrace();
                 Common.log.write("网络连接失败：" + e.getMessage());
                 Common.IS_REGIST = true;
+
+                Common.save("网络连接失败，正在重新连接...");
                 Common.sendError("网络连接失败，正在重新连接...");
                 try {
                     Thread.sleep(Constants.RECONNECT_DELAY);
@@ -109,6 +111,7 @@ public class TcpSocket implements Runnable {
      */
     private void dealInfo(String info) {
         try {
+            Log.e("TAG", info);
             Common.reboot_count_down = Constants.REBOOT_COUNT_DOWN;
             if (info.equals("1")) {
                 // 回复心跳包
@@ -142,17 +145,19 @@ public class TcpSocket implements Runnable {
                         message.what = Constants.REGISTER_SUCCESS_MESSAGE;
                         Common.mainActivityHandler.sendMessage(message);
                         Common.log.write("注册设备成功");
+                        Common.save("注册设备成功");
                     } else {
                         Common.register();
+                        Common.save("注册设备失败");
                         Common.log.write("注册设备失败：" + jsonObject.toString());
                     }
                     //上报状态
                 } else if (classString.equals(Constants.LOCK_STATUS_JSON_CLASS) && method.equals(Constants.LOCK_STATUS_JSON_METHOD)) {
+                    Common.save("返回上报状态");
                     Common.log.write("返回上报状态");
                     //开柜
+
                 } else if (classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) {
-
-
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         //板地址
                         final int boardId = jsonObject.getJSONObject("data").getInt("lock_board_id");
@@ -165,8 +170,7 @@ public class TcpSocket implements Runnable {
                         Common.backToMain();
                         // TODO:
                         Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-
-                        Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+                        Common.save("板子型号：" + Common.LockBoardVsersion + "远程开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
                         if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                             if (lockId == 22) {
                                 lockId = 0;
@@ -215,11 +219,12 @@ public class TcpSocket implements Runnable {
                             });
                         }
                     } else {
-
+                        Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息失败： " + jsonObject.getJSONObject("data").getString("msg"));
                         Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                     }
                     //取件开柜
                 } else if (classString.equals(Constants.GET_PACKAGE_JSON_CLASS) && method.equals(Constants.GET_PACKAGE_JSON_METHOD)) {
+                    Common.save("板子型号：" + Common.LockBoardVsersion + "返回取件开柜： " + jsonObject.toString());
                     Common.log.write("返回取件开柜：" + jsonObject.toString());
                     GetFrame.dealOpen(jsonObject);
                     //快递员登录
@@ -238,15 +243,16 @@ public class TcpSocket implements Runnable {
                     }
                     //预约投件
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD)) {
+                    Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
                 } else if (classString.equals(Constants.DEVICE_SCAN_CLASS) && method.equals(Constants.DEVICE_SCAN_METHOD)) {
+                    Common.save("返回扫码开柜： " + jsonObject.toString());
                     Common.log.write("返回扫码开柜：" + jsonObject.toString());
                     ScanFrame.dealOpen(jsonObject);
                     //获取柜子类型
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.GET_GRID_TYPE_METHOD)) {
                     Common.endLoad();
-                    Log.e("TAG", jsonObject.toString());
                     Common.log.write("返回获取柜子类型：" + jsonObject.toString());
                     try {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
@@ -270,6 +276,7 @@ public class TcpSocket implements Runnable {
                     }
                     //快递员投件
                 } else if (classString.equals(Constants.SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.SEND_PACKAGE_JSON_METHOD)) {
+                    Common.save("快递员现场投件开柜： " + jsonObject.toString());
                     Common.log.write("返回快递员现场投件开柜：" + jsonObject.toString());
                     try {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
@@ -334,8 +341,18 @@ public class TcpSocket implements Runnable {
                     msg.obj = jsonObject.toString();
                     Common.queryFrameHandler.sendMessage(msg);
 
+                } else if (classString.equals(Constants.LOG_UP_CLASS) && method.equals(Constants.LOG_UP_METHOD)) {
+                    //回收日志
+                    Common.uploadHttpURLConnection(Constants.path);
+                } else if (classString.equals(Constants.CLEAR_LOG_CLASS) && method.equals(Constants.CLEAR_LOG_METHOD)) {
+                    //清理日志
+                    Common.ClearLog();
+                } else if (classString.equals(Constants.REBOOT_CLASS) && method.equals(Constants.REBOOT_METHOD)) {
+                    //重启系统
+                    Common.rebot();
                 } else {
-                    Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]");
+                    Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
+                    Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "为止信息：" + jsonObject.toString());
                 }
             }
         } catch (Exception e) {

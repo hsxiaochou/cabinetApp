@@ -55,12 +55,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -164,6 +169,8 @@ public class Common {
 
     //网络断开重连注册
     public static boolean IS_REGIST = false;
+    private static HttpURLConnection conn;
+    private static boolean b;
 
     /**
      * MD5加密
@@ -348,6 +355,7 @@ public class Common {
     }
 
     public static void reboot(Activity mAppContext) {
+        Common.save(" 断网重启");
         AlarmManager mgr = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(mAppContext, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -421,34 +429,8 @@ public class Common {
         return lockid;
     }
 
-    // 用于格式化日期,作为日志文件名的一部分
-    private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
-            Locale.CHINA);
-    private static String path = Environment.getExternalStorageDirectory()
-            + "/crash/";
 
-    public static void save(String data) {
-        FileOutputStream out = null;
-        BufferedWriter writer = null;
-        try {
-            if (Environment.getExternalStorageState().equals(
-                    Environment.MEDIA_MOUNTED)) {
-                String time = formatter.format(new Date());
-                data = time + ":  " + data + "\n";
-                File dir = new File(path);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                FileOutputStream fos = new FileOutputStream(path + "data.txt", true);
-                fos.write(data.toString().getBytes());
-                fos.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
+    //注册板子
     public static void register() {
 //        if (Common.device == null) {
 //            Common.sendError("没有主板");
@@ -508,6 +490,7 @@ public class Common {
     }
 
 
+    //后台调节音量
     public static void getUpVolume(int num) {
         Log.e("TAG", "调节音量" + num);
         AudioManager mAudioManager = (AudioManager) Common.mainActivity.getSystemService(Context.AUDIO_SERVICE);
@@ -515,9 +498,9 @@ public class Common {
     }
 
 
+    //后台执行重启机器
     public static void rebot() {
-
-        Process proc = null;  //关机
+        Process proc = null;
         try {
             proc = Runtime.getRuntime().exec(new String[]{"su", "-c", "reboot "});
             proc.waitFor();
@@ -526,8 +509,93 @@ public class Common {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
 
+    // 用于格式化日期,作为日志文件名的一部分
+    private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+            Locale.CHINA);
+
+
+    //存储日志文件
+    public static void save(String data) {
+        try {
+            if (Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED)) {
+                String time = formatter.format(new Date());
+                data = time + ":     " + data + "\n";
+                File dir = new File(Constants.path);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                FileOutputStream fos = new FileOutputStream(Constants.path + "data.txt", true);
+                fos.write(data.toString().getBytes());
+                fos.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //定时清理日志文件
+    public static void ClearLog() {
+        File file = new File(Constants.path + "data.txt");
+        if (file != null) {
+            if (file.isFile()) {
+                file.delete();
+            }
+        }
     }
 
 
+    //回收日志文件
+    private static final String BOUNDARY = "---------------------------7db1c523809b2";//数据分割线
+
+    public static boolean uploadHttpURLConnection(String path) {
+        try {
+            //找到sdcard上的文件
+            File file = new File(path + "data.txt");
+            if (file != null) {
+                //仿Http协议发送数据方式进行拼接
+                StringBuilder sb = new StringBuilder();
+                sb.append("--" + BOUNDARY + "\r\n");
+                sb.append("Content-Disposition: form-data; name=\"mac\"" + "\r\n");
+                sb.append("\r\n");
+                sb.append(Common.getPreference("mac") + "\r\n");
+                sb.append("--" + BOUNDARY + "\r\n");
+                sb.append("Content-Disposition: form-data; name=\"log\"; filename=\"" + "log1" + "\"" + "\r\n");
+                sb.append("Content-Type: txt" + "\r\n");
+                sb.append("\r\n");
+                byte[] before = new byte[0];
+                before = sb.toString().getBytes("UTF-8");
+                byte[] after = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("UTF-8");
+                URL url = new URL(Constants.LOG_URL);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+                conn.setRequestProperty("Content-Length", String.valueOf(before.length + file.length() + after.length));
+                conn.setRequestProperty("HOST", Constants.LOG_HOST);
+                conn.setDoOutput(true);
+
+                OutputStream out = conn.getOutputStream();
+                InputStream in = new FileInputStream(file);
+
+                out.write(before);
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) != -1)
+                    out.write(buf, 0, len);
+
+                out.write(after);
+                in.close();
+                out.close();
+                b = conn.getResponseCode() == 200;
+                Log.e("TAG", "连接状态：" + b);
+            }
+        } catch (Exception e) {
+            Log.e("TAG", e.toString());
+            e.printStackTrace();
+        }
+        return b;
+    }
 }

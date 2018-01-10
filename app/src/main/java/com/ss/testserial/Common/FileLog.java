@@ -19,7 +19,7 @@ public class FileLog {
     private FileOutputStream out;
     private SimpleDateFormat dateFormat;
 
-    public FileLog(){
+    public FileLog() {
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         /*
         this.file = new File(Environment.getExternalStorageDirectory(),Constants.UNCAUGHT_EXCEPTION_LOG_FIEL+new SimpleDateFormat("yyyy_MM_dd").format(new Date())+".log");
@@ -31,7 +31,8 @@ public class FileLog {
         }
         */
     }
-    public void write(String log){
+
+    public void write(String log) {
         //Log.d("yougoto",("["+this.dateFormat.format(new Date())+"]:"+log+"\n"));
 /*
         try {
@@ -41,8 +42,10 @@ public class FileLog {
             e.printStackTrace();
         }
         */
+
     }
-    public void close(){
+
+    public void close() {
         try {
             this.out.close();
         } catch (IOException e) {

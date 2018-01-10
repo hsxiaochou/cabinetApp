@@ -224,7 +224,7 @@ public class GetFrame extends Fragment {
                 final int logId = jsonObject.getJSONObject("data").getInt("logId");
                 Common.sendError("将打开" + lockCode + "号柜");
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-                Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+                Common.save("取件开柜   " + "板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                 // TODO:
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                     if (lockId == 22) {
@@ -278,6 +278,7 @@ public class GetFrame extends Fragment {
 
             } else {
                 try {
+                    Common.save("取件失败：" + jsonObject.getJSONObject("data").getString("msg"));//记录板子有关信息到文件中
                     //取件超时
                     String url = jsonObject.getJSONObject("data").getString("payUrl");
                     Message message1 = new Message();
@@ -285,10 +286,12 @@ public class GetFrame extends Fragment {
                     message1.what = Constants.GET_PACKAGE_ERROR_MESSAGE;
                     Common.getFrameHandler.sendMessage(message1);
                 } catch (Exception e) {
+                    Common.save("取件异常");//记录板子有关信息到文件中
                     Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                 }
             }
         } catch (Exception e) {
+            Common.save("取件异常");
         }
     }
 }

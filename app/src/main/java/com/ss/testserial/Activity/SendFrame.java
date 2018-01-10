@@ -238,9 +238,9 @@ public class SendFrame extends Fragment {
                 Common.sendError("打开柜子");
                 // TODO:
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-                Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+                Common.save("预约投件：  " + "板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
-                    lockId=Common.JUBU_ZeroId(lockId);
+                    lockId = Common.JUBU_ZeroId(lockId);
                     Jubu.openBox(boardId, lockId);
                     //回复开柜信息
                     try {
@@ -289,9 +289,11 @@ public class SendFrame extends Fragment {
                     });
                 }
             } else {
+                Common.save("预约投件失败：" + jsonObject.getJSONObject("data").getString("msg"));
                 Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
             }
         } catch (Exception e) {
+            Common.save("预约投件失败：" + e.toString());
             e.printStackTrace();
         }
     }

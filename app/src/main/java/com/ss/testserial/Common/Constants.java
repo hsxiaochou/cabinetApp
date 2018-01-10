@@ -1,5 +1,7 @@
 package com.ss.testserial.Common;
 
+import android.os.Environment;
+
 /**
  * Created by Listen on 2016/9/9.
  */
@@ -35,6 +37,12 @@ public interface Constants {
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
     public static final int PORT = 8282;
+    //日志上传host
+
+    public static final String LOG_HOST = "www.cdmengjinyuan.com:8080";
+    public static final String LOG_URL = "http://" + LOG_HOST + "/index.php?m=Api&c=Api&a=uploadCabinetLog";
+
+
     //服务器重连间隔
     public static final int RECONNECT_DELAY = 10000;
     //连接最大阻塞时间
@@ -158,6 +166,17 @@ public interface Constants {
     //一键获取验证码
     public static final String GETQUERY_CODE_CLASS = "DevOp";
     public static final String GETQUERY_CODE_METHOD = "resendMsg";
+    //回收日志
+    public static final String LOG_UP_CLASS = "Dev";
+    public static final String LOG_UP_METHOD = "uploadLog";
+
+    //定时清理日志
+    public static final String CLEAR_LOG_CLASS = "Dev";
+    public static final String CLEAR_LOG_METHOD = "clearLog";
+
+    //定时开机
+    public static final String REBOOT_CLASS = "Dev";
+    public static final String REBOOT_METHOD = "reboot";
 
 
     /*其他*/
@@ -182,5 +201,7 @@ public interface Constants {
 
 
     public static final String SP = "configuration";
+    public static final String path = Environment.getExternalStorageDirectory()
+            + "/crash/";
 
 }

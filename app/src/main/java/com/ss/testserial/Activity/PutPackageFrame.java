@@ -366,7 +366,7 @@ public class PutPackageFrame extends Fragment {
             Common.openAgain(grid_info);
         } else {
             final int finalLockId = lockId;
-            int i = Common.device.openGrid(boardId, lockId, new OpenGridListener() {
+            Common.device.openGrid(boardId, lockId, new OpenGridListener() {
                 @Override
                 public void openEnd() {
                     //回复开柜信息
@@ -394,8 +394,6 @@ public class PutPackageFrame extends Fragment {
                     Common.openAgain(grid_info);
                 }
             });
-
-            Log.e("TAG", "开柜反馈：" + i);
         }
     }
 
