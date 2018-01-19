@@ -228,8 +228,6 @@ public class PutPackageFrame extends Fragment {
                 editText.setText("");
             }
         });
-
-
         this.keyBoard.setKeyBoardListener(new KeyBoard.KeyBoardListener() {
             @Override
             public void delete() {
@@ -296,19 +294,23 @@ public class PutPackageFrame extends Fragment {
      * @param box_type 柜子类型
      */
     private void putPackage(int box_type) {
+        Common.isOpen = false;
         String express_number = this.express.getText().toString();
         if (express_number.length() == 0) {
             Common.sendError("请输入快递单号");
+            Common.isOpen = true;
             return;
         }
         String phone_number = this.phone.getText().toString();
         if (!Common.isPhone(phone_number)) {
             Common.sendError("请输入正确的手机号");
+            Common.isOpen = true;
             return;
         }
         //判断两次输入电话是否一致
         if (!this.phone2.getText().toString().equals(phone_number)) {
             Common.sendError("两次输入手机号不一致");
+            Common.isOpen = true;
             return;
         }
         Common.startLoad();
@@ -322,6 +324,7 @@ public class PutPackageFrame extends Fragment {
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.SEND_PACKAGE_JSON_CLASS, Constants.SEND_PACKAGE_JSON_METHOD, putJson).toString(), Constants.DES_KEY));
             Common.put.flush();
         } catch (Exception e) {
+            Common.isOpen = true;
             e.printStackTrace();
         }
     }

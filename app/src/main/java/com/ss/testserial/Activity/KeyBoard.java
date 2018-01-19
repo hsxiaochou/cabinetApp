@@ -22,8 +22,10 @@ public class KeyBoard {
     private Button[] buttons;
     private JSONObject key;
     private int[] id;
+    private final int my_key_board;
 
     public KeyBoard(View view, int key_board) {
+        my_key_board = key_board;
         if (key_board == Constants.KEY_BOARD) {
             this.keyboard = (LinearLayout) view.findViewById(R.id.keyboard);
         } else {
@@ -38,13 +40,10 @@ public class KeyBoard {
                 public void onClick(View view) {
                     try {
                         String s = key.getString(String.valueOf(view.getId()));
-                        int selectionStart = editText.getSelectionStart();
                         if (s.equals("delete")) {
-                            Common.log.write("键盘删除");
                             keyBoardListener.delete();
                             return;
                         } else {
-                            Common.log.write("输入：" + s);
                             keyBoardListener.input(s);
                             return;
                         }
@@ -68,10 +67,17 @@ public class KeyBoard {
 
     private void initKey() {
         this.buttons = new Button[38];
-        this.id = new int[]{R.id.keyboard0, R.id.keyboard1, R.id.keyboard2, R.id.keyboard3, R.id.keyboard4, R.id.keyboard5, R.id.keyboard6, R.id.keyboard7, R.id.keyboard8, R.id.keyboard9,
-                R.id.keyboardQ, R.id.keyboardW, R.id.keyboardE, R.id.keyboardR, R.id.keyboardT, R.id.keyboardY, R.id.keyboardU, R.id.keyboardI, R.id.keyboardO, R.id.keyboardP,
-                R.id.keyboardA, R.id.keyboardS, R.id.keyboardD, R.id.keyboardF, R.id.keyboardG, R.id.keyboardH, R.id.keyboardJ, R.id.keyboardK, R.id.keyboardL,
-                R.id.keyboardZ, R.id.keyboardX, R.id.keyboardC, R.id.keyboardV, R.id.keyboardB, R.id.keyboardN, R.id.keyboardM, R.id.keyboard_delete};
+        if (my_key_board == Constants.KEY_BOARD) {
+            this.id = new int[]{R.id.keyboard0, R.id.keyboard1, R.id.keyboard2, R.id.keyboard3, R.id.keyboard4, R.id.keyboard5, R.id.keyboard6, R.id.keyboard7, R.id.keyboard8, R.id.keyboard9,
+                    R.id.keyboardQ, R.id.keyboardW, R.id.keyboardE, R.id.keyboardR, R.id.keyboardT, R.id.keyboardY, R.id.keyboardU, R.id.keyboardI, R.id.keyboardO, R.id.keyboardP,
+                    R.id.keyboardA, R.id.keyboardS, R.id.keyboardD, R.id.keyboardF, R.id.keyboardG, R.id.keyboardH, R.id.keyboardJ, R.id.keyboardK, R.id.keyboardL,
+                    R.id.keyboardZ, R.id.keyboardX, R.id.keyboardC, R.id.keyboardV, R.id.keyboardB, R.id.keyboardN, R.id.keyboardM, R.id.keyboard_delete};
+        } else {
+            this.id = new int[]{R.id.keyboard0_num, R.id.keyboard1_num, R.id.keyboard2_mun, R.id.keyboard3_num, R.id.keyboard4_num, R.id.keyboard5_num, R.id.keyboard6_num, R.id.keyboard7_num, R.id.keyboard8_num, R.id.keyboard9_num,
+                    R.id.keyboardQ, R.id.keyboardW, R.id.keyboardE, R.id.keyboardR, R.id.keyboardT, R.id.keyboardY, R.id.keyboardU, R.id.keyboardI, R.id.keyboardO, R.id.keyboardP,
+                    R.id.keyboardA, R.id.keyboardS, R.id.keyboardD, R.id.keyboardF, R.id.keyboardG, R.id.keyboardH, R.id.keyboardJ, R.id.keyboardK, R.id.keyboardL,
+                    R.id.keyboardZ, R.id.keyboardX, R.id.keyboardC, R.id.keyboardV, R.id.keyboardB, R.id.keyboardN, R.id.keyboardM, R.id.keyboard_delete_num};
+        }
         try {
             this.key = new JSONObject();
             this.key.put("" + id[0], "0");
@@ -122,3 +128,4 @@ public class KeyBoard {
         public void input(String c);
     }
 }
+

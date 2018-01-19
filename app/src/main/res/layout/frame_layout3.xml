@@ -119,10 +119,19 @@
         android:layout_height="372dp"
         android:layout_gravity="center_horizontal|bottom">
 
+
         <include
             layout="@layout/keyboard"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <include
+            layout="@layout/keyboard_num"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
     </FrameLayout>
+
 
 </LinearLayout>

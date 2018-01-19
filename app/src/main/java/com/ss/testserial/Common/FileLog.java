@@ -33,6 +33,7 @@ public class FileLog {
     }
 
     public void write(String log) {
+        Common.save(log);
         //Log.d("yougoto",("["+this.dateFormat.format(new Date())+"]:"+log+"\n"));
 /*
         try {

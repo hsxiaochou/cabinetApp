@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ss.testserial"
-    android:versionCode="463"
-    android:versionName="4.6.3" >
+    android:versionCode="466"
+    android:versionName="4.6.6" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -54,6 +54,13 @@
                 <action android:name="com.hzjubu.action.ACK_OPEN_DOOR" />
             </intent-filter>
         </receiver>
+
+        <activity android:name="com.ss.testserial.Activity.VideoActivity" />
+
+        <service
+            android:name="com.ss.testserial.Common.download.DownloadService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

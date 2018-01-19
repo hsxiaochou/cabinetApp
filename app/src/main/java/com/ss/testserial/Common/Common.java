@@ -7,10 +7,12 @@ import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.os.Environment;
 import android.os.Handler;
@@ -21,19 +23,23 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.ss.testserial.Activity.Config;
 import com.ss.testserial.Activity.GetFrame;
 import com.ss.testserial.Activity.Layout3Frame;
 import com.ss.testserial.Activity.MainActivity;
 import com.ss.testserial.Activity.MainFrame;
+import com.ss.testserial.Activity.MyDialog;
 import com.ss.testserial.Activity.PutPackageFrame;
 import com.ss.testserial.Activity.SendFrame;
 import com.ss.testserial.JNI.DeviceInterface;
@@ -73,6 +79,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,6 +88,8 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+
+import static android.media.MediaPlayer.*;
 
 /**
  * Created by Listen on 2016/9/9.
@@ -156,6 +165,9 @@ public class Common {
     public static String contact_phone = "";
     public static String address = "";
     public static MainFrame mainFrame = null;
+
+    //开柜判断
+    public static boolean isOpen = true;
 
     /*banner*/
     public static int banners[] = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
@@ -301,6 +313,7 @@ public class Common {
     }
 
     public static void sendError(String message) {
+        Common.save(message);
         Message msg = new Message();
         msg.what = Constants.COMMON_ERROR_MESSAGE;
         msg.obj = message;
@@ -500,6 +513,7 @@ public class Common {
 
     //后台执行重启机器
     public static void rebot() {
+        Common.save("重启机器！");
         Process proc = null;
         try {
             proc = Runtime.getRuntime().exec(new String[]{"su", "-c", "reboot "});
@@ -512,7 +526,7 @@ public class Common {
     }
 
     // 用于格式化日期,作为日志文件名的一部分
-    private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+    private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd  HH-mm-ss",
             Locale.CHINA);
 
 
@@ -573,7 +587,7 @@ public class Common {
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
                 conn.setRequestProperty("Content-Length", String.valueOf(before.length + file.length() + after.length));
-                conn.setRequestProperty("HOST", Constants.LOG_HOST);
+                conn.setRequestProperty("HOST", Constants.HOST);
                 conn.setDoOutput(true);
 
                 OutputStream out = conn.getOutputStream();
@@ -597,5 +611,35 @@ public class Common {
             e.printStackTrace();
         }
         return b;
+    }
+
+
+    //遍历视频文件夹里的视频文件
+    public static final List<File> mFileList = new ArrayList<>();
+
+    public static List<File> getFile(File file) {
+        File[] fileArray = file.listFiles();
+        for (File f : fileArray) {
+            if (f.isFile()) {
+                if (f.getName().endsWith(".mp4")) {
+                    mFileList.add(f);
+                }
+            } else {
+                getFile(f);
+            }
+        }
+        return mFileList;
+    }
+
+    //获取视频下载json
+    public static void GetVideoJson() {
+        JSONObject getCodeJson = new JSONObject();
+        try {
+            getCodeJson.put("mac", Common.mac);
+            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GETVIDEO_CLASS, Constants.GETVIDEO_METHOD, getCodeJson).toString(), Constants.DES_KEY));
+            Common.put.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

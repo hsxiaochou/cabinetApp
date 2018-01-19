@@ -8,12 +8,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
@@ -38,6 +40,9 @@ public class Layout3Frame extends Fragment {
     PutPackageFrame putPackageFrame = new PutPackageFrame();
     //获取验证码倒计时
     public static int countDown = 150;
+    private LinearLayout keyboard_num;
+    private LinearLayout all_keyboard;
+    private Button clear_all;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -93,6 +98,23 @@ public class Layout3Frame extends Fragment {
                 }
             }
         };
+
+
+        //数字全键盘
+        keyboard_num = (LinearLayout) this.view.findViewById(R.id.keyboard_num);
+        all_keyboard = (LinearLayout) this.view.findViewById(R.id.keyboard);
+
+
+        //清空所有
+        clear_all = (Button) this.view.findViewById(R.id.clear_all);
+        clear_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View myview) {
+                EditText editText = (EditText) view.findFocus();
+                editText.setText("");
+            }
+        });
+
         //返回按钮
         this.back = (ImageView) this.view.findViewById(R.id.back2layout1);
         this.back.setOnClickListener(new View.OnClickListener() {
@@ -107,18 +129,20 @@ public class Layout3Frame extends Fragment {
         });
         //手机号
         this.phone = (EditText) this.view.findViewById(R.id.phone);
-//        this.phone.setInputType(InputType.TYPE_NULL);
-//        this.phone.setTextIsSelectable(false);
-//        this.phone.setLongClickable(false);
         Common.disableShowSoftInput(this.phone);            //my修改
 
         this.phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean focus) {
+            public void onFocusChange(View myview, boolean focus) {
                 if (focus) {
                     phone.setBackgroundResource(R.drawable.pink_border);
+                    keyboard_num.setVisibility(View.VISIBLE);
+                    all_keyboard.setVisibility(View.GONE);
+                    //英文软键盘
                     keyBoard.setView(phone);
                 } else {
+                    keyboard_num.setVisibility(View.GONE);
+                    all_keyboard.setVisibility(View.VISIBLE);
                     phone.setBackgroundResource(R.drawable.gray_border);
                 }
             }
@@ -127,12 +151,14 @@ public class Layout3Frame extends Fragment {
         this.loginCode = (EditText) this.view.findViewById(R.id.loginCode);
         this.loginCode.setInputType(InputType.TYPE_NULL);
         this.loginCode.setTransformationMethod(new PasswordTransformationMethod());
-
         this.loginCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean focus) {
+            public void onFocusChange(View myview, boolean focus) {
                 if (focus) {
                     loginCode.setBackgroundResource(R.drawable.pink_border);
+                    //英文软键盘
+                    keyBoard = new KeyBoard(view, Constants.KEY_BOARD);
+                    setkeyboard();
                     keyBoard.setView(loginCode);
                 } else {
                     loginCode.setBackgroundResource(R.drawable.gray_border);
@@ -172,11 +198,17 @@ public class Layout3Frame extends Fragment {
                 }
                 //登录
                 loginFun(number, code);
-
             }
         });
-        //软键盘
-        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD);
+
+
+        //英文软键盘
+        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD_NUM);
+        setkeyboard();
+        this.phone.requestFocus();
+    }
+
+    private void setkeyboard() {
         this.keyBoard.setKeyBoardListener(new KeyBoard.KeyBoardListener() {
             @Override
             public void delete() {
@@ -195,9 +227,7 @@ public class Layout3Frame extends Fragment {
             public void input(String c) {
                 try {
                     EditText editText = (EditText) view.findFocus();
-//                    editText.append(c);
                     Common.insert(editText, c);     //在光标后插入文字
-
                     if (editText.getId() == R.id.phone && Common.isPhone(editText.getText().toString())) {
                         getLoginCode.setEnabled(true);
                         getLoginCode.setTextColor(Color.parseColor("#ffffff"));
@@ -212,7 +242,6 @@ public class Layout3Frame extends Fragment {
                 }
             }
         });
-        this.phone.requestFocus();
     }
 
     /**

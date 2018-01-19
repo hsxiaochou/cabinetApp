@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,13 +138,19 @@ public class MainFrame extends Fragment {
         this.query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                QueryFrame queryFrame = new QueryFrame();
-                fragmentTransaction.replace(R.id.content, queryFrame);
-                Common.log.write("点击查询按钮");
-                fragmentTransaction.commitAllowingStateLoss();
+//                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+//                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//                QueryFrame queryFrame = new QueryFrame();
+//                fragmentTransaction.replace(R.id.content, queryFrame);
+//                Common.log.write("点击查询按钮");
+//                fragmentTransaction.commitAllowingStateLoss();
 
+                Common.GetVideoJson();
+
+//                Message msg = new Message();
+//                msg.what = Constants.GET_VIDEO;
+//                msg.obj = "";
+//                Common.mainActivityHandler.sendMessage(msg);
             }
         });
         // 获取剩余柜子数

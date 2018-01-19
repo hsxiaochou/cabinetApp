@@ -3,13 +3,17 @@ package com.ss.testserial.Activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,11 +29,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.gson.Gson;
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 import com.ss.testserial.Common.CrashHandler;
 import com.ss.testserial.Common.FileLog;
 import com.ss.testserial.Common.Loading;
+import com.ss.testserial.Common.download.DownloadService;
 import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.TcpSocket;
@@ -46,14 +52,31 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.networkbench.agent.impl.NBSAppAgent;
+import com.ss.testserial.bean.GetVideoUrl;
 
 public class MainActivity extends Activity {
     private ImageSwitcher bannerSwitch = null;
     private Loading load = null;
     // 新增图片修改
     private ImageSwitcher bannerSwitch1 = null;
+
+    private DownloadService.DownloadBinder downloadBinder;
+    private ServiceConnection connection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e("TAG", "5555");
+            downloadBinder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +88,12 @@ public class MainActivity extends Activity {
         NBSAppAgent.setLicenseKey("f1122c57726f4d3ba066e525d981eeae").withLocationServiceEnabled(true).enableLogging(true).start(this.getApplicationContext());
         // Log last 100 messages
         NBSAppAgent.setLogging(100, "AndroidRuntime");
+
+        Intent intent = new Intent(this, DownloadService.class);
+        //这一点至关重要，因为启动服务可以保证DownloadService一直在后台运行，绑定服务则可以让MaiinActivity和DownloadService
+        //进行通信，因此两个方法的调用都必不可少。
+        startService(intent);  //启动服务
+        bindService(intent, connection, BIND_AUTO_CREATE);//绑定服务
 
         Common.log = new FileLog();
         Common.log.write("打开优裹徒");
@@ -393,12 +422,28 @@ public class MainActivity extends Activity {
                                 }
                             }
                             break;
+                        case Constants.GET_VIDEO:
+                            //下载视频json返回
+                            String vediojson = (String) msg.obj;
+                            GetVideoUrl getVideoUrl = new Gson().fromJson(vediojson, GetVideoUrl.class);
+                            if (getVideoUrl.getData().isSwitchX()) {
+                                Log.e("TAG", "开始视频");
+                                List<String> video = getVideoUrl.getData().getVideo();
+                            }
+                            break;
                         default:
                             break;
                     }
                 }
             };
         }
+
+    }
+
+
+    private void startService() {
+        String url = "http://www.cdmengjinyuan.com:8080/Public/adVideo/B0F1EC21B552/e2ef671e72279c5d616d3362aa38b4a0.mp4";
+        downloadBinder.startDownload(url);
 
     }
 

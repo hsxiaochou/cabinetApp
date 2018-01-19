@@ -26,9 +26,12 @@ repositories {
     mavenCentral()
 }
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:19.+'
     compile 'com.networkbench.newlens.agent.android:nbs.newlens.agent:2.5.3'
     compile files('libs/zxing.jar')
     compile files('libs/classes.jar')
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.googlecode.mp4parser:isoparser:1.1.21'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 }

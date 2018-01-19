@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ss.testserial"
-    android:versionCode="463"
-    android:versionName="4.6.3">
+    android:versionCode="466"
+    android:versionName="4.6.6">
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 允许应用程序完全使用网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <!-- sdcard权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -44,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".Common.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -51,6 +52,12 @@
                 <action android:name="com.hzjubu.action.ACK_OPEN_DOOR" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Activity.VideoActivity"></activity>
+        <service
+            android:name=".Common.download.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

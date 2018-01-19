@@ -58,7 +58,6 @@ public class Wifi implements Runnable {
             if (!Common.mac.equals(Common.getPreference("mac"))) {
                 Common.mac = Common.getPreference("mac");
             }
-
             Common.log.write("获取到MAC地址：" + Common.mac);
         } catch (InterruptedException e) {
             e.printStackTrace();

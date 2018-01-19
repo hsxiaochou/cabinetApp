@@ -39,8 +39,8 @@ public interface Constants {
     public static final int PORT = 8282;
     //日志上传host
 
-    public static final String LOG_HOST = "www.cdmengjinyuan.com:8080";
-    public static final String LOG_URL = "http://" + LOG_HOST + "/index.php?m=Api&c=Api&a=uploadCabinetLog";
+
+    public static final String LOG_URL = "http://" + HOST + "/index.php?m=Api&c=Api&a=uploadCabinetLog";
 
 
     //服务器重连间隔
@@ -178,6 +178,10 @@ public interface Constants {
     public static final String REBOOT_CLASS = "Dev";
     public static final String REBOOT_METHOD = "reboot";
 
+    //获取下载视频json
+    public static final String GETVIDEO_CLASS = "DevOp";
+    public static final String GETVIDEO_METHOD = "getAdVideo";
+
 
     /*其他*/
     //DES对称加密密钥
@@ -196,12 +200,13 @@ public interface Constants {
     public static final int SWITCH_BANNER_TIME = 10 * 1000;
     public static final int REBOOT_COUNT_DOWN = 18;
     public static final int LOAD_RUN_TIME_OUT = 15000; // 加载超时
-    public static final int KEY_BOARD_NUM = 1; // 加载超时
-    public static final int KEY_BOARD = 2; // 加载超时
+    public static final int KEY_BOARD_NUM = 1; // 数字键盘
+    public static final int KEY_BOARD = 2; // 英文键盘
 
 
     public static final String SP = "configuration";
     public static final String path = Environment.getExternalStorageDirectory()
             + "/crash/";
 
+    int GET_VIDEO = 0x20;
 }

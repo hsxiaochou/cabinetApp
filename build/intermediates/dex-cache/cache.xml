@@ -23,6 +23,36 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.googlecode.mp4parser\isoparser\1.1.21\76ccc70b6b23997e8424f4460f8c88a3d591f972\isoparser-1.1.21.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="76ccc70b6b23997e8424f4460f8c88a3d591f972">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.2\3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf\gson-2.8.2.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         min-sdk-version="17"
@@ -40,6 +70,16 @@
         revision="26.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\8.jar" />
     </item>
 
 </items>

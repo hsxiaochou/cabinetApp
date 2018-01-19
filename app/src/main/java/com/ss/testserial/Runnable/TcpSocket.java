@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ss.testserial.Activity.GetFrame;
 import com.ss.testserial.Activity.Layout3Frame;
@@ -75,7 +76,7 @@ public class TcpSocket implements Runnable {
                 Common.log.write("网络连接失败：" + e.getMessage());
                 Common.IS_REGIST = true;
 
-                Common.save("网络连接失败，正在重新连接...");
+                Common.save("网络连接失败，正在重新连接..." + e.getMessage());
                 Common.sendError("网络连接失败，正在重新连接...");
                 try {
                     Thread.sleep(Constants.RECONNECT_DELAY);
@@ -115,13 +116,13 @@ public class TcpSocket implements Runnable {
             Common.reboot_count_down = Constants.REBOOT_COUNT_DOWN;
             if (info.equals("1")) {
                 // 回复心跳包
-                Common.log.write("回复心跳包");
+//                Common.log.write("回复心跳包");
                 Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.HEART_CLASS, Constants.HEART_METHOD, 1).toString(), Constants.DES_KEY));
                 Common.put.flush();
                 return;
             }
             String decryptByDES = Common.decryptByDES(info, Constants.DES_KEY);
-            Common.log.write("接收数据：" + decryptByDES);
+//            Common.log.write("接收数据：" + decryptByDES);
             final JSONObject jsonObject = new JSONObject(decryptByDES);
             //验证签名sign
             if (Common.Md5FromJson(jsonObject).equals(jsonObject.getString("sign"))) {
@@ -130,6 +131,7 @@ public class TcpSocket implements Runnable {
                 String classString = jsonObject.getString("class");
                 String method = jsonObject.getString("method");
                 //注册设备
+
                 if (classString.equals(Constants.REGISTER_DEVICE_JSON_CLASS) && method.equals(Constants.REGISTER_DEVICE_JSON_METHOD)) {
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         Common.boxid = jsonObject.getJSONObject("data").getInt("boxId");
@@ -243,6 +245,7 @@ public class TcpSocket implements Runnable {
                     }
                     //预约投件
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD)) {
+                    Common.isOpen = true;
                     Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
@@ -349,13 +352,26 @@ public class TcpSocket implements Runnable {
                     Common.ClearLog();
                 } else if (classString.equals(Constants.REBOOT_CLASS) && method.equals(Constants.REBOOT_METHOD)) {
                     //重启系统
+                    Common.save("  远程重启");
                     Common.rebot();
+                } else if (classString.equals(Constants.GETVIDEO_CLASS) && method.equals(Constants.GETVIDEO_METHOD)) {
+                    Message msg = new Message();
+                    msg.what = Constants.GET_VIDEO;
+                    msg.obj = jsonObject.toString();
+                    Common.mainActivityHandler.sendMessage(msg);
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "为止信息：" + jsonObject.toString());
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
+            Common.save(e.toString());
+            Common.mainActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(Common.mainActivity, "清理日志：" + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
             e.printStackTrace();
         }
     }
