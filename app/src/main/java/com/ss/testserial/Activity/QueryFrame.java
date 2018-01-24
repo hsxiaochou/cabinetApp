@@ -225,7 +225,7 @@ public class QueryFrame extends Fragment {
             JSONObject jsonObject = Common.packageJsonData(Constants.GETQUERY_CODE_CLASS, Constants.GETQUERY_CODE_METHOD, data);
             if (Common.socket.isConnected() && !Common.socket.isClosed()) {
                 Common.startLoad();
-                Common.log.write("一键获取验证码：" + this.code);
+                Common.log.write("一键获验证码：" + this.code);
                 Common.put.println(Common.encryptByDES(jsonObject.toString(), Constants.DES_KEY));
                 Common.put.flush();
             } else {

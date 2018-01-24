@@ -19,6 +19,7 @@ import com.ss.testserial.Common.Constants;
 import com.ss.testserial.Common.QRCode;
 import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.JNI.OpenGridListener;
+import com.ss.testserial.JNI.UartComm;
 import com.ss.testserial.R;
 
 import org.json.JSONException;

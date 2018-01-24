@@ -83,6 +83,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -183,6 +184,7 @@ public class Common {
     public static boolean IS_REGIST = false;
     private static HttpURLConnection conn;
     private static boolean b;
+    private static String content;
 
     /**
      * MD5加密
@@ -574,6 +576,7 @@ public class Common {
                 sb.append("--" + BOUNDARY + "\r\n");
                 sb.append("Content-Disposition: form-data; name=\"mac\"" + "\r\n");
                 sb.append("\r\n");
+                Log.e("TAG", Common.getPreference("mac"));
                 sb.append(Common.getPreference("mac") + "\r\n");
                 sb.append("--" + BOUNDARY + "\r\n");
                 sb.append("Content-Disposition: form-data; name=\"log\"; filename=\"" + "log1" + "\"" + "\r\n");
@@ -604,7 +607,28 @@ public class Common {
                 in.close();
                 out.close();
                 b = conn.getResponseCode() == 200;
-                Log.e("TAG", "连接状态：" + b);
+                if (200 == conn.getResponseCode()) {
+                    InputStream inputStream = null;
+                    if (!TextUtils.isEmpty(conn.getContentEncoding())) {
+                        String encode = conn.getContentEncoding().toLowerCase();
+                        if (!TextUtils.isEmpty(encode) && encode.indexOf("gzip") >= 0) {
+                            inputStream = new GZIPInputStream(conn.getInputStream());
+                        }
+                    }
+
+                    if (null == inputStream) {
+                        inputStream = conn.getInputStream();
+                    }
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                    StringBuilder builder = new StringBuilder();
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        builder.append(line).append("\n");
+                    }
+                    content = builder.toString();
+                }
+                Log.e("TAG", "连接状态：" + b + " 请求返回：" + content);
             }
         } catch (Exception e) {
             Log.e("TAG", e.toString());
@@ -619,6 +643,7 @@ public class Common {
 
     public static List<File> getFile(File file) {
         File[] fileArray = file.listFiles();
+        mFileList.clear();
         for (File f : fileArray) {
             if (f.isFile()) {
                 if (f.getName().endsWith(".mp4")) {
@@ -631,6 +656,18 @@ public class Common {
         return mFileList;
     }
 
+    public static final ArrayList<String> flienamelist = new ArrayList<>();
+
+    //遍历文件夹里的文件 然后得到文件名字的集合
+    public static List<String> getFileName(File myfile) {
+        List<File> file = getFile(myfile);
+        flienamelist.clear();
+        for (int i = 0; i < file.size(); i++) {
+            flienamelist.add(file.get(i).getName());
+        }
+        return flienamelist;
+    }
+
     //获取视频下载json
     public static void GetVideoJson() {
         JSONObject getCodeJson = new JSONObject();
@@ -641,5 +678,16 @@ public class Common {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void delateFile(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            File file = new File(path);
+            if (file != null) {
+                file.delete();
+            }
+        }
+
     }
 }

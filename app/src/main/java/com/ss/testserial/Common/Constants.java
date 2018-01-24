@@ -39,6 +39,9 @@ public interface Constants {
     public static final int PORT = 8282;
     //日志上传host
 
+    //视频下载url
+    public static final String VIDEO_HOST = "http://www.cdmengjinyuan.com:8080/";
+
 
     public static final String LOG_URL = "http://" + HOST + "/index.php?m=Api&c=Api&a=uploadCabinetLog";
 
@@ -209,4 +212,5 @@ public interface Constants {
             + "/crash/";
 
     int GET_VIDEO = 0x20;
+    int DOWN_NEXT = 0X21;
 }

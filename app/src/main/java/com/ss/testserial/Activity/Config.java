@@ -17,6 +17,7 @@ import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.JNI.OpenGridListener;
+import com.ss.testserial.JNI.UartComm;
 import com.ss.testserial.R;
 
 import org.json.JSONArray;
@@ -40,12 +41,15 @@ public class Config extends Fragment {
     private Button save_config;
     private Button exit;
     private Spinner lockboard_type;
+    private UartComm.Rs485 rs485;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.frame_config, container, false);
         Common.frame = "config";
         this.init();
+//        rs485 = new UartComm().new Rs485();
+//        rs485.rs485Init();
         return this.view;
     }
 
@@ -474,6 +478,9 @@ public class Config extends Fragment {
                     public void openEnd() {
                     }
                 });
+//                int[] ints = new int[5];
+//                rs485.rs485OpenGrid(boardId, lockId, ints);
+
             }
         } else {
             Common.sendError("请选择锁控板");

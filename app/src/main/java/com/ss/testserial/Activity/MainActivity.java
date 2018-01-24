@@ -2,6 +2,7 @@ package com.ss.testserial.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -68,7 +70,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.e("TAG", "5555");
             downloadBinder = (DownloadService.DownloadBinder) service;
         }
 
@@ -77,6 +78,14 @@ public class MainActivity extends Activity {
 
         }
     };
+    private String vediojson;
+    private int index_video;
+    private List<String> video_new;
+    private List<String> fileName;
+    int recLen = 0;
+    Handler handler = new Handler();
+    private GetVideoUrl getVideoUrl;
+    private boolean isswitchx = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +108,6 @@ public class MainActivity extends Activity {
         Common.log.write("打开优裹徒");
         //初始化
         init();
-
-
         //设备操作
         Common.confirm_LockBoardVsersion();//确定LockBoardVsersion
         Log.e("TAG", "设备操作：" + Common.LockBoardVsersion + "   " + Common.device);
@@ -146,6 +153,7 @@ public class MainActivity extends Activity {
                     }
                 }
             });
+
             Common.countdownThread.start();
         }
         // 获取柜子信息线程
@@ -158,7 +166,7 @@ public class MainActivity extends Activity {
                             Common.getCabinetLeft();
                         }
                         try {
-                            Thread.sleep(5 * 60 * 1000);
+                            Thread.sleep(10 * 60 * 1000);
                         } catch (Exception e) {
                         }
                     }
@@ -166,13 +174,41 @@ public class MainActivity extends Activity {
             });
             Common.getBoxThread.start();
         }
+
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isswitchx) {
+            recLen = 0;
+//        handler.postDelayed(runnable, 1000);
+            runnable.run();
+        }
+
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        recLen = 0;
         Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
         return super.dispatchTouchEvent(ev);
     }
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            recLen++;
+            Log.e("TAG", recLen + " ");
+            if (recLen > 240) {
+                Common.mainActivity.startActivity(new Intent(MainActivity.this, VideoActivity.class));
+            } else {
+                handler.postDelayed(this, 1000);
+            }
+
+        }
+    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -253,7 +289,7 @@ public class MainActivity extends Activity {
                             break;
                         //保存配置文件
                         case Constants.SAVE_CONFIG_MESSAGE:
-                            File file = new File(Environment.getExternalStorageDirectory(), Constants.SYSTEM_CONFIG);
+                            final File file = new File(Environment.getExternalStorageDirectory(), Constants.SYSTEM_CONFIG);
                             FileOutputStream out = null;
                             try {
                                 out = new FileOutputStream(file);
@@ -338,10 +374,15 @@ public class MainActivity extends Activity {
                                 config_info = new JSONObject(new String(content, "UTF-8"));
                                 config_info.put("phone", Common.contact_phone);
                                 config_info.put("address", Common.address);
-
                                 out1 = new FileOutputStream(file1);
                                 out1.write(config_info.toString().getBytes("UTF-8"));
                                 out1.close();
+
+                                //获取的信息为空。执行下载视频广告
+                                if (TextUtils.isEmpty(vediojson)) {
+                                    Common.GetVideoJson();
+                                }
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -422,13 +463,57 @@ public class MainActivity extends Activity {
                                 }
                             }
                             break;
+                        //下载视频json返回
                         case Constants.GET_VIDEO:
-                            //下载视频json返回
-                            String vediojson = (String) msg.obj;
-                            GetVideoUrl getVideoUrl = new Gson().fromJson(vediojson, GetVideoUrl.class);
+                            vediojson = (String) msg.obj;
+                            getVideoUrl = new Gson().fromJson(vediojson, GetVideoUrl.class);
                             if (getVideoUrl.getData().isSwitchX()) {
+                                isswitchx = true;
                                 Log.e("TAG", "开始视频");
-                                List<String> video = getVideoUrl.getData().getVideo();
+                                //新的videourl
+                                video_new = getVideoUrl.getData().getVideo();
+                                ArrayList<String> list_video = new ArrayList<>();
+                                list_video.addAll(video_new);
+                                fileName = Common.getFileName(new File(Constants.path));
+                                int video_new_size = video_new.size();
+                                for (int i = 0; i < video_new_size; i++) {
+                                    String s = list_video.get(i);
+                                    String substring = s.substring(s.lastIndexOf("/") + 1);
+                                    Log.e("TAG", substring);
+                                    if (fileName.contains(substring)) {
+                                        video_new.remove(s);
+                                        fileName.remove(substring);
+                                    }
+                                }
+                                new Thread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                for (int i = 0; i < fileName.size(); i++) {
+                                                    Common.delateFile(Constants.path +
+                                                            fileName.get(i));
+                                                }
+                                            }
+                                        }
+                                ).start();
+                                index_video = 0;
+                                if (video_new.size() > 0) {
+                                    startService(video_new.get(index_video));
+                                } else {
+                                    recLen = 0;
+                                    handler.postDelayed(runnable, 10000);
+                                }
+                            } else {
+                                isswitchx = false;
+                            }
+                            break;
+                        case Constants.DOWN_NEXT:
+                            index_video++;
+                            if (index_video < video_new.size()) {
+                                startService(video_new.get(index_video));
+                            } else {
+                                recLen = 0;
+                                handler.postDelayed(runnable, 10000);
                             }
                             break;
                         default:
@@ -441,10 +526,10 @@ public class MainActivity extends Activity {
     }
 
 
-    private void startService() {
-        String url = "http://www.cdmengjinyuan.com:8080/Public/adVideo/B0F1EC21B552/e2ef671e72279c5d616d3362aa38b4a0.mp4";
+    private void startService(String s) {
+        String url = Constants.VIDEO_HOST + s;
+        Log.e("TAG", url);
         downloadBinder.startDownload(url);
-
     }
 
     //初始化界面

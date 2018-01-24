@@ -120,7 +120,7 @@ public class PutPackageFrame extends Fragment {
                                     btn.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            if (canClick()) {
+                                            if (canClick() && Common.isOpen) {
                                                 putPackage(box_type);
                                             }
                                         }

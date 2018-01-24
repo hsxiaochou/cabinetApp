@@ -34,9 +34,9 @@ public class VideoActivity extends Activity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                finish();
                 break;
             case MotionEvent.ACTION_UP:
-                finish();
                 break;
             case MotionEvent.ACTION_MOVE:
             default:
@@ -69,7 +69,6 @@ public class VideoActivity extends Activity {
                 } else {
                     index++;
                 }
-                Log.e("TAG", index + " ");
                 my_video.setVideoPath(file.get(index).getAbsolutePath());
                 my_video.start();
             }

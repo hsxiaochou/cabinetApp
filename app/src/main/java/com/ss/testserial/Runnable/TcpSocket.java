@@ -369,7 +369,7 @@ public class TcpSocket implements Runnable {
             Common.mainActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(Common.mainActivity, "清理日志：" + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Common.mainActivity, "异常：" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
             e.printStackTrace();
