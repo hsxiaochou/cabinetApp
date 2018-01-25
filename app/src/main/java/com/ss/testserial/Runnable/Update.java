@@ -47,7 +47,7 @@ public class Update {
             public void run() {
                 try {
                     HttpURLConnection conn =  (HttpURLConnection) new URL(url).openConnection();
-                    conn.setConnectTimeout(5000);
+                    conn.setConnectTimeout(30000);
                     InputStream is = conn.getInputStream();
                     File file = new File(Environment.getExternalStorageDirectory(), "yougoto.apk");
                     FileOutputStream fos = new FileOutputStream(file);

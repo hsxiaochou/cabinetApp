@@ -31,8 +31,8 @@ public interface Constants {
 
     /*TCP相关*/
     //服务器地址:端口
-//    public static final String HOST = "kdg.tuyingmjy.com";
-    public static final String HOST = "139.129.233.252";//测试
+    public static final String HOST = "kdg.tuyingmjy.com";
+//        public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -40,16 +40,14 @@ public interface Constants {
     //日志上传host
 
     //视频下载url
-    public static final String VIDEO_HOST = "http://www.cdmengjinyuan.com:8080/";
-
-
+    public static final String VIDEO_HOST = "http://" + HOST;
     public static final String LOG_URL = "http://" + HOST + "/index.php?m=Api&c=Api&a=uploadCabinetLog";
 
 
     //服务器重连间隔
     public static final int RECONNECT_DELAY = 10000;
     //连接最大阻塞时间
-    public static final int CONNECT_BLOCK_TIMEOUT = 2 * 1000 * 60;
+    public static final int CONNECT_BLOCK_TIMEOUT = 3 * 1000 * 60;
     //连接重发次数
     public static final int RE_SEND_COUNT = 60000;
     //连接重发间隔时间

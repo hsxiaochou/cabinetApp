@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -471,7 +472,11 @@ public class MainActivity extends Activity {
                                 isswitchx = true;
                                 Log.e("TAG", "开始视频");
                                 //新的videourl
-                                video_new = getVideoUrl.getData().getVideo();
+                                video_new = new ArrayList<>();
+                                for (int i = 0; i < getVideoUrl.getData().getVideo().size(); i++) {
+                                    video_new.add(getVideoUrl.getData().getVideo().get(i).getName());
+                                }
+                                ;
                                 ArrayList<String> list_video = new ArrayList<>();
                                 list_video.addAll(video_new);
                                 fileName = Common.getFileName(new File(Constants.path));
@@ -479,8 +484,8 @@ public class MainActivity extends Activity {
                                 for (int i = 0; i < video_new_size; i++) {
                                     String s = list_video.get(i);
                                     String substring = s.substring(s.lastIndexOf("/") + 1);
-                                    Log.e("TAG", substring);
-                                    if (fileName.contains(substring)) {
+                                    Log.e("TAG", new File(Constants.path + substring).length() + "  文件大小");
+                                    if (fileName.contains(substring) && getVideoUrl.getData().getVideo().get(i).getSize() == new File(Constants.path + substring).length()) {
                                         video_new.remove(s);
                                         fileName.remove(substring);
                                     }
@@ -500,8 +505,11 @@ public class MainActivity extends Activity {
                                 if (video_new.size() > 0) {
                                     startService(video_new.get(index_video));
                                 } else {
-                                    recLen = 0;
-                                    handler.postDelayed(runnable, 10000);
+                                    List<File> file_video = Common.getFile(new File(Constants.path));
+                                    if (file_video.size() > 0) {
+                                        recLen = 0;
+                                        handler.postDelayed(runnable, 10000);
+                                    }
                                 }
                             } else {
                                 isswitchx = false;

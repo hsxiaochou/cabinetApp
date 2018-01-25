@@ -11,9 +11,9 @@ import java.util.List;
 public class GetVideoUrl {
 
     /**
-     * sign : 1257dcfd1d299da2a7913b170ee547c2
-     * timestamp : 1516355616
-     * data : {"video":["/home/cabinet/Public/adVideo/B0F1EC21B552/16596c72ee6eeca64257219b32061107.mp4","/home/cabinet/Public/adVideo/B0F1EC21B552/e2ef671e72279c5d616d3362aa38b4a0.mp4"],"switch":true}
+     * sign : 401f9ef5c278aab9d0c7171556e425cb
+     * timestamp : 1516861085
+     * data : {"video":[{"size":37199938,"name":"/Public/adVideo/B0F1EC21B552/雷克萨斯新NX.mp4"}],"switch":true}
      * class : DevOp
      * method : getAdVideo
      */
@@ -67,13 +67,13 @@ public class GetVideoUrl {
 
     public static class DataBean {
         /**
-         * video : ["/home/cabinet/Public/adVideo/B0F1EC21B552/16596c72ee6eeca64257219b32061107.mp4","/home/cabinet/Public/adVideo/B0F1EC21B552/e2ef671e72279c5d616d3362aa38b4a0.mp4"]
+         * video : [{"size":37199938,"name":"/Public/adVideo/B0F1EC21B552/雷克萨斯新NX.mp4"}]
          * switch : true
          */
 
         @SerializedName("switch")
         private boolean switchX;
-        private List<String> video;
+        private List<VideoBean> video;
 
         public boolean isSwitchX() {
             return switchX;
@@ -83,12 +83,38 @@ public class GetVideoUrl {
             this.switchX = switchX;
         }
 
-        public List<String> getVideo() {
+        public List<VideoBean> getVideo() {
             return video;
         }
 
-        public void setVideo(List<String> video) {
+        public void setVideo(List<VideoBean> video) {
             this.video = video;
+        }
+
+        public static class VideoBean {
+            /**
+             * size : 37199938
+             * name : /Public/adVideo/B0F1EC21B552/雷克萨斯新NX.mp4
+             */
+
+            private int size;
+            private String name;
+
+            public int getSize() {
+                return size;
+            }
+
+            public void setSize(int size) {
+                this.size = size;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
         }
     }
 }

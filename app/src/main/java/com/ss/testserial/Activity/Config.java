@@ -48,8 +48,12 @@ public class Config extends Fragment {
         this.view = inflater.inflate(R.layout.frame_config, container, false);
         Common.frame = "config";
         this.init();
-//        rs485 = new UartComm().new Rs485();
-//        rs485.rs485Init();
+//        try {
+//            rs485 = new UartComm().new Rs485();
+//            rs485.rs485Init();
+//        } catch (Exception e) {
+//            Log.e("TAG", e.toString());
+//        }
         return this.view;
     }
 
@@ -480,7 +484,6 @@ public class Config extends Fragment {
                 });
 //                int[] ints = new int[5];
 //                rs485.rs485OpenGrid(boardId, lockId, ints);
-
             }
         } else {
             Common.sendError("请选择锁控板");

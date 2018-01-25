@@ -108,8 +108,6 @@ public class QueryFrame extends Fragment {
                             }
 
                         }
-
-
                         break;
                 }
             }
@@ -178,7 +176,6 @@ public class QueryFrame extends Fragment {
                 GetCode_Query();
             }
         });
-
         this.ll_query_msg = (LinearLayout) this.view.findViewById(R.id.ll_query_msg);
 
 

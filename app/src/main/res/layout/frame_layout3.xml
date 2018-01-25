@@ -95,7 +95,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/pink_radius"
-                android:text="获取登录码"
+                android:text="重置登录密码"
                 android:textColor="#fff"
                 android:textSize="25sp" />
         </LinearLayout>

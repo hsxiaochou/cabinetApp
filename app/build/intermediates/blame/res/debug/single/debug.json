@@ -12,12 +12,12 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.3.aar\\36a1c0eb6051cd8100110e6dd42adcee\\res\\drawable-hdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_fade_out.xml.flat",
-        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.3.aar\\36a1c0eb6051cd8100110e6dd42adcee\\res\\anim\\abc_fade_out.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_fade_out.xml.flat",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.3.aar\\36a1c0eb6051cd8100110e6dd42adcee\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_abc_ic_menu_moreoverflow_mtrl_alpha.png.flat",

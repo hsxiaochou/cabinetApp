@@ -354,7 +354,10 @@ public class TcpSocket implements Runnable {
                     //重启系统
                     Common.save("  远程重启");
                     Common.rebot();
+
+
                 } else if (classString.equals(Constants.GETVIDEO_CLASS) && method.equals(Constants.GETVIDEO_METHOD)) {
+                    //获取视频json
                     Message msg = new Message();
                     msg.what = Constants.GET_VIDEO;
                     msg.obj = jsonObject.toString();
