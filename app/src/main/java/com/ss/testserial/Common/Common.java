@@ -186,6 +186,10 @@ public class Common {
     private static boolean b;
     private static String content;
 
+
+    public static String CrashLogName = "";
+
+
     /**
      * MD5加密
      *
@@ -370,7 +374,7 @@ public class Common {
     }
 
     public static void reboot(Activity mAppContext) {
-        Common.save(" 断网重启");
+        Common.save(" 重启");
         AlarmManager mgr = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(mAppContext, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -567,9 +571,10 @@ public class Common {
     private static final String BOUNDARY = "---------------------------7db1c523809b2";//数据分割线
 
     public static boolean uploadHttpURLConnection(String path) {
+        Log.e("TAG", path);
         try {
             //找到sdcard上的文件
-            File file = new File(path + "data.txt");
+            File file = new File(path);
             if (file != null) {
                 //仿Http协议发送数据方式进行拼接
                 StringBuilder sb = new StringBuilder();
@@ -615,7 +620,6 @@ public class Common {
                             inputStream = new GZIPInputStream(conn.getInputStream());
                         }
                     }
-
                     if (null == inputStream) {
                         inputStream = conn.getInputStream();
                     }

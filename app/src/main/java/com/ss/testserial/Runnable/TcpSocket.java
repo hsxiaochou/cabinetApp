@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -346,16 +347,16 @@ public class TcpSocket implements Runnable {
 
                 } else if (classString.equals(Constants.LOG_UP_CLASS) && method.equals(Constants.LOG_UP_METHOD)) {
                     //回收日志
-                    Common.uploadHttpURLConnection(Constants.path);
+                    Common.uploadHttpURLConnection(Constants.path + "data.txt");
                 } else if (classString.equals(Constants.CLEAR_LOG_CLASS) && method.equals(Constants.CLEAR_LOG_METHOD)) {
                     //清理日志
-                    Common.ClearLog();
+                    if (TextUtils.isEmpty(Common.CrashLogName)) {
+                        Common.ClearLog();
+                    }
                 } else if (classString.equals(Constants.REBOOT_CLASS) && method.equals(Constants.REBOOT_METHOD)) {
                     //重启系统
                     Common.save("  远程重启");
                     Common.rebot();
-
-
                 } else if (classString.equals(Constants.GETVIDEO_CLASS) && method.equals(Constants.GETVIDEO_METHOD)) {
                     //获取视频json
                     Message msg = new Message();

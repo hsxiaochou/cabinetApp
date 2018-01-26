@@ -144,6 +144,7 @@ public class MainFrame extends Fragment {
                 fragmentTransaction.replace(R.id.content, queryFrame);
                 Common.log.write("点击查询按钮");
                 fragmentTransaction.commitAllowingStateLoss();
+
             }
         });
         // 获取剩余柜子数
