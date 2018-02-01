@@ -74,10 +74,8 @@ public class TcpSocket implements Runnable {
                 Common.sendError("网络连接成功");
             } catch (IOException e) {
                 e.printStackTrace();
-                Common.log.write("网络连接失败：" + e.getMessage());
+                Common.log.write("网络连接失败，正在重新连接..." + e.getMessage());
                 Common.IS_REGIST = true;
-
-                Common.save("网络连接失败，正在重新连接..." + e.getMessage());
                 Common.sendError("网络连接失败，正在重新连接...");
                 try {
                     Thread.sleep(Constants.RECONNECT_DELAY);
@@ -148,18 +146,14 @@ public class TcpSocket implements Runnable {
                         message.what = Constants.REGISTER_SUCCESS_MESSAGE;
                         Common.mainActivityHandler.sendMessage(message);
                         Common.log.write("注册设备成功");
-                        Common.save("注册设备成功");
                     } else {
                         Common.register();
-                        Common.save("注册设备失败");
                         Common.log.write("注册设备失败：" + jsonObject.toString());
                     }
                     //上报状态
                 } else if (classString.equals(Constants.LOCK_STATUS_JSON_CLASS) && method.equals(Constants.LOCK_STATUS_JSON_METHOD)) {
-                    Common.save("返回上报状态");
                     Common.log.write("返回上报状态");
                     //开柜
-
                 } else if (classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) {
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         //板地址
@@ -319,7 +313,6 @@ public class TcpSocket implements Runnable {
                 } else if (classString.equals(Constants.UPDATE_CLASS) && method.equals(Constants.UPDATE_METHOD)) {
                     if (jsonObject.getJSONObject("data").getString("version").equals(Common.version)) {
                         Common.log.write("尝试升级但是版本一致");
-
                     } else {
                         //升级
                         Common.log.write("升级：" + jsonObject.getJSONObject("data").getString("version"));

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ss.testserial"
-    android:versionCode="467"
-    android:versionName="4.6.7">
+    android:versionCode="468"
+    android:versionName="4.6.8">
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -50,6 +50,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="com.hzjubu.action.UP_BARCODE" />
                 <action android:name="com.hzjubu.action.ACK_OPEN_DOOR" />
+                <action android:name="com.hzjubu.action.ACK_DOOR_STATUS" />
             </intent-filter>
         </receiver>
 

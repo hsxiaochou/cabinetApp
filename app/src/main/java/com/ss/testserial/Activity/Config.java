@@ -45,7 +45,7 @@ public class Config extends Fragment {
     private Button save_config;
     private Button exit;
     private Spinner lockboard_type;
-    private UartComm.Rs485 rs485;
+
     private UartComm UC;
 
     HandlerThread thread;
@@ -68,86 +68,21 @@ public class Config extends Fragment {
         this.view = inflater.inflate(R.layout.frame_config, container, false);
         Common.frame = "config";
         this.init();
-
-        UC = new UartComm();
-        /* Create a receiving thread */
-        thread = new HandlerThread("UartRecvThread");
-        thread.start();//创建一个HandlerThread并启动它
-        mRecvHandler = new Handler(thread.getLooper());//使用HandlerThread的looper对象创建Handler，如果使用默认的构造方法，很有可能阻塞UI线程
         return this.view;
     }
-
-
-    private void SetUartComm() {
-        String str;
-        SharedPreferences sp = Common.mainActivity.getSharedPreferences("com.android.uartdemo_preferences", Context.MODE_PRIVATE);
-        uartDevice = sp.getString("DEVICE", "");
-        baudrate = Integer.decode(sp.getString("BAUDRATE", "-1"));
-        String odd_even = sp.getString("PARITY_CHECK", "none");
-        if (odd_even.equals("Odd"))
-            parityCheck = 1;
-        else if (odd_even.equals("Even"))
-            parityCheck = 2;
-        else
-            parityCheck = 0;
-        if (!uartDevice.equals("") && (baudrate != -1)) {
-            str = "uart: " + uartDevice + "    baudrate :  " + baudrate + " parity check: " + odd_even;
-            uart_fd = UC.uartInit(uartDevice);
-            UC.setOpt(uart_fd, baudrate, 8, parityCheck, 1);
-            //只有设置过串口后才会进入读取线程
-            mRunning = true;
-            mRecvHandler.post(mRecvRunnable);//将线程post到Handler中
-        }
-    }
-
 
     @Override
     public void onResume() {
         super.onResume();
-        SetUartComm();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mRunning = false;
-        mRecvHandler.removeCallbacks(mRecvRunnable);
-        UC.uartDestroy(uart_fd);
-        uart_fd = -1;
 
     }
 
-    //实现耗时操作的线程
-    Runnable mRecvRunnable = new Runnable() {
-        @Override
-        public void run() {
-            while (mRunning) {
-                int size;
-                int[] buffer = new int[256];
-                if (mNeedSendData == true) {
-                    //set RS485 to send data mode
-                    if (mIsRS485)
-                        UC.setRS485WriteRead(0);
-                    UC.send(uart_fd, mSendBuf, mSendDataLen);
-                    mNeedSendData = false;
-                    //set RS485 to receive data mode by default.
-                    if (mIsRS485)
-                        UC.setRS485WriteRead(1);
-                } else {
-                    if (mIsRS485)
-                        UC.setRS485WriteRead(1);
-                    size = UC.recv(uart_fd, buffer, 256);
-                    if (size != 0) {
-                        recv_msg = "";
-                        for (int i = 0; i < size; i++) {
-                            recv_msg += Integer.toHexString(((int) buffer[i]) & 0xff);
-                            recv_msg += "  ";
-                        }
-                    } //end if(size != 0)
-                } //end else
-            } //end while
-        }
-    };
 
     @Override
     public void onDetach() {
@@ -569,15 +504,13 @@ public class Config extends Fragment {
                 }
                 Jubu.openBox(this.boardId, lockId);
             } else {
-//                Common.device.openGrid(this.boardId, lockId, new OpenGridListener() {
-//                    @Override
-//                    public void openEnd() {
-//                    }
-//                });
-                rs485 = new UartComm().new Rs485();
-                rs485.rs485Init();
-                int[] ints = new int[5];
-                int i = rs485.rs485OpenGrid(boardId, lockId, ints);
+                Common.device.openGrid(this.boardId, lockId, new OpenGridListener() {
+                    @Override
+                    public void openEnd() {
+                    }
+                });
+
+//                Common.oPenDoor(boardId, lockId);
             }
         } else {
             Common.sendError("请选择锁控板");

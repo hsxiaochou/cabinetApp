@@ -40,6 +40,7 @@ import com.ss.testserial.Common.FileLog;
 import com.ss.testserial.Common.Loading;
 import com.ss.testserial.Common.download.DownloadService;
 import com.ss.testserial.JNI.DeviceInterface;
+import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Update;
@@ -56,6 +57,8 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.networkbench.agent.impl.NBSAppAgent;
 import com.ss.testserial.bean.GetVideoUrl;
@@ -65,7 +68,7 @@ public class MainActivity extends Activity {
     private Loading load = null;
     // 新增图片修改
     private ImageSwitcher bannerSwitch1 = null;
-
+    ExecutorService executorService = Executors.newFixedThreadPool(5);
     private DownloadService.DownloadBinder downloadBinder;
     private ServiceConnection connection = new ServiceConnection() {
 
@@ -87,6 +90,7 @@ public class MainActivity extends Activity {
     Handler handler = new Handler();
     private GetVideoUrl getVideoUrl;
     private boolean isswitchx = false;
+    private boolean door_sate_breack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,41 +145,63 @@ public class MainActivity extends Activity {
             Common.bannerThread.start();
         }
         // 开启倒计时线程
-        if (Common.countdownThread == null) {
-            Common.countdownThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-            });
+        restartThread(0);
 
-            Common.countdownThread.start();
-        }
+
         // 获取柜子信息线程
-        if (Common.getBoxThread == null) {
-            Common.getBoxThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        if (Common.frame == "main") {
-                            Common.getCabinetLeft();
-                        }
-                        try {
-                            Thread.sleep(10 * 60 * 1000);
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-            });
-            Common.getBoxThread.start();
-        }
+        restartThread(1);
 
+
+    }
+
+
+    public void restartThread(int i) {
+        switch (i) {
+            case 0:
+                if (Common.countdownThread == null) {
+                    Common.countdownThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (true) {
+                                try {
+                                    Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
+                                    Thread.sleep(1000);
+                                } catch (Exception e) {
+                                    Common.countdownThread.interrupt();
+                                    Common.countdownThread = null;
+                                    restartThread(0);
+                                }
+                            }
+                        }
+                    });
+                    Common.countdownThread.start();
+                }
+                break;
+
+            case 1:
+                if (Common.getBoxThread == null) {
+                    Common.getBoxThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (true) {
+
+                                try {
+                                    if (Common.frame == "main") {
+                                        Common.getCabinetLeft();
+                                    }
+                                    Thread.sleep(10 * 60 * 1000);
+                                } catch (Exception e) {
+                                    Common.getBoxThread.interrupt();
+                                    Common.getBoxThread = null;
+                                    restartThread(1);
+                                }
+                            }
+                        }
+                    });
+                    Common.getBoxThread.start();
+                }
+                break;
+        }
     }
 
 
@@ -193,6 +219,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         recLen = 0;
+        door_sate_breack = true;
         Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
         return super.dispatchTouchEvent(ev);
     }
@@ -202,7 +229,7 @@ public class MainActivity extends Activity {
         public void run() {
             recLen++;
             Log.e("TAG", recLen + " ");
-            if (recLen > 240) {
+            if (recLen > 20) {
                 Common.mainActivity.startActivity(new Intent(MainActivity.this, VideoActivity.class));
             } else {
                 handler.postDelayed(this, 1000);
@@ -318,7 +345,6 @@ public class MainActivity extends Activity {
                                 Common.loadDialog.dismiss();
                             } catch (Exception e) {}
                             */
-
                             try {
                                 Common.device.scanner.close();
                             } catch (Exception e) {
@@ -389,7 +415,7 @@ public class MainActivity extends Activity {
                             }
                             break;
                         case Constants.COUNT_DOWN_MESSAGE:
-                            if (Common.frame == "main" || Common.frame == "config") {
+                            if (Common.frame == "main" || Common.frame == "config" || Common.frame == "open_door") {
                                 return;
                             }
                             Common.count_down--;
@@ -484,7 +510,6 @@ public class MainActivity extends Activity {
                                 for (int i = 0; i < video_new_size; i++) {
                                     String s = list_video.get(i);
                                     String substring = s.substring(s.lastIndexOf("/") + 1);
-                                    Log.e("TAG", new File(Constants.path + substring).length() + "  文件大小");
                                     if (fileName.contains(substring) && getVideoUrl.getData().getVideo().get(i).getSize() == new File(Constants.path + substring).length()) {
                                         video_new.remove(s);
                                         fileName.remove(substring);
@@ -524,6 +549,34 @@ public class MainActivity extends Activity {
                                 handler.postDelayed(runnable, 10000);
                             }
                             break;
+                        //JUBU柜子判断柜门的打开状态
+                        case Constants.DOOR_STATE:
+                            if (Common.Door_status == 0) {
+                                if (Common.frame.equals("open_door")) {
+                                    Toast.makeText(MainActivity.this, "感谢你关闭了箱门！", Toast.LENGTH_SHORT).show();
+                                    fragmentTransaction.replace(R.id.content, Common.mainFrame);
+                                    fragmentTransaction.commitAllowingStateLoss();
+                                }
+                            } else if (Common.Door_status == 1) {
+                                Toast.makeText(MainActivity.this, "还有箱门未关闭，请关闭后操作！", Toast.LENGTH_SHORT).show();
+                                if (!Common.frame.equals("open_door")) {
+                                    //添加Frame
+                                    DoorOpenFrame dooropenframe = new DoorOpenFrame();
+                                    fragmentTransaction.replace(R.id.content, dooropenframe);
+                                    //提交事务
+                                    fragmentTransaction.commitAllowingStateLoss();
+                                }
+                            }
+                            break;
+                        case Constants.OPEN_DOOR:
+                            //检查柜门的状态
+                            String check_boardId = Common.getPreference("check_boardId");
+                            String check_lockId = Common.getPreference("check_lockId");
+                            if (!TextUtils.isEmpty(check_boardId) && !TextUtils.isEmpty(check_lockId)) {
+                                Toast.makeText(MainActivity.this, "发送消息", Toast.LENGTH_SHORT).show();
+                                Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -536,7 +589,6 @@ public class MainActivity extends Activity {
 
     private void startService(String s) {
         String url = Constants.VIDEO_HOST + s;
-        Log.e("TAG", url);
         downloadBinder.startDownload(url);
     }
 

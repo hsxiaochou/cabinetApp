@@ -3,6 +3,8 @@ package com.ss.testserial.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +100,7 @@ public class OpenDialogFrame extends Fragment {
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new MainFrame()).commitAllowingStateLoss();
                         break;
                 }
+
             }
         });
         // 再次开柜
@@ -113,6 +116,7 @@ public class OpenDialogFrame extends Fragment {
                         lockId = 0;
                     }
                     Jubu.openBox(boardId, lockId);
+
                 } else {
                     Common.device.openGrid(boardId, lockId, new OpenGridListener() {
                         @Override

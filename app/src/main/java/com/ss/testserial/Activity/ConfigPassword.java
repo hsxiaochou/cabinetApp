@@ -137,7 +137,6 @@ public class ConfigPassword extends Fragment{
      * 发送取件信息
      */
     private void getPackage(){
-
         //获取验证码
         String code = "";
         for (int i = 0;i<this.code.length;i++){

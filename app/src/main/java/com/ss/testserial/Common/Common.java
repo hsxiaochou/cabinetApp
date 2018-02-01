@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.smatek.uart.UartComm;
 import com.ss.testserial.Activity.Config;
 import com.ss.testserial.Activity.GetFrame;
 import com.ss.testserial.Activity.Layout3Frame;
@@ -136,6 +137,9 @@ public class Common {
     //自助查询handler
     public static Handler queryFrameHandler = null;
 
+    //关好箱门的handler
+    public static Handler close_DorrFrameHandler = null;
+
 
     //弹窗
     public static Dialog commonDialog = null;
@@ -181,14 +185,16 @@ public class Common {
     public static int reboot_count_down = Constants.REBOOT_COUNT_DOWN;
 
     //网络断开重连注册
-    public static boolean IS_REGIST = false;
+    public static boolean IS_REGIST = false;//是否注册
     private static HttpURLConnection conn;
     private static boolean b;
     private static String content;
 
 
     public static String CrashLogName = "";
-
+    public static UartComm.Rs485 rs485 = null;
+    //获取门状态的判断
+    public static int Door_status = -1;
 
     /**
      * MD5加密
@@ -504,8 +510,12 @@ public class Common {
             e.printStackTrace();
         }
         Common.registerBoardThreadRun = true;
-        Common.registerBoardThread = new Thread(new BoardInfo());
-        Common.registerBoardThread.start();
+        Common.registerBoardThread.interrupt();
+        Common.registerBoardThread = null;
+        if (Common.registerBoardThread == null) {
+            Common.registerBoardThread = new Thread(new BoardInfo());
+            Common.registerBoardThread.start();
+        }
     }
 
 
@@ -677,6 +687,7 @@ public class Common {
         JSONObject getCodeJson = new JSONObject();
         try {
             getCodeJson.put("mac", Common.mac);
+            Log.e("TAG", "mac :" + Common.mac);
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GETVIDEO_CLASS, Constants.GETVIDEO_METHOD, getCodeJson).toString(), Constants.DES_KEY));
             Common.put.flush();
         } catch (Exception e) {
@@ -692,6 +703,16 @@ public class Common {
                 file.delete();
             }
         }
+    }
 
+
+    public static void oPenDoor(int boardId, int lockId) {
+        if (rs485 == null) {
+            rs485 = new UartComm().new Rs485();
+            rs485.rs485Init();
+        }
+        int[] ints = new int[5];
+        int i = rs485.rs485OpenGrid(boardId, lockId, ints);
+        Log.e("TAG", "开锁反馈：" + i);
     }
 }

@@ -68,6 +68,7 @@ public class MainFrame extends Fragment {
         }
     }
 
+
     /**
      * 初始化
      */

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
     public static final String JUBU_SCAN = "com.hzjubu.action.UP_BARCODE";//上报扫描事件
     public static final String JUBU_ALL_STATUS = "com.hzjubu.action.ACK_DOORS_STATUS";//获取指定副机所有箱格箱门状态.广播应答
     public static final String JUBU_OPEN_DOOR = "com.hzjubu.action.ACK_OPEN_DOOR";
+    public static final String JUBU_DOOR_STATUS = "com.hzjubu.action.ACK_DOOR_STATUS";
     private int iErrorCode;
 
     @Override
@@ -139,6 +141,26 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                     e.printStackTrace();
                     //重置
                     BoardInfo.lockStateJson = new JSONArray();
+                }
+                break;
+            //JUBU获取指定门的状态
+            case JUBU_DOOR_STATUS:
+                int check_BoardId = intent.getIntExtra("iBoardId", -1);
+                //获取应答箱格的格口ID
+                int check_iLockId = intent.getIntExtra("iLockId", -1);
+                int check_iErrorCode = intent.getIntExtra("iErrorCode", -1);
+                if (check_iErrorCode < 0) {//命令执行失败，提示失败原因：线路连接、硬件故障等
+                    String sErrordesc = intent.getStringExtra("sErrordesc");
+                    Common.Door_status = 0;
+                    Message msg = new Message();
+                    msg.what = Constants.DOOR_STATE;
+                    Common.mainActivityHandler.sendMessage(msg);
+                } else {//命令执行成功，获取箱门当前状态
+                    boolean bOpend = intent.getBooleanExtra("bOpend", false);
+                    Common.Door_status = bOpend ? 1 : 0;
+                    Message msg = new Message();
+                    msg.what = Constants.DOOR_STATE;
+                    Common.mainActivityHandler.sendMessage(msg);
                 }
                 break;
             default:
