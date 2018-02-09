@@ -32,9 +32,10 @@ public class Loading extends AlertDialog.Builder {
         super.setCancelable(false);
         this.runtimeout = new Handler();
     }
-    public AlertDialog show(){
-        if(this.alertDialog != null){
-            Log.d(this.TAG,"弹出层已存在");
+
+    public AlertDialog show() {
+        if (this.alertDialog != null) {
+            Log.d(this.TAG, "弹出层已存在");
             return this.alertDialog;
         }
         super.setView(View.inflate(this.context, R.layout.load, null)).create();
@@ -48,35 +49,41 @@ public class Loading extends AlertDialog.Builder {
         this.runtimeout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(alertDialog != null){
+                if (alertDialog != null) {
                     loadFail();
                 }
             }
-        },Constants.LOAD_RUN_TIME_OUT);
+        }, Constants.LOAD_RUN_TIME_OUT);
         return this.alertDialog;
     }
-    public void hide(){
-        try{
-            this.alertDialog.dismiss();
-        }catch (Exception e){
+
+    public void hide() {
+        try {
+            if (alertDialog != null) {
+                this.alertDialog.dismiss();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.alertDialog = null;
     }
-    private void loadFail(){
-        if(this.loadingListener == null){
-            Toast toast = Toast.makeText(this.context,"加载超时",Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM,685+toast.getXOffset(),50);
+
+    private void loadFail() {
+        if (this.loadingListener == null) {
+            Toast toast = Toast.makeText(this.context, "加载超时", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
             toast.show();
-        }else{
+        } else {
             this.loadingListener.fail();
         }
         this.hide();
     }
-    public void setListener(LoadingListener loadingListener){
+
+    public void setListener(LoadingListener loadingListener) {
         this.loadingListener = loadingListener;
     }
-    public interface LoadingListener{
+
+    public interface LoadingListener {
         public void fail();
     }
 }

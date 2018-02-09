@@ -48,7 +48,7 @@ public class DoorOpenFrame extends Fragment {
                     String check_lockId = Common.getPreference("check_lockId");
                     if (!TextUtils.isEmpty(check_boardId) && !TextUtils.isEmpty(check_lockId)) {
                         Toast.makeText(Common.mainActivity, "箱门状态监测中", Toast.LENGTH_SHORT).show();
-                        Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
+//                        Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
                     }
                 }
             }

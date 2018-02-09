@@ -23,26 +23,13 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.smatek.uart.UartComm;
-import com.ss.testserial.Activity.Config;
-import com.ss.testserial.Activity.GetFrame;
-import com.ss.testserial.Activity.Layout3Frame;
 import com.ss.testserial.Activity.MainActivity;
 import com.ss.testserial.Activity.MainFrame;
 import com.ss.testserial.Activity.MyDialog;
-import com.ss.testserial.Activity.PutPackageFrame;
-import com.ss.testserial.Activity.SendFrame;
 import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.BoardInfo;
@@ -63,12 +50,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.Socket;
@@ -82,6 +64,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -91,7 +75,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-import static android.media.MediaPlayer.*;
 
 /**
  * Created by Listen on 2016/9/9.
@@ -137,20 +120,12 @@ public class Common {
     //自助查询handler
     public static Handler queryFrameHandler = null;
 
-    //关好箱门的handler
-    public static Handler close_DorrFrameHandler = null;
-
-
     //弹窗
     public static Dialog commonDialog = null;
-    public static Dialog loadDialog = null;
-    //确认开柜弹窗
-    public static Dialog reOpenDialog = null;
 
     /*板子相关*/
     public static Thread registerBoardThread = null;
     public static boolean registerBoardThreadRun = true;
-    public static boolean getBoardThreadRun = true;
     public static int boxid;
     //板子是否注册
     public static String LockBoardVsersion = "";
@@ -195,6 +170,10 @@ public class Common {
     public static UartComm.Rs485 rs485 = null;
     //获取门状态的判断
     public static int Door_status = -1;
+
+
+    public static MyDialog myDialog = null;
+
 
     /**
      * MD5加密
@@ -329,7 +308,9 @@ public class Common {
         Message msg = new Message();
         msg.what = Constants.COMMON_ERROR_MESSAGE;
         msg.obj = message;
-        Common.mainActivityHandler.sendMessage(msg);
+        if (Common.mainActivityHandler != null) {
+            Common.mainActivityHandler.sendMessage(msg);
+        }
     }
 
     public static boolean isPhone(String phone) {
@@ -372,15 +353,17 @@ public class Common {
     // 获取剩余柜子数
     public static void getCabinetLeft() {
         try {
-            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
-            Common.put.flush();
+            if (Common.put != null) {
+                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
+                Common.put.flush();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void reboot(Activity mAppContext) {
-        Common.save(" 重启");
+        Common.save(" 重启软件");
         AlarmManager mgr = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(mAppContext, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -419,14 +402,13 @@ public class Common {
 
     //数据的preference存储
     public static void savePreference(String key, String value) {
-        mainActivity.getSharedPreferences(Constants.SP, 0).edit().putString(key, value).commit();
+        context.getSharedPreferences(Constants.SP, 0).edit().putString(key, value).commit();
 
     }
 
     //获取preference的数据
     public static String getPreference(String key) {
-
-        return mainActivity.getSharedPreferences(Constants.SP, 0).getString(key, "");
+        return context.getSharedPreferences(Constants.SP, 0).getString(key, "");
     }
 
 
@@ -518,6 +500,34 @@ public class Common {
         }
     }
 
+
+    //显示dialog
+
+    public static void ShowDialog() {
+        if (Common.myDialog == null) {
+            Common.myDialog = new MyDialog(context);
+        }
+        Common.myDialog.show();
+
+    }
+
+    //设置Toast的显示时间
+    public static void showMyToast(final Toast toast, final int cnt) {
+        final Timer timer =new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                toast.show();
+            }
+        },0,3000);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                toast.cancel();
+                timer.cancel();
+            }
+        }, cnt );
+    }
 
     //后台调节音量
     public static void getUpVolume(int num) {

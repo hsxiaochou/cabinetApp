@@ -71,7 +71,7 @@
                 android:background="@drawable/gray_border"
                 android:hint="请输入手机号或订单号"
                 android:inputType="phone"
-                android:maxLength="11"
+                android:maxLength="20"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:textColorHint="#aaaaaa"

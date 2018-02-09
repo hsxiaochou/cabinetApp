@@ -20,7 +20,7 @@ import java.util.Hashtable;
  * Created by Listen on 2016/10/30.
  */
 public class QRCode {
-    public static Bitmap makeQrcode(String content,int size){
+    public static Bitmap makeQrcode(String content, int size) {
         // 用于设置QR二维码参数
         Hashtable<EncodeHintType, Object> qrParam = new Hashtable<EncodeHintType, Object>();
         // 设置QR二维码的纠错级别——这里选择最高H级别

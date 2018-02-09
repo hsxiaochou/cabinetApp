@@ -94,6 +94,7 @@ public class TcpSocket implements Runnable {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Common.log.write("网络断开");
+                    Common.IS_REGIST = true;
                     Common.sendError("网络断开，正在重新连接...");
                     try {
                         Common.socket.close();
@@ -240,7 +241,7 @@ public class TcpSocket implements Runnable {
                     }
                     //预约投件
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD)) {
-                    Common.isOpen = true;
+
                     Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
@@ -250,6 +251,7 @@ public class TcpSocket implements Runnable {
                     ScanFrame.dealOpen(jsonObject);
                     //获取柜子类型
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.GET_GRID_TYPE_METHOD)) {
+                    Common.isOpen = true;
                     Common.endLoad();
                     Common.log.write("返回获取柜子类型：" + jsonObject.toString());
                     try {
@@ -274,6 +276,7 @@ public class TcpSocket implements Runnable {
                     }
                     //快递员投件
                 } else if (classString.equals(Constants.SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.SEND_PACKAGE_JSON_METHOD)) {
+                    Common.isOpen = true;
                     Common.save("快递员现场投件开柜： " + jsonObject.toString());
                     Common.log.write("返回快递员现场投件开柜：" + jsonObject.toString());
                     try {

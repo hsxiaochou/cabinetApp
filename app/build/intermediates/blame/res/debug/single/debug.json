@@ -636,6 +636,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.3.aar\\36a1c0eb6051cd8100110e6dd42adcee\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
+        "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_toast_radius.xml.flat",
+        "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\drawable\\toast_radius.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_ic_ab_back_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-21.0.3.aar\\36a1c0eb6051cd8100110e6dd42adcee\\res\\drawable-xxhdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
     },

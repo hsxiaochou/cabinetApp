@@ -24,9 +24,9 @@ public class Jubu {
         intent.putExtra("iBoardId", boardId);
         intent.putExtra("iLockId", lockId);
         Common.mainActivity.sendBroadcast(intent);
-        Message msg = new Message();
-        msg.what = Constants.OPEN_DOOR;
-        Common.mainActivityHandler.sendMessageDelayed(msg, 20000);
+//        Message msg = new Message();
+//        msg.what = Constants.OPEN_DOOR;
+//        Common.mainActivityHandler.sendMessageDelayed(msg, 20000);
     }
 
     public static void getAllStatus(int boardId) {
@@ -36,11 +36,11 @@ public class Jubu {
         Common.mainActivity.sendBroadcast(intent);
     }
 
-    public static void getDoorStatus(int boardId, int lockId) {
-        Common.save("doorstatus  " + boardId + "   " + lockId);
-        Intent localIntent = new Intent(GET_DOOR_STATUS);
-        localIntent.putExtra("iBoardId", boardId);
-        localIntent.putExtra("iLockId", lockId);
-        Common.mainActivity.sendBroadcast(localIntent);
-    }
+//    public static void getDoorStatus(int boardId, int lockId) {
+//        Common.save("doorstatus  " + boardId + "   " + lockId);
+//        Intent localIntent = new Intent(GET_DOOR_STATUS);
+//        localIntent.putExtra("iBoardId", boardId);
+//        localIntent.putExtra("iLockId", lockId);
+//        Common.mainActivity.sendBroadcast(localIntent);
+//    }
 }

@@ -120,7 +120,7 @@ public class PutPackageFrame extends Fragment {
                                     btn.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            if (canClick()) {
+                                            if (canClick() && Common.isOpen) {
                                                 putPackage(box_type);
                                             }
                                         }
@@ -370,27 +370,27 @@ public class PutPackageFrame extends Fragment {
             final int finalLockId = lockId;
             Common.oPenDoor(boardId, lockId);
             try {
-                        JSONObject reply = new JSONObject();
-                        reply.put("logId", _logId);
-                        Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
-                        Common.put.flush();
-                        //开柜成功
-                        Message msg = new Message();
-                        msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
-                        msg.obj = "";
-                        Common.putFrameHandler.sendMessage(msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //再次开柜
-                    JSONObject grid_info = new JSONObject();
-                    try {
-                        grid_info.put("boardId", boardId);
-                        grid_info.put("lockId", finalLockId);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Common.openAgain(grid_info);
+                JSONObject reply = new JSONObject();
+                reply.put("logId", _logId);
+                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                Common.put.flush();
+                //开柜成功
+                Message msg = new Message();
+                msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
+                msg.obj = "";
+                Common.putFrameHandler.sendMessage(msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //再次开柜
+            JSONObject grid_info = new JSONObject();
+            try {
+                grid_info.put("boardId", boardId);
+                grid_info.put("lockId", finalLockId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Common.openAgain(grid_info);
 
 //            Common.device.openGrid(boardId, lockId, new OpenGridListener() {
 //                @Override

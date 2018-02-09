@@ -85,10 +85,12 @@ public class GetFrame extends Fragment {
                         break;
                     case Constants.GET_PACKAGE_ERROR_MESSAGE:
                         Common.pay_qrcode = msg.obj.toString();
-                        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                        PayQrcodeFrame payQrcodeFrame = new PayQrcodeFrame();
-                        fragmentTransaction.replace(R.id.content, payQrcodeFrame);
-                        fragmentTransaction.commitAllowingStateLoss();
+                        if (getActivity()!=null){
+                            FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                            PayQrcodeFrame payQrcodeFrame = new PayQrcodeFrame();
+                            fragmentTransaction.replace(R.id.content, payQrcodeFrame);
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
                         break;
                     default:
                         break;
@@ -108,6 +110,7 @@ public class GetFrame extends Fragment {
                 }
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                Common.frame = "main";
                 MainFrame mainFrame = new MainFrame();
                 fragmentTransaction.replace(R.id.content, mainFrame);
                 fragmentTransaction.commitAllowingStateLoss();

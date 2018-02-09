@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,15 +37,12 @@ import com.google.gson.Gson;
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 import com.ss.testserial.Common.CrashHandler;
-import com.ss.testserial.Common.FileLog;
 import com.ss.testserial.Common.Loading;
+import com.ss.testserial.Common.ToastUtil;
 import com.ss.testserial.Common.download.DownloadService;
 import com.ss.testserial.JNI.DeviceInterface;
-import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.R;
-import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Update;
-import com.ss.testserial.Runnable.Wifi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,15 +100,13 @@ public class MainActivity extends Activity {
         NBSAppAgent.setLicenseKey("f1122c57726f4d3ba066e525d981eeae").withLocationServiceEnabled(true).enableLogging(true).start(this.getApplicationContext());
         // Log last 100 messages
         NBSAppAgent.setLogging(100, "AndroidRuntime");
-
         Intent intent = new Intent(this, DownloadService.class);
         //这一点至关重要，因为启动服务可以保证DownloadService一直在后台运行，绑定服务则可以让MaiinActivity和DownloadService
         //进行通信，因此两个方法的调用都必不可少。
         startService(intent);  //启动服务
         bindService(intent, connection, BIND_AUTO_CREATE);//绑定服务
 
-        Common.log = new FileLog();
-        Common.log.write("打开优裹徒");
+
         //初始化
         init();
         //设备操作
@@ -119,90 +115,82 @@ public class MainActivity extends Activity {
         if (!Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME) && Common.device == null) {
             Common.device = new DeviceInterface();
         }
-        //开启长连接线程                               // 修改
-        if (Common.tcpSocket == null) {
-            Common.tcpSocket = new TcpSocket();
-            new Thread(Common.tcpSocket).start();
-        }                                               // 修改
-        //开启获取WIFI线程
-        if (Common.mac == null) {
-            new Thread(new Wifi((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE))).start();
-        }
+
         //开启banner切换线程
-        if (Common.bannerThread == null) {
-            Common.bannerThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            Thread.sleep(Constants.SWITCH_BANNER_TIME);
-                        } catch (Exception e) {
-                        }
-                        Common.mainActivityHandler.sendEmptyMessage(Constants.SWITCH_BANNER_MESSAGE);
-                    }
-                }
-            });
-            Common.bannerThread.start();
-        }
+//        if (Common.bannerThread == null) {
+//            Common.bannerThread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while (true) {
+//                        try {
+//                            Thread.sleep(Constants.SWITCH_BANNER_TIME);
+//                        } catch (Exception e) {
+//                        }
+//                        Common.mainActivityHandler.sendEmptyMessage(Constants.SWITCH_BANNER_MESSAGE);
+//                    }
+//                }
+//            });
+//            Common.bannerThread.start();
+//        }
         // 开启倒计时线程
-        restartThread(0);
-
-
+//        restartThread(0);
         // 获取柜子信息线程
-        restartThread(1);
-
-
+//        restartThread(1);
     }
 
-
-    public void restartThread(int i) {
-        switch (i) {
-            case 0:
-                if (Common.countdownThread == null) {
-                    Common.countdownThread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            while (true) {
-                                try {
-                                    Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
-                                    Thread.sleep(1000);
-                                } catch (Exception e) {
-                                    Common.countdownThread.interrupt();
-                                    Common.countdownThread = null;
-                                    restartThread(0);
-                                }
-                            }
-                        }
-                    });
-                    Common.countdownThread.start();
-                }
-                break;
-
-            case 1:
-                if (Common.getBoxThread == null) {
-                    Common.getBoxThread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            while (true) {
-
-                                try {
-                                    if (Common.frame == "main") {
-                                        Common.getCabinetLeft();
-                                    }
-                                    Thread.sleep(10 * 60 * 1000);
-                                } catch (Exception e) {
-                                    Common.getBoxThread.interrupt();
-                                    Common.getBoxThread = null;
-                                    restartThread(1);
-                                }
-                            }
-                        }
-                    });
-                    Common.getBoxThread.start();
-                }
-                break;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
     }
+
+//    public void restartThread(int i) {
+//        switch (i) {
+//            case 0:
+//                if (Common.countdownThread == null) {
+//                    Common.countdownThread = new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            while (true) {
+//                                try {
+//                                    Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
+//                                    Thread.sleep(1000);
+//                                } catch (Exception e) {
+//                                    Common.countdownThread.interrupt();
+//                                    Common.countdownThread = null;
+//                                    restartThread(0);
+//                                }
+//                            }
+//                        }
+//                    });
+//                    Common.countdownThread.start();
+//                }
+//                break;
+//
+//            case 1:
+//                if (Common.getBoxThread == null) {
+//                    Common.getBoxThread = new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            while (true) {
+//                                try {
+//                                    if (Common.frame == "main") {
+//                                        Common.getCabinetLeft();
+//                                    }
+//                                    Thread.sleep(10 * 60 * 1000);
+//                                } catch (Exception e) {
+//                                    Common.getBoxThread.interrupt();
+//                                    Common.getBoxThread = null;
+//                                    restartThread(1);
+//                                }
+//                            }
+//                        }
+//                    });
+//                    Common.getBoxThread.start();
+//                }
+//                break;
+//        }
+//    }
 
 
     @Override
@@ -229,7 +217,7 @@ public class MainActivity extends Activity {
         public void run() {
             recLen++;
             Log.e("TAG", recLen + " ");
-            if (recLen > 20) {
+            if (recLen > 100) {
                 Common.mainActivity.startActivity(new Intent(MainActivity.this, VideoActivity.class));
             } else {
                 handler.postDelayed(this, 1000);
@@ -257,7 +245,6 @@ public class MainActivity extends Activity {
     //初始化
     @SuppressLint("HandlerLeak")
     private void init() {
-        //
         this.load = new Loading(this);
         //初始更新
         if (Common.update == null) {
@@ -311,9 +298,14 @@ public class MainActivity extends Activity {
                             load.hide();
                             break;
                         case Constants.COMMON_ERROR_MESSAGE:
-                            Toast toast = Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
-                            toast.show();
+//                            Toast toast = Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_LONG);
+//                            toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
+//                            toast.show();
+                            ToastUtil toastUtil = new ToastUtil();
+                            Toast show = toastUtil.Long(MainActivity.this, msg.obj.toString()).setPostion(685, 50).setToastBackground(Color.WHITE, R.drawable.toast_radius).show();
+                            Common.showMyToast(show, 5000);
+
+
                             break;
                         //保存配置文件
                         case Constants.SAVE_CONFIG_MESSAGE:
@@ -467,7 +459,9 @@ public class MainActivity extends Activity {
                             }
                             // 判断断网重启
                             if (--Common.reboot_count_down == 0) {
-                                Common.reboot(Common.mainActivity);
+//                                Common.reboot(Common.mainActivity);
+
+                                Common.rebot();
                             }
                             break;
                         case Constants.HOME_GET_GRID_LIST_MESSAGE:
@@ -510,6 +504,7 @@ public class MainActivity extends Activity {
                                 for (int i = 0; i < video_new_size; i++) {
                                     String s = list_video.get(i);
                                     String substring = s.substring(s.lastIndexOf("/") + 1);
+
                                     if (fileName.contains(substring) && getVideoUrl.getData().getVideo().get(i).getSize() == new File(Constants.path + substring).length()) {
                                         video_new.remove(s);
                                         fileName.remove(substring);
@@ -527,6 +522,8 @@ public class MainActivity extends Activity {
                                         }
                                 ).start();
                                 index_video = 0;
+
+                                Log.e("TAG", video_new.size() + "  ");
                                 if (video_new.size() > 0) {
                                     startService(video_new.get(index_video));
                                 } else {
@@ -574,7 +571,7 @@ public class MainActivity extends Activity {
                             String check_lockId = Common.getPreference("check_lockId");
                             if (!TextUtils.isEmpty(check_boardId) && !TextUtils.isEmpty(check_lockId)) {
                                 Toast.makeText(MainActivity.this, "发送消息", Toast.LENGTH_SHORT).show();
-                                Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
+//                                Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
                             }
                             break;
                         default:

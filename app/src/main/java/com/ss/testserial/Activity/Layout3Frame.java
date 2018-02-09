@@ -90,9 +90,13 @@ public class Layout3Frame extends Fragment {
                         break;
                     case Constants.LOGIN_SUCCESS_MESSAGE:
                         Common.sendError("登录成功");
-                        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.content, putPackageFrame);
-                        fragmentTransaction.commitAllowingStateLoss();
+                        if (getActivity() != null) {
+                            FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.content, putPackageFrame);
+                            fragmentTransaction.commitAllowingStateLoss();
+
+                        }
+
                     default:
                         break;
                 }

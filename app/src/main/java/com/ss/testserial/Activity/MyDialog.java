@@ -23,7 +23,7 @@ public class MyDialog extends AlertDialog {
 
     public MyDialog(Context context) {
         super(context, R.style.MyDialog); // 自定义全屏style
-        setOwnerActivity((Activity)context);
+        setOwnerActivity((Activity) context);
         this.mContext = context;
 
     }
@@ -40,9 +40,9 @@ public class MyDialog extends AlertDialog {
          * 设置宽度全屏，要设置在show的后面
          */
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-        layoutParams.gravity = Gravity.CENTER;
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.gravity = Gravity.RIGHT;
+        layoutParams.width = 500;
+        layoutParams.height = 500;
         getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setAttributes(layoutParams);
     }
