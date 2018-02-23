@@ -33,8 +33,8 @@ public interface Constants {
 
     /*TCP相关*/
     //服务器地址:端口
-    public static final String HOST = "kdg.tuyingmjy.com";
-//    public static final String HOST = "139.129.233.252";//测试
+//    public static final String HOST = "kdg.tuyingmjy.com";
+    public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -125,10 +125,14 @@ public interface Constants {
     public static final String CODE_SEND_PACKAGE_JSON_CLASS = "DevOp";
     //预约投件方法名
     public static final String CODE_SEND_PACKAGE_JSON_METHOD = "putPackageByCode";
+    //预约投件方法名2
+    public static final String CODE_SEND_PACKAGE_JSON_METHOD_2 = "putPackageByCodeV2";
     //快递员投件类名
     public static final String SEND_PACKAGE_JSON_CLASS = "DevOp";
     //快递员投件方法名
     public static final String SEND_PACKAGE_JSON_METHOD = "addPackage";
+    //快递员投件方法名2
+    public static final String SEND_PACKAGE_JSON_METHOD2 = "addPackageV2";
     //开柜类名
     public static final String OPEN_GRID_JSON_CLASS = "Dev";
     //开柜方法名
@@ -185,6 +189,10 @@ public interface Constants {
     public static final String GETVIDEO_CLASS = "DevOp";
     public static final String GETVIDEO_METHOD = "getAdVideo";
 
+    //投件返回的方法
+    public static final String SENDMSG = "sendMsg";
+    public static final String RESETLOCK = "resetLock";
+
 
     /*其他*/
     //DES对称加密密钥
@@ -211,10 +219,12 @@ public interface Constants {
     public static final String path = Environment.getExternalStorageDirectory()
             + "/crash/";
 
-    int GET_VIDEO = 0x20;
-    int DOWN_NEXT = 0X21;
-    int DOOR_STATE = 0X22;
-    int OPEN_DOOR = 0X23;
-    int CLOSE_DOOR = 0X24;
+    public static final int GET_VIDEO = 0x20;
+    public static final int DOWN_NEXT = 0X21;
+    public static final int DOOR_STATE = 0X22;
+    public static final int OPEN_DOOR = 0X23;
+    public static final int CLOSE_DOOR = 0X24;
+
+    public static final int DETERMINE = 0X25;
 
 }

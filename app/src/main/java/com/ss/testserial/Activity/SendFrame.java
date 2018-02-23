@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -181,7 +182,7 @@ public class SendFrame extends Fragment {
     }
 
     /**
-     * 发送取件信息
+     * 发送投件信息
      */
     private void putPackage() {
         //获取验证码
@@ -193,7 +194,7 @@ public class SendFrame extends Fragment {
         try {
             JSONObject data = new JSONObject();
             data.put("verify_code", code);
-            JSONObject jsonObject = Common.packageJsonData(Constants.CODE_SEND_PACKAGE_JSON_CLASS, Constants.CODE_SEND_PACKAGE_JSON_METHOD, data);
+            JSONObject jsonObject = Common.packageJsonData(Constants.CODE_SEND_PACKAGE_JSON_CLASS, Constants.CODE_SEND_PACKAGE_JSON_METHOD_2, data);
             if (Common.socket.isConnected() && !Common.socket.isClosed()) {
                 Common.startLoad();
                 Common.tcpSocket.setTcpListener(new TcpListener() {
@@ -235,6 +236,8 @@ public class SendFrame extends Fragment {
                 int lockCode = jsonObject.getJSONObject("data").getInt("lock_code");
                 //锁编号
                 final int logId = jsonObject.getJSONObject("data").getInt("logId");
+
+                Common.package_id = jsonObject.getJSONObject("data").getString("package_id");
                 Common.sendError("打开柜子");
                 // TODO:
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
@@ -248,7 +251,6 @@ public class SendFrame extends Fragment {
                         reply.put("logId", logId);
                         Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
                         Common.put.flush();
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -260,7 +262,9 @@ public class SendFrame extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Common.openAgain(grid_info);
+//                    Common.openAgain(grid_info);
+                    Common.Determine(grid_info);
+
                 } else {
                     final int finalLockId = lockId;
                     Common.device.openGrid(boardId, lockId, new OpenGridListener() {
@@ -272,7 +276,6 @@ public class SendFrame extends Fragment {
                                 reply.put("logId", logId);
                                 Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
                                 Common.put.flush();
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -284,7 +287,12 @@ public class SendFrame extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Common.openAgain(grid_info);
+
+
+//                            Common.openAgain(grid_info);
+                            Common.Determine(grid_info);
+
+
                         }
                     });
                 }

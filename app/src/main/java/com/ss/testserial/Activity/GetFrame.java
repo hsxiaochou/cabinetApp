@@ -85,7 +85,7 @@ public class GetFrame extends Fragment {
                         break;
                     case Constants.GET_PACKAGE_ERROR_MESSAGE:
                         Common.pay_qrcode = msg.obj.toString();
-                        if (getActivity()!=null){
+                        if (getActivity() != null) {
                             FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                             PayQrcodeFrame payQrcodeFrame = new PayQrcodeFrame();
                             fragmentTransaction.replace(R.id.content, payQrcodeFrame);
@@ -125,7 +125,7 @@ public class GetFrame extends Fragment {
         this.code[4] = (EditText) this.view.findViewById(R.id.getCode5);
         this.code[5] = (EditText) this.view.findViewById(R.id.getCode6);
         //软键盘
-        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD);
+        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD_NUM);
         this.keyBoard.setKeyBoardListener(new KeyBoard.KeyBoardListener() {
             @Override
             public void delete() {
@@ -139,6 +139,7 @@ public class GetFrame extends Fragment {
                     }
                     return;
                 }
+
                 if (code[position].getText().length() == 0 && position > 0) {
                     position--;
                     keyBoard.setView(code[position]);
@@ -192,10 +193,10 @@ public class GetFrame extends Fragment {
             data.put("mac", Common.mac);
             JSONObject jsonObject = Common.packageJsonData(Constants.GET_PACKAGE_JSON_CLASS, Constants.GET_PACKAGE_JSON_METHOD, data);
             if (Common.socket.isConnected() && !Common.socket.isClosed()) {
-                Common.startLoad();
                 Common.log.write("发送取件码：" + code);
                 Common.put.println(Common.encryptByDES(jsonObject.toString(), Constants.DES_KEY));
                 Common.put.flush();
+                Common.startLoad();
             } else {
                 Common.sendError("网络连接失败，请稍后再试");
             }
@@ -299,7 +300,6 @@ public class GetFrame extends Fragment {
 //                        }
 //                    });
                 }
-
             } else {
                 try {
                     Common.save("取件失败：" + jsonObject.getJSONObject("data").getString("msg"));//记录板子有关信息到文件中

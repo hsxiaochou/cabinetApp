@@ -108,7 +108,7 @@ public class OpenDialogFrame extends Fragment {
         this.open_again.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+                Common.save("再次开柜板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
                 // TODO:
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {

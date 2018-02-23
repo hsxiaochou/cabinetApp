@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.MyApplication;
 import com.ss.testserial.Activity.GetFrame;
 import com.ss.testserial.Activity.Layout3Frame;
 import com.ss.testserial.Activity.MainActivity;
+import com.ss.testserial.Activity.MainFrame;
 import com.ss.testserial.Activity.PutPackageFrame;
 import com.ss.testserial.Activity.ScanFrame;
 import com.ss.testserial.Activity.SendFrame;
@@ -20,6 +22,7 @@ import com.ss.testserial.Common.Constants;
 import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.JNI.OpenGridListener;
+import com.ss.testserial.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -241,7 +244,10 @@ public class TcpSocket implements Runnable {
                     }
                     //预约投件
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD)) {
-
+                    Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
+                    Common.log.write("返回投件码投件：" + jsonObject.toString());
+                    SendFrame.dealOpen(jsonObject);
+                } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD_2)) {
                     Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
@@ -302,6 +308,35 @@ public class TcpSocket implements Runnable {
                     } catch (Exception e) {
                     }
                     //获取登录码
+                } else if (classString.equals(Constants.SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.SEND_PACKAGE_JSON_METHOD2)) {
+                    //修改的投件方法
+                    Common.isOpen = true;
+                    Common.save("快递员现场投件开柜： " + jsonObject.toString());
+                    Common.log.write("返回快递员现场投件开柜：" + jsonObject.toString());
+                    try {
+                        if (jsonObject.getJSONObject("data").getBoolean("success")) {
+                            //板地址
+                            int boardId = jsonObject.getJSONObject("data").getInt("lock_board_id");
+                            //锁地址
+                            int lockId = jsonObject.getJSONObject("data").getInt("lock_id");
+                            //锁编号
+                            int lockCode = jsonObject.getJSONObject("data").getInt("lock_code");
+                            //logId
+                            final int logId = jsonObject.getJSONObject("data").getInt("logId");
+                            Common.package_id = jsonObject.getJSONObject("data").getString("package_id");
+                            PutPackageFrame.putSuccess(boardId, lockId, lockCode, logId);
+                        } else {
+                            Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
+                            Common.endLoad();
+                            //初始化
+                            Message msg = new Message();
+                            msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
+                            msg.obj = "";
+                            Common.putFrameHandler.sendMessage(msg);
+                        }
+                    } catch (Exception e) {
+                    }
+
                 } else if (classString.equals(Constants.GET_LOGIN_CODE_CLASS) && method.equals(Constants.GET_LOGIN_CODE_METHOD)) {
                     Common.endLoad();
                     try {
@@ -359,6 +394,21 @@ public class TcpSocket implements Runnable {
                     msg.what = Constants.GET_VIDEO;
                     msg.obj = jsonObject.toString();
                     Common.mainActivityHandler.sendMessage(msg);
+                } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.SENDMSG)) {
+                    Common.endLoad();
+                    if (jsonObject.getJSONObject("data").getBoolean("success")) {
+                        Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
+                    }
+                    if (Common.count_down > 0) {
+                        Common.determineFrameHandler.sendEmptyMessage(0);
+
+                    }
+                } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.RESETLOCK)) {
+                    Common.endLoad();
+                    if (jsonObject.getJSONObject("data").getBoolean("success")) {
+                        Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
+                    }
+                    Common.determineFrameHandler.sendEmptyMessage(0);
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "为止信息：" + jsonObject.toString());

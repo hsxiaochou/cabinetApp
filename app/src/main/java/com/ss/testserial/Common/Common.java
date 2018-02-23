@@ -119,6 +119,8 @@ public class Common {
     public static Handler putFrameHandler = null;
     //自助查询handler
     public static Handler queryFrameHandler = null;
+    //快递员投递反馈handler
+    public static Handler determineFrameHandler = null;
 
     //弹窗
     public static Dialog commonDialog = null;
@@ -141,6 +143,7 @@ public class Common {
     //再次开柜倒计时
     public static JSONObject open_again_data;
     public static String frame;
+    public static String frame2 = "";
     public static FileLog log;
     public static String contact_phone = "";
     public static String address = "";
@@ -148,6 +151,10 @@ public class Common {
 
     //开柜判断
     public static boolean isOpen = true;
+
+
+    //快递员投递后的package_id
+    public static String package_id = "";
 
     /*banner*/
     public static int banners[] = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
@@ -336,6 +343,31 @@ public class Common {
         Common.mainActivityHandler.sendMessage(msg);
     }
 
+    //快递员确定是否已投件
+    public static void Determine(JSONObject jsonObject) {
+        Message msg = new Message();
+        msg.what = Constants.DETERMINE;
+        msg.obj = jsonObject;
+        Common.mainActivityHandler.sendMessage(msg);
+    }
+
+
+    //快递员已投件方法
+    public static void YTD() {
+        try {
+            JSONObject reply = new JSONObject();
+            reply.put("package_id", Common.package_id);
+            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
+            Common.put.flush();
+            Common.startLoad();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     //判断锁状态是否改变--判断状态数组是否都为空
     public static boolean isLockStatusChange(JSONArray lockStatusGroup) {
         try {
@@ -513,20 +545,20 @@ public class Common {
 
     //设置Toast的显示时间
     public static void showMyToast(final Toast toast, final int cnt) {
-        final Timer timer =new Timer();
+        final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 toast.show();
             }
-        },0,3000);
+        }, 0, 3000);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 toast.cancel();
                 timer.cancel();
             }
-        }, cnt );
+        }, cnt);
     }
 
     //后台调节音量

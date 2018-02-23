@@ -359,6 +359,21 @@ public class MainActivity extends Activity {
                             OpenDialogFrame openDialogFrame = new OpenDialogFrame();
                             fragmentTransaction.replace(R.id.content, openDialogFrame).commitAllowingStateLoss();
                             break;
+                        case Constants.DETERMINE:
+                            //快递员确定投递
+                            Common.open_again_data = null;
+                            try {
+                                jsonObject = new JSONObject(msg.obj.toString());
+                                jsonObject.put("frame", Common.frame);
+                                Common.open_again_data = jsonObject;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            DetermineFrame determineFrame = new DetermineFrame();
+                            fragmentTransaction.replace(R.id.content, determineFrame).commitAllowingStateLoss();
+
+                            break;
                         case Constants.REGISTER_SUCCESS_MESSAGE:
                             try {
                                 ((TextView) MainActivity.this.findViewById(R.id.contact_phone)).setText(Common.contact_phone);
@@ -418,6 +433,9 @@ public class MainActivity extends Activity {
                                 } catch (Exception e) {
                                 }
                             } else {
+                                if (Common.frame2.equals("determine")) {
+                                    Common.YTD();
+                                }
                                 //初始化返回首页
                                 Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
                                 Common.wechat_id = "";
@@ -461,7 +479,7 @@ public class MainActivity extends Activity {
                             if (--Common.reboot_count_down == 0) {
 //                                Common.reboot(Common.mainActivity);
 
-                                Common.rebot();
+                                Common.rebot();//断网重启机器。
                             }
                             break;
                         case Constants.HOME_GET_GRID_LIST_MESSAGE:
@@ -488,7 +506,7 @@ public class MainActivity extends Activity {
                         case Constants.GET_VIDEO:
                             vediojson = (String) msg.obj;
                             getVideoUrl = new Gson().fromJson(vediojson, GetVideoUrl.class);
-                            if (getVideoUrl.getData().isSwitchX()) {
+                            if (getVideoUrl.getData().isSwitchX() && getVideoUrl.getData().getVideo().size() > 0) {
                                 isswitchx = true;
                                 Log.e("TAG", "开始视频");
                                 //新的videourl
@@ -522,7 +540,6 @@ public class MainActivity extends Activity {
                                         }
                                 ).start();
                                 index_video = 0;
-
                                 Log.e("TAG", video_new.size() + "  ");
                                 if (video_new.size() > 0) {
                                     startService(video_new.get(index_video));
