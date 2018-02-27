@@ -24,6 +24,7 @@ import com.ss.testserial.R;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
+import java.security.AlgorithmParameterGenerator;
 
 /**
  * Created by Listen on 2016/9/19.
@@ -80,6 +81,7 @@ public class OpenDialogFrame extends Fragment {
         this.open_success.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Common.overdue = false;
                 switch (frame) {
                     case "get":
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new GetFrame()).commitAllowingStateLoss();
@@ -95,6 +97,9 @@ public class OpenDialogFrame extends Fragment {
                         break;
                     case "put":
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new PutPackageFrame()).commitAllowingStateLoss();
+                        break;
+                    case "recycling":
+                        getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new Recycling()).commitAllowingStateLoss();
                         break;
                     default:
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new MainFrame()).commitAllowingStateLoss();

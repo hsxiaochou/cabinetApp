@@ -94,7 +94,6 @@ public class Layout3Frame extends Fragment {
                             FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                             fragmentTransaction.replace(R.id.content, putPackageFrame);
                             fragmentTransaction.commitAllowingStateLoss();
-
                         }
 
                     default:

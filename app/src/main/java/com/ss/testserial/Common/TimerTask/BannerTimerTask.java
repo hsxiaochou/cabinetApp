@@ -12,6 +12,9 @@ import java.util.TimerTask;
 public class BannerTimerTask extends TimerTask {
     @Override
     public void run() {
-        Common.mainActivityHandler.sendEmptyMessage(Constants.SWITCH_BANNER_MESSAGE);
+        if (Common.mainActivityHandler != null) {
+            Common.mainActivityHandler.sendEmptyMessage(Constants.SWITCH_BANNER_MESSAGE);
+
+        }
     }
 }

@@ -42,6 +42,7 @@ import com.ss.testserial.Common.ToastUtil;
 import com.ss.testserial.Common.download.DownloadService;
 import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.R;
+import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Update;
 
 import org.json.JSONArray;
@@ -105,10 +106,15 @@ public class MainActivity extends Activity {
         //进行通信，因此两个方法的调用都必不可少。
         startService(intent);  //启动服务
         bindService(intent, connection, BIND_AUTO_CREATE);//绑定服务
-
-
         //初始化
         init();
+        //开启长连接线程                               // 修改
+        if (Common.tcpSocket == null) {
+            Common.tcpSocket = new TcpSocket();
+            new Thread(Common.tcpSocket).start();
+        }
+
+
         //设备操作
         Common.confirm_LockBoardVsersion();//确定LockBoardVsersion
         Log.e("TAG", "设备操作：" + Common.LockBoardVsersion + "   " + Common.device);
@@ -369,7 +375,6 @@ public class MainActivity extends Activity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                             DetermineFrame determineFrame = new DetermineFrame();
                             fragmentTransaction.replace(R.id.content, determineFrame).commitAllowingStateLoss();
 
@@ -457,6 +462,7 @@ public class MainActivity extends Activity {
                                 }
                                 fragmentTransaction.replace(R.id.content, Common.mainFrame);
                                 fragmentTransaction.commitAllowingStateLoss();
+                                Common.frame2 = "";//还原
                             }
                             break;
                         case Constants.SWITCH_BANNER_MESSAGE:

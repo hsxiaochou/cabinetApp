@@ -2,8 +2,10 @@ package com;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiManager;
 
+import com.ss.testserial.Activity.MainActivity;
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.FileLog;
 import com.ss.testserial.Common.TimerTask.BannerTimerTask;
@@ -25,11 +27,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //开启长连接线程                               // 修改
-        if (Common.tcpSocket == null) {
-            Common.tcpSocket = new TcpSocket();
-            new Thread(Common.tcpSocket).start();
-        }
         //开启定时启动功能
         doRebot();
         Common.context = getApplicationContext();
@@ -40,20 +37,16 @@ public class MyApplication extends Application {
         }
         //开启获取柜子格数
         GetBoxNum();
-
-
         //k开启倒计时
         Dorestart();
-
         //开启banner
         DoBanner();
-
         Common.log = new FileLog();
         Common.log.write("打开优裹徒");
     }
 
     private void DoBanner() {
-        new Timer().schedule(new BannerTimerTask(), 5000, 10000);
+        new Timer().schedule(new BannerTimerTask(), 10000, 10000);
     }
 
     private void Dorestart() {

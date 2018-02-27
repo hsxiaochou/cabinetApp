@@ -12,6 +12,8 @@ import java.util.TimerTask;
 public class RestartTimerTask extends TimerTask {
     @Override
     public void run() {
-        Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
+        if (Common.mainActivityHandler != null) {
+            Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
+        }
     }
 }

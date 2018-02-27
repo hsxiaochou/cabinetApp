@@ -33,8 +33,8 @@ public interface Constants {
 
     /*TCP相关*/
     //服务器地址:端口
-//    public static final String HOST = "kdg.tuyingmjy.com";
-    public static final String HOST = "139.129.233.252";//测试
+    public static final String HOST = "kdg.tuyingmjy.com";
+    //    public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -193,6 +193,13 @@ public interface Constants {
     public static final String SENDMSG = "sendMsg";
     public static final String RESETLOCK = "resetLock";
 
+    //快递回收请求方法
+    public static final String GETCOURIER_CLASS = "DevOp";
+    public static final String GETCOURIER_METHOD = "getCourierPackageByBox";
+
+    //确认回收包裹
+    public static final String CONFIRM_CLASS = "DevOp";
+    public static final String CONFIRM_METHOD = "recyclePackage";
 
     /*其他*/
     //DES对称加密密钥
@@ -224,6 +231,8 @@ public interface Constants {
     public static final int DOOR_STATE = 0X22;
     public static final int OPEN_DOOR = 0X23;
     public static final int CLOSE_DOOR = 0X24;
+
+    public static final int GET_COURIER = 0X26;
 
     public static final int DETERMINE = 0X25;
 

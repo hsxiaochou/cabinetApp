@@ -158,7 +158,8 @@ public class TcpSocket implements Runnable {
                 } else if (classString.equals(Constants.LOCK_STATUS_JSON_CLASS) && method.equals(Constants.LOCK_STATUS_JSON_METHOD)) {
                     Common.log.write("返回上报状态");
                     //开柜
-                } else if (classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) {
+                } else if ((classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) || (classString.equals(Constants.CONFIRM_CLASS) && method.equals(Constants.CONFIRM_METHOD))) {
+                    Common.endLoad();
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         //板地址
                         final int boardId = jsonObject.getJSONObject("data").getInt("lock_board_id");
@@ -168,10 +169,12 @@ public class TcpSocket implements Runnable {
                         int lockCode = jsonObject.getJSONObject("data").getInt("lock_code");
                         //logId
                         final int logId = jsonObject.getJSONObject("data").getInt("logId");
-                        Common.backToMain();
+                        if (classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) {
+                            Common.backToMain();
+                        }
                         // TODO:
                         Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-                        Common.save("板子型号：" + Common.LockBoardVsersion + "远程开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
+                        Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
                         if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                             if (lockId == 22) {
                                 lockId = 0;
@@ -236,6 +239,7 @@ public class TcpSocket implements Runnable {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
                             Common.wechat_id = jsonObject.getJSONObject("data").getString("user_identity");
                             Common.user_name = jsonObject.getJSONObject("data").getString("user_name");
+                            Common.overdue = jsonObject.getJSONObject("data").getBoolean("overdue");
                             Layout3Frame.loginSuccess();
                         } else {
                             Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
@@ -244,15 +248,12 @@ public class TcpSocket implements Runnable {
                     }
                     //预约投件
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD)) {
-                    Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
                 } else if (classString.equals(Constants.CODE_SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.CODE_SEND_PACKAGE_JSON_METHOD_2)) {
-                    Common.save("预约投件：" + "返回投件码投件： " + jsonObject.toString());
                     Common.log.write("返回投件码投件：" + jsonObject.toString());
                     SendFrame.dealOpen(jsonObject);
                 } else if (classString.equals(Constants.DEVICE_SCAN_CLASS) && method.equals(Constants.DEVICE_SCAN_METHOD)) {
-                    Common.save("返回扫码开柜： " + jsonObject.toString());
                     Common.log.write("返回扫码开柜：" + jsonObject.toString());
                     ScanFrame.dealOpen(jsonObject);
                     //获取柜子类型
@@ -283,7 +284,6 @@ public class TcpSocket implements Runnable {
                     //快递员投件
                 } else if (classString.equals(Constants.SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.SEND_PACKAGE_JSON_METHOD)) {
                     Common.isOpen = true;
-                    Common.save("快递员现场投件开柜： " + jsonObject.toString());
                     Common.log.write("返回快递员现场投件开柜：" + jsonObject.toString());
                     try {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
@@ -311,7 +311,6 @@ public class TcpSocket implements Runnable {
                 } else if (classString.equals(Constants.SEND_PACKAGE_JSON_CLASS) && method.equals(Constants.SEND_PACKAGE_JSON_METHOD2)) {
                     //修改的投件方法
                     Common.isOpen = true;
-                    Common.save("快递员现场投件开柜： " + jsonObject.toString());
                     Common.log.write("返回快递员现场投件开柜：" + jsonObject.toString());
                     try {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
@@ -409,6 +408,16 @@ public class TcpSocket implements Runnable {
                         Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                     }
                     Common.determineFrameHandler.sendEmptyMessage(0);
+                } else if (classString.equals(Constants.GETCOURIER_CLASS) && method.equals(Constants.GETCOURIER_METHOD)) {
+                    //获取快递员回收json
+                    Common.endLoad();
+                    if (jsonObject.getJSONObject("data").getBoolean("success")) {
+                        Message msg = new Message();
+                        msg.what = Constants.GET_COURIER;
+                        msg.obj = jsonObject.toString();
+                        Common.RecyclingFrameHandler.sendMessage(msg);
+                    }
+
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "为止信息：" + jsonObject.toString());

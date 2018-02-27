@@ -65,6 +65,7 @@ public class PutPackageFrame extends Fragment {
         }
     };
     private Button clear_all;
+    private ImageView iv_kdhs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +93,15 @@ public class PutPackageFrame extends Fragment {
      * 初始化
      */
     private void init() {
+        if (Common.overdue) {
+            FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);//my加上动画
+            Recycling recyclingframe = new Recycling();
+            fragmentTransaction.replace(R.id.content, recyclingframe);
+            fragmentTransaction.commitAllowingStateLoss();
+        }
+
+
         this.contact_phone = (TextView) this.view.findViewById(R.id.contact_phone);
         this.contact_phone.setText(Common.contact_phone);
         Common.putFrameHandler = new Handler() {
@@ -199,6 +209,22 @@ public class PutPackageFrame extends Fragment {
                 }
             }
         });
+
+
+        //快递员回收按钮
+        iv_kdhs = (ImageView) this.view.findViewById(R.id.iv_kdhs);
+        iv_kdhs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);//my加上动画
+                Recycling recyclingframe = new Recycling();
+                fragmentTransaction.replace(R.id.content, recyclingframe);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        });
+
+
         //用户电话
         this.phone2 = (EditText) this.view.findViewById(R.id.phone2);
 //        this.phone2.setInputType(InputType.TYPE_NULL);
@@ -323,6 +349,7 @@ public class PutPackageFrame extends Fragment {
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.SEND_PACKAGE_JSON_CLASS, Constants.SEND_PACKAGE_JSON_METHOD2, putJson).toString(), Constants.DES_KEY));
             Common.put.flush();
             Common.startLoad();
+
         } catch (Exception e) {
             Common.isOpen = true;
             e.printStackTrace();
@@ -338,11 +365,18 @@ public class PutPackageFrame extends Fragment {
         Common.sendError("开柜成功");
         // TODO:
         Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-
         Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
         if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
             lockId = Common.JUBU_ZeroId(lockId);
-
+            //再次开柜
+            JSONObject grid_info = new JSONObject();
+            try {
+                grid_info.put("boardId", boardId);
+                grid_info.put("lockId", lockId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Common.Determine(grid_info);
             Jubu.openBox(boardId, lockId);
             //回复开柜信息
             try {
@@ -382,8 +416,6 @@ public class PutPackageFrame extends Fragment {
             }
 
 //            Common.openAgain(grid_info);
-
-
 //            Common.device.openGrid(boardId, lockId, new OpenGridListener() {
 //                @Override
 //                public void openEnd() {

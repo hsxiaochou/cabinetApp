@@ -85,10 +85,12 @@ public class Common {
     /*用户信息*/
     public static String wechat_id = "";
     public static String user_name = "";
+    public static boolean overdue = false;
     //超时包裹支付二维码
     public static String pay_qrcode = "";
     //mac地址
     public static String mac = null;
+
     /*与服务器的长连接*/
     public static TcpSocket tcpSocket = null;
     //长连接
@@ -121,6 +123,9 @@ public class Common {
     public static Handler queryFrameHandler = null;
     //快递员投递反馈handler
     public static Handler determineFrameHandler = null;
+
+    //快递员回收handler
+    public static Handler RecyclingFrameHandler = null;
 
     //弹窗
     public static Dialog commonDialog = null;
@@ -360,7 +365,6 @@ public class Common {
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
             Common.put.flush();
             Common.startLoad();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -385,9 +389,11 @@ public class Common {
     // 获取剩余柜子数
     public static void getCabinetLeft() {
         try {
-            if (Common.put != null) {
-                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
-                Common.put.flush();
+            if (Common.socket.isConnected() && !Common.socket.isClosed()) {
+                if (Common.put != null) {
+                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
+                    Common.put.flush();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -757,4 +763,6 @@ public class Common {
         int i = rs485.rs485OpenGrid(boardId, lockId, ints);
         Log.e("TAG", "开锁反馈：" + i);
     }
+
+
 }

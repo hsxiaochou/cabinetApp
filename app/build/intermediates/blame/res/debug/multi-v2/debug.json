@@ -160,33 +160,39 @@
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\disabled_button.xml",
                     "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "281"
                     },
                     "to": {
-                        "startLines": "202",
+                        "startLines": "206",
                         "startColumns": "4",
-                        "startOffsets": "14202",
-                        "endLines": "205",
+                        "startOffsets": "14498",
+                        "endLines": "209",
                         "endColumns": "12",
-                        "endOffsets": "14423"
+                        "endOffsets": "14719"
                     }
                 },
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
-                        "startLines": "-1,-1,-1",
-                        "startColumns": "-1,-1,-1",
-                        "startOffsets": "-1,-1,-1"
+                        "startLines": "6,15,19",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "192,547,712",
+                        "endLines": "12,17,32",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "506,704,1413"
                     },
                     "to": {
-                        "startLines": "196,199,206",
+                        "startLines": "196,203,210",
                         "startColumns": "4,4,4",
-                        "startOffsets": "14025,14130,14428",
-                        "endLines": "198,201,219",
+                        "startOffsets": "14025,14338,14724",
+                        "endLines": "202,205,223",
                         "endColumns": "12,12,12",
-                        "endOffsets": "14125,14197,15032"
+                        "endOffsets": "14333,14493,15412"
                     }
                 },
                 {
@@ -209,25 +215,31 @@
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\primary_button.xml",
                     "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "279"
                     },
                     "to": {
-                        "startLines": "220",
+                        "startLines": "224",
                         "startColumns": "4",
-                        "startOffsets": "15037",
-                        "endLines": "223",
+                        "startOffsets": "15417",
+                        "endLines": "227",
                         "endColumns": "12",
-                        "endOffsets": "15256"
+                        "endOffsets": "15636"
                     }
                 },
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                        "startLines": "11,12,3,16,15,13,14,21,4,5,17,9,10,6",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "419,483,59,780,699,541,620,987,101,155,853,306,354,207",
+                        "endLines": "11,12,3,16,15,13,14,21,4,5,19,9,10,6",
+                        "endColumns": "62,56,40,71,79,77,77,69,52,50,13,46,63,56",
+                        "endOffsets": "477,535,95,847,774,614,693,1052,149,201,979,348,413,259"
                     },
                     "to": {
                         "startLines": "180,181,182,183,184,185,186,187,188,189,190,193,194,195",
@@ -241,9 +253,11 @@
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\dimens.xml",
                     "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "90,149",
+                        "endColumns": "57,55",
+                        "endOffsets": "143,200"
                     },
                     "to": {
                         "startLines": "178,179",
@@ -256,9 +270,12 @@
                 {
                     "source": "C:\\Users\\Administrator\\Desktop\\cabinetApp\\cabinetApp\\app\\src\\main\\res\\values\\array.xml",
                     "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "75",
+                        "endLines": "7",
+                        "endColumns": "19",
+                        "endOffsets": "213"
                     },
                     "to": {
                         "startLines": "2",
@@ -272,9 +289,12 @@
                 {
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\constraint-layout-1.0.2.aar\\879bd68bb0cd27eb67d07a3b508320d1\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                        "startLines": "2,3,4,7,8,11,14,15,18,21,22,23,24,28,29,30,31,36,37,38,41,44,45,48,51,54,57,58,61,64,65,70,71,75,76,77,78,79,80,81,82,83,84,85",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,107,177,310,378,507,633,700,823,948,1015,1080,1145,1285,1351,1417,1484,1694,1763,1829,1954,2080,2147,2273,2400,2525,2652,2717,2843,2966,3031,3239,3306,3445,3510,3575,3637,3699,3761,3820,3880,3941,4002,4061",
+                        "endLines": "2,3,6,7,10,13,14,17,20,21,22,23,27,28,29,30,35,36,37,40,43,44,47,50,53,56,57,60,63,64,69,70,74,75,76,77,78,79,80,81,82,83,84,90",
+                        "endColumns": "51,69,11,67,11,11,66,11,11,66,64,64,11,65,65,66,11,68,65,11,11,66,11,11,11,11,64,11,11,64,11,66,11,64,64,61,61,61,58,59,60,60,58,11",
+                        "endOffsets": "102,172,305,373,502,628,695,818,943,1010,1075,1140,1280,1346,1412,1479,1689,1758,1824,1949,2075,2142,2268,2395,2520,2647,2712,2838,2961,3026,3234,3301,3440,3505,3570,3632,3694,3756,3815,3875,3936,3997,4056,4265"
                     },
                     "to": {
                         "startLines": "7,8,9,12,13,16,19,20,23,26,27,28,29,33,34,35,36,41,42,43,46,49,50,53,56,59,62,63,66,69,70,75,76,80,81,82,83,84,85,86,87,88,89,90",

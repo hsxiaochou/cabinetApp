@@ -8,6 +8,6 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "com.ss.testserial";
   public static final String BUILD_TYPE = "release";
   public static final String FLAVOR = "";
-  public static final int VERSION_CODE = 468;
-  public static final String VERSION_NAME = "4.6.8";
+  public static final int VERSION_CODE = 471;
+  public static final String VERSION_NAME = "4.7.1";
 }

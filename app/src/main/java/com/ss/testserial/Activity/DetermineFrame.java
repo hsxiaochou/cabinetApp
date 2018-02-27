@@ -72,6 +72,7 @@ public class DetermineFrame extends Fragment {
             @Override
             public void onClick(View view) {
                 Common.YTD();
+                Common.frame2 = "";
             }
         });
 
@@ -80,6 +81,7 @@ public class DetermineFrame extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
+                    Common.frame2 = "";
                     JSONObject reply = new JSONObject();
                     reply.put("package_id", Common.package_id);
                     Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.RESETLOCK, reply).toString(), Constants.DES_KEY));
@@ -106,8 +108,6 @@ public class DetermineFrame extends Fragment {
         this.bt_open_agin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.e("TAG", lockId + "  " + boardId);
                 Common.save("再次开柜板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                 Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
                 // TODO:
@@ -116,7 +116,6 @@ public class DetermineFrame extends Fragment {
                         lockId = 0;
                     }
                     Jubu.openBox(boardId, lockId);
-
                 } else {
                     Common.device.openGrid(boardId, lockId, new OpenGridListener() {
                         @Override

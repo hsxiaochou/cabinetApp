@@ -70,6 +70,7 @@ public class Loading extends AlertDialog.Builder {
 
     private void loadFail() {
         if (this.loadingListener == null) {
+            Common.isOpen = true;
             Toast toast = Toast.makeText(this.context, "加载超时", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
             toast.show();

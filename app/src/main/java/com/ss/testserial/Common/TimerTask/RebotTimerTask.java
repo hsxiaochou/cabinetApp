@@ -23,6 +23,7 @@ public class RebotTimerTask extends TimerTask {
     static {
         initEatTimes();
     }
+
     /*
      * 初始化吃饭时间
      * */
@@ -35,9 +36,8 @@ public class RebotTimerTask extends TimerTask {
     public void run() {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        Log.e("TAG", hour + "  ");
         if (eatTimes.contains(hour)) {
-           Common.rebot();
+            Common.rebot();
         }
     }
 }

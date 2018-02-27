@@ -40,8 +40,9 @@ import java.util.List;
 public class QueryFrame extends Fragment {
 
     private LayoutInflater inflater;
-    private KeyBoard keyBoard = null;
     private View view;
+    private KeyBoard keyBoard = null;
+
     private ImageView back2layout1_query;
     private NoMenuEditText phone_query;
     private Button clear_all;
@@ -263,8 +264,6 @@ public class QueryFrame extends Fragment {
 
 
     class MyAdapter extends BaseAdapter {
-
-
         private final List<QueryInfoBean.DataBean.ListBean> list;
         LayoutInflater mInflater = null;
 
