@@ -438,7 +438,7 @@ public class MainActivity extends Activity {
                                 } catch (Exception e) {
                                 }
                             } else {
-                                if (Common.frame2.equals("determine")) {
+                                if (Common.frame.equals("determine")) {
                                     Common.YTD();
                                 }
                                 //初始化返回首页
@@ -484,7 +484,6 @@ public class MainActivity extends Activity {
                             // 判断断网重启
                             if (--Common.reboot_count_down == 0) {
 //                                Common.reboot(Common.mainActivity);
-
                                 Common.rebot();//断网重启机器。
                             }
                             break;

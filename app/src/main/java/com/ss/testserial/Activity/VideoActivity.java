@@ -37,8 +37,10 @@ public class VideoActivity extends Activity {
                 finish();
                 break;
             case MotionEvent.ACTION_UP:
+                finish();
                 break;
             case MotionEvent.ACTION_MOVE:
+                finish();
             default:
                 break;
         }

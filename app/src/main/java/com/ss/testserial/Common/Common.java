@@ -360,6 +360,7 @@ public class Common {
     //快递员已投件方法
     public static void YTD() {
         try {
+
             JSONObject reply = new JSONObject();
             reply.put("package_id", Common.package_id);
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
@@ -389,10 +390,12 @@ public class Common {
     // 获取剩余柜子数
     public static void getCabinetLeft() {
         try {
-            if (Common.socket.isConnected() && !Common.socket.isClosed()) {
-                if (Common.put != null) {
-                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
-                    Common.put.flush();
+            if (Common.socket != null) {
+                if (Common.socket.isConnected() && !Common.socket.isClosed()) {
+                    if (Common.put != null) {
+                        Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.GET_GRID_TYPE_METHOD, new JSONObject()).toString(), Constants.DES_KEY));
+                        Common.put.flush();
+                    }
                 }
             }
         } catch (Exception e) {
@@ -690,7 +693,6 @@ public class Common {
                     }
                     content = builder.toString();
                 }
-                Log.e("TAG", "连接状态：" + b + " 请求返回：" + content);
             }
         } catch (Exception e) {
             Log.e("TAG", e.toString());

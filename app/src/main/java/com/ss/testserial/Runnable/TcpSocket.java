@@ -77,6 +77,7 @@ public class TcpSocket implements Runnable {
                 Common.sendError("网络连接成功");
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.e("TAG", e.toString());
                 Common.log.write("网络连接失败，正在重新连接..." + e.getMessage());
                 Common.IS_REGIST = true;
                 Common.sendError("网络连接失败，正在重新连接...");
@@ -134,7 +135,6 @@ public class TcpSocket implements Runnable {
                 String classString = jsonObject.getString("class");
                 String method = jsonObject.getString("method");
                 //注册设备
-
                 if (classString.equals(Constants.REGISTER_DEVICE_JSON_CLASS) && method.equals(Constants.REGISTER_DEVICE_JSON_METHOD)) {
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         Common.boxid = jsonObject.getJSONObject("data").getInt("boxId");
@@ -172,55 +172,97 @@ public class TcpSocket implements Runnable {
                         if (classString.equals(Constants.OPEN_GRID_JSON_CLASS) && method.equals(Constants.OPEN_GRID_JSON_METHOD)) {
                             Common.backToMain();
                         }
-                        // TODO:
-                        Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
-                        Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
-                        if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
-                            if (lockId == 22) {
-                                lockId = 0;
-                            }
-                            Jubu.openBox(boardId, lockId);
-                            try {
-                                JSONObject reply = new JSONObject();
-                                reply.put("logId", logId);
-                                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
-                                Common.put.flush();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        if (jsonObject.getJSONObject("data").has("is_weixin") && jsonObject.getJSONObject("data").has("package_id")) {
                             //再次开柜
                             JSONObject grid_info = new JSONObject();
                             try {
+                                Common.frame = "determine";
                                 grid_info.put("boardId", boardId);
                                 grid_info.put("lockId", lockId);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Common.openAgain(grid_info);
-                        } else {
-                            final int finalLockId = lockId;
-                            Common.device.openGrid(boardId, lockId, new OpenGridListener() {
-                                @Override
-                                public void openEnd() {
-                                    try {
-                                        JSONObject reply = new JSONObject();
-                                        reply.put("logId", logId);
-                                        Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
-                                        Common.put.flush();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                    //再次开柜
-                                    JSONObject grid_info = new JSONObject();
-                                    try {
-                                        grid_info.put("boardId", boardId);
-                                        grid_info.put("lockId", finalLockId);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    Common.openAgain(grid_info);
+                            Common.package_id = jsonObject.getJSONObject("data").getString("package_id");
+                            JSONObject reply = new JSONObject();
+                            reply.put("logId", logId);
+                            // TODO:
+                            Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
+                            Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+                            if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
+                                lockId = Common.JUBU_ZeroId(lockId);
+                                //再次开柜
+                                Jubu.openBox(boardId, lockId);
+                                //回复开柜信息
+                                try {
+                                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                                    Common.put.flush();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            });
+                            } else {
+                                //再次开柜
+                                Common.oPenDoor(boardId, lockId);
+                                try {
+                                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                                    Common.put.flush();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                            Common.Determine(grid_info);
+                            Common.sendError("开柜成功");
+                        } else {
+                            // TODO:
+                            Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
+                            Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
+                            if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
+                                if (lockId == 22) {
+                                    lockId = 0;
+                                }
+                                Jubu.openBox(boardId, lockId);
+                                try {
+                                    JSONObject reply = new JSONObject();
+                                    reply.put("logId", logId);
+                                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                                    Common.put.flush();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                //再次开柜
+                                JSONObject grid_info = new JSONObject();
+                                try {
+                                    grid_info.put("boardId", boardId);
+                                    grid_info.put("lockId", lockId);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Common.openAgain(grid_info);
+                            } else {
+                                final int finalLockId = lockId;
+                                Common.device.openGrid(boardId, lockId, new OpenGridListener() {
+                                    @Override
+                                    public void openEnd() {
+                                        try {
+                                            JSONObject reply = new JSONObject();
+                                            reply.put("logId", logId);
+                                            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                                            Common.put.flush();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        //再次开柜
+                                        JSONObject grid_info = new JSONObject();
+                                        try {
+                                            grid_info.put("boardId", boardId);
+                                            grid_info.put("lockId", finalLockId);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Common.openAgain(grid_info);
+                                    }
+                                });
+                            }
                         }
                     } else {
                         Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息失败： " + jsonObject.getJSONObject("data").getString("msg"));
@@ -394,14 +436,16 @@ public class TcpSocket implements Runnable {
                     msg.obj = jsonObject.toString();
                     Common.mainActivityHandler.sendMessage(msg);
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.SENDMSG)) {
+
                     Common.endLoad();
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                     }
                     if (Common.count_down > 0) {
                         Common.determineFrameHandler.sendEmptyMessage(0);
-
                     }
+
+
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.RESETLOCK)) {
                     Common.endLoad();
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {

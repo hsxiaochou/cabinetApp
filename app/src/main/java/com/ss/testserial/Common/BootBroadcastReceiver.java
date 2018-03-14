@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import okhttp3.internal.Util;
 
 // TODO: 下面有开机自启动广播，如果广告有就去掉
 public class BootBroadcastReceiver extends BroadcastReceiver {
@@ -48,7 +51,6 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 if (iErrorCode < 0) {//命令执行失败，提示失败原因：线路连接、硬件故障等
                     String sErrordesc = intent.getStringExtra("sErrordesc");
                     Common.save("错误消息：" + sErrordesc);
-
                 } else {//命令执行成功，根据业务逻辑可进一步判断箱门是否被打开
                     boolean bOpend = intent.getBooleanExtra("bOpend", false);
                     Common.save("是否打开：" + bOpend);
@@ -66,16 +68,18 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 break;
             case JUBU_SCAN:
                 String code = intent.getStringExtra("sBarcode");
-                switch (Common.frame) {
-                    case "scaner":
-                        ((TextView) Common.mainActivity.findViewById(R.id.express)).setText(code);
-                        dealScan(code);
-                        break;
-                    case "put":
-                        ((EditText) Common.mainActivity.findViewById(R.id.express)).setText(code);
-                        break;
-                    default:
-                        break;
+                if (!TextUtils.isEmpty(code)) {
+                    switch (Common.frame) {
+                        case "scaner":
+                            ((TextView) Common.mainActivity.findViewById(R.id.express)).setText(code);
+                            dealScan(code);
+                            break;
+                        case "put":
+                            ((EditText) Common.mainActivity.findViewById(R.id.express)).setText(code);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
             case JUBU_ALL_STATUS:

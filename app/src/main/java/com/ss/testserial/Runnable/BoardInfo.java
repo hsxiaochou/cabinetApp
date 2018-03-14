@@ -35,6 +35,8 @@ public class BoardInfo implements Runnable {
 
     @Override
     public void run() {
+
+
         //注册设备
         this.registerDevice();
     }

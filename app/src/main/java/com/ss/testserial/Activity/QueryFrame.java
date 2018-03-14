@@ -153,7 +153,9 @@ public class QueryFrame extends Fragment {
             @Override
             public void onClick(View myview) {
                 EditText editText = (EditText) view.findFocus();
-                editText.setText("");
+                if (editText != null) {
+                    editText.setText("");
+                }
             }
         });
 

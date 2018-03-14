@@ -1,6 +1,8 @@
 package com.ss.testserial.Activity;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,7 +39,7 @@ public class DetermineFrame extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         this.view = inflater.inflate(R.layout.determine_frame_view, container, false);
-        Common.frame2 = "determine";
+        Common.frame = "determine";
         this.init();
         return this.view;
     }
@@ -50,15 +52,19 @@ public class DetermineFrame extends Fragment {
                 switch (msg.what) {
                     case 0:
                         if (getActivity() != null) {
-                            if (Common.frame.equals("send")) {
+                            if (Common.frame2.equals("send")) {
+                                Common.frame2 = "";
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new SendFrame()).commitAllowingStateLoss();
-                            } else {
+                            } else if (Common.frame2.equals("put")) {
+                                Common.frame2 = "";
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new PutPackageFrame()).commitAllowingStateLoss();
                                 //开柜成功
                                 Message mymsg = new Message();
                                 msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
                                 msg.obj = "";
                                 Common.putFrameHandler.sendMessage(mymsg);
+                            } else {
+                                getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new MainFrame()).commitAllowingStateLoss();
                             }
                         }
                         break;
@@ -72,7 +78,6 @@ public class DetermineFrame extends Fragment {
             @Override
             public void onClick(View view) {
                 Common.YTD();
-                Common.frame2 = "";
             }
         });
 
@@ -80,16 +85,31 @@ public class DetermineFrame extends Fragment {
         bt_wtd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    Common.frame2 = "";
-                    JSONObject reply = new JSONObject();
-                    reply.put("package_id", Common.package_id);
-                    Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.RESETLOCK, reply).toString(), Constants.DES_KEY));
-                    Common.put.flush();
-                    Common.startLoad();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                String mesg = "请确定物品已从快递柜取出，取消投递将不发送投件短信并重置箱格，确定取消投递？";
+                builder.setMessage(mesg);
+                builder.setTitle("提示");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            JSONObject reply = new JSONObject();
+                            reply.put("package_id", Common.package_id);
+                            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.RESETLOCK, reply).toString(), Constants.DES_KEY));
+                            Common.put.flush();
+                            Common.startLoad();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
             }
         });
 
@@ -126,6 +146,7 @@ public class DetermineFrame extends Fragment {
                 }
             }
         });
-
     }
+
+
 }

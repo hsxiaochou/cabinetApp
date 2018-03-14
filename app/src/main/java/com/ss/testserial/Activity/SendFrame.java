@@ -43,6 +43,7 @@ public class SendFrame extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.frame_layout2_send, container, false);
+        Common.frame2 = "send";
         Common.frame = "send";
         this.init();
         //生成投件二维码

@@ -70,6 +70,7 @@ public class PutPackageFrame extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.frame_putpackage, container, false);
+        Common.frame2 = "put";
         Common.frame = "put";
         this.init();
         return this.view;
@@ -251,7 +252,9 @@ public class PutPackageFrame extends Fragment {
             @Override
             public void onClick(View myview) {
                 EditText editText = (EditText) view.findFocus();
-                editText.setText("");
+                if (editText != null) {
+                    editText.setText("");
+                }
             }
         });
         this.keyBoard.setKeyBoardListener(new KeyBoard.KeyBoardListener() {
