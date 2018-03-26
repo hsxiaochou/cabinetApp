@@ -18,6 +18,7 @@ import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.JNI.OpenGridListener;
 import com.ss.testserial.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -137,12 +138,13 @@ public class DetermineFrame extends Fragment {
                     }
                     Jubu.openBox(boardId, lockId);
                 } else {
-                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
-                        @Override
-                        public void openEnd() {
-                            Common.sendError("开柜完成");
-                        }
-                    });
+//                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
+//                        @Override
+//                        public void openEnd() {
+//                           Common.sendError("开柜完成");
+//                        }
+//                    });
+                    Common.oPenDoor(boardId, lockId);
                 }
             }
         });

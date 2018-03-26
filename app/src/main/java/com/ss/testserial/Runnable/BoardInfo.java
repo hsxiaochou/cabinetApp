@@ -35,8 +35,6 @@ public class BoardInfo implements Runnable {
 
     @Override
     public void run() {
-
-
         //注册设备
         this.registerDevice();
     }
@@ -93,7 +91,7 @@ public class BoardInfo implements Runnable {
             this.initBoxStatus();
             Common.isBoardRegister = true;
             //获取锁信息
-            this.getLockInfo();
+//            this.getLockInfo();
         } catch (Exception e) {
             Common.log.write("注册设备失败：" + e.toString());
             e.printStackTrace();

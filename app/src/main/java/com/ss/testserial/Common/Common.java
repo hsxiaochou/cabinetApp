@@ -326,7 +326,7 @@ public class Common {
     }
 
     public static boolean isPhone(String phone) {
-        String regExp = "^1[34578]\\d{9}$";
+        String regExp = "^1[3457869]\\d{9}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(phone);
         return m.find();
@@ -762,8 +762,7 @@ public class Common {
             rs485.rs485Init();
         }
         int[] ints = new int[5];
-        int i = rs485.rs485OpenGrid(boardId, lockId, ints);
-        Log.e("TAG", "开锁反馈：" + i);
+        rs485.rs485OpenGrid(boardId, lockId, ints);
     }
 
 

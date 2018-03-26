@@ -268,34 +268,52 @@ public class SendFrame extends Fragment {
 
                 } else {
                     final int finalLockId = lockId;
-                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
-                        @Override
-                        public void openEnd() {
-                            //回复开柜信息
-                            try {
-                                JSONObject reply = new JSONObject();
-                                reply.put("logId", logId);
-                                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
-                                Common.put.flush();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            //再次开柜
-                            JSONObject grid_info = new JSONObject();
-                            try {
-                                grid_info.put("boardId", boardId);
-                                grid_info.put("lockId", finalLockId);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                    Common.oPenDoor(boardId, lockId);
+                    try {
+                        JSONObject reply = new JSONObject();
+                        reply.put("logId", logId);
+                        Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+                        Common.put.flush();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //再次开柜
+                    JSONObject grid_info = new JSONObject();
+                    try {
+                        grid_info.put("boardId", boardId);
+                        grid_info.put("lockId", finalLockId);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Common.Determine(grid_info);
 
 
-//                            Common.openAgain(grid_info);
-                            Common.Determine(grid_info);
-
-
-                        }
-                    });
+//                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
+//                        @Override
+//                        public void openEnd() {
+//                            //回复开柜信息
+//                            try {
+//                                JSONObject reply = new JSONObject();
+//                                reply.put("logId", logId);
+//                                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
+//                                Common.put.flush();
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                            //再次开柜
+//                            JSONObject grid_info = new JSONObject();
+//                            try {
+//                                grid_info.put("boardId", boardId);
+//                                grid_info.put("lockId", finalLockId);
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+////                            Common.openAgain(grid_info);
+//                            Common.Determine(grid_info);
+//
+//
+//                        }
+//                    });
                 }
             } else {
                 Common.save("预约投件失败：" + jsonObject.getJSONObject("data").getString("msg"));

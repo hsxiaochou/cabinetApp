@@ -74,6 +74,8 @@ public class PutPackageFrame extends Fragment {
         Common.frame = "put";
         this.init();
         return this.view;
+
+
     }
 
     @Override
@@ -155,6 +157,12 @@ public class PutPackageFrame extends Fragment {
                         express.requestFocus();
                         //重新获取剩余柜子
                         getGrid();
+                        break;
+                    case 0:
+                        DetermineFrame determineFrame = new DetermineFrame();
+                        if (getActivity() != null) {
+                            getActivity().getFragmentManager().beginTransaction().replace(R.id.content, determineFrame).commitAllowingStateLoss();
+                        }
                         break;
                     default:
                         break;
@@ -376,10 +384,13 @@ public class PutPackageFrame extends Fragment {
             try {
                 grid_info.put("boardId", boardId);
                 grid_info.put("lockId", lockId);
+                grid_info.put("frame", Common.frame);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Common.Determine(grid_info);
+
+            Dodetermine(grid_info);
+//            Common.Determine(grid_info);
             Jubu.openBox(boardId, lockId);
             //回复开柜信息
             try {
@@ -399,10 +410,13 @@ public class PutPackageFrame extends Fragment {
             try {
                 grid_info.put("boardId", boardId);
                 grid_info.put("lockId", finalLockId);
+                grid_info.put("frame", Common.frame);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Common.Determine(grid_info);
+
+            Dodetermine(grid_info);
+//            Common.Determine(grid_info);
             Common.oPenDoor(boardId, lockId);
             try {
                 JSONObject reply = new JSONObject();
@@ -448,6 +462,11 @@ public class PutPackageFrame extends Fragment {
 //                }
 //            });
         }
+    }
+
+    private static void Dodetermine(JSONObject grid_info) {
+        Common.open_again_data = grid_info;
+        Common.putFrameHandler.sendEmptyMessage(0);
     }
 
     private boolean canClick() {

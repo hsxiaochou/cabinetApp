@@ -25,7 +25,7 @@ public class RebotTimerTask extends TimerTask {
     }
 
     /*
-     * 初始化吃饭时间
+     * 初始化重启时间
      * */
     private static void initEatTimes() {
         eatTimes = new ArrayList<Integer>();

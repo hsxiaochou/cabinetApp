@@ -504,13 +504,13 @@ public class Config extends Fragment {
                 }
                 Jubu.openBox(this.boardId, lockId);
             } else {
-                Common.device.openGrid(this.boardId, lockId, new OpenGridListener() {
-                    @Override
-                    public void openEnd() {
-                    }
-                });
+//                Common.device.openGrid(this.boardId, lockId, new OpenGridListener() {
+//                    @Override
+//                    public void openEnd() {
+//                    }
+//                });
 
-//                Common.oPenDoor(boardId, lockId);
+                Common.oPenDoor(boardId, lockId);
             }
         } else {
             Common.sendError("请选择锁控板");

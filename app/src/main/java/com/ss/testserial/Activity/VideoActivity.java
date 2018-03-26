@@ -56,8 +56,7 @@ public class VideoActivity extends Activity {
                 mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
                     @Override
                     public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
-                            my_video.setBackgroundColor(Color.TRANSPARENT);
+
                         return true;
                     }
                 });

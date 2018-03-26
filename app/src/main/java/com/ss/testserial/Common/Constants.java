@@ -33,8 +33,8 @@ public interface Constants {
 
     /*TCP相关*/
     //服务器地址:端口
-    public static final String HOST = "kdg.tuyingmjy.com";
-//            public static final String HOST = "139.129.233.252";//测试
+//    public static final String HOST = "kdg.tuyingmjy.com";
+            public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
