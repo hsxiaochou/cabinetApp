@@ -156,15 +156,15 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 if (check_iErrorCode < 0) {//命令执行失败，提示失败原因：线路连接、硬件故障等
                     String sErrordesc = intent.getStringExtra("sErrordesc");
                     Common.Door_status = 0;
-                    Message msg = new Message();
+                    Message msg = Common.mainActivityHandler.obtainMessage();
                     msg.what = Constants.DOOR_STATE;
-                    Common.mainActivityHandler.sendMessage(msg);
+                    msg.sendToTarget();
                 } else {//命令执行成功，获取箱门当前状态
                     boolean bOpend = intent.getBooleanExtra("bOpend", false);
                     Common.Door_status = bOpend ? 1 : 0;
-                    Message msg = new Message();
+                    Message msg = Common.mainActivityHandler.obtainMessage();
                     msg.what = Constants.DOOR_STATE;
-                    Common.mainActivityHandler.sendMessage(msg);
+                    msg.sendToTarget();
                 }
                 break;
             default:
@@ -227,6 +227,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                         lockId = 0;
                     }
                     Jubu.openBox(boardId, lockId);
+                    Common.JuBuOpenAgain(boardId, lockId);
                     //回复开柜信息
                     try {
                         JSONObject reply = new JSONObject();

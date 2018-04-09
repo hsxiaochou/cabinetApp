@@ -60,10 +60,10 @@ public class DetermineFrame extends Fragment {
                                 Common.frame2 = "";
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new PutPackageFrame()).commitAllowingStateLoss();
                                 //开柜成功
-                                Message mymsg = new Message();
+                                Message mymsg = Common.putFrameHandler.obtainMessage();
                                 msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
                                 msg.obj = "";
-                                Common.putFrameHandler.sendMessage(mymsg);
+                                mymsg.sendToTarget();
                             } else {
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.content, new MainFrame()).commitAllowingStateLoss();
                             }

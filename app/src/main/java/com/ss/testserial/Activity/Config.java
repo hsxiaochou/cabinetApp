@@ -342,7 +342,7 @@ public class Config extends Fragment {
                     }
                     if (Common.lockBoard.size() > 0) {
                         //保存配置
-                        Message message = new Message();
+                        Message message = Common.mainActivityHandler.obtainMessage();
                         message.what = Constants.SAVE_CONFIG_MESSAGE;
                         JSONObject config_info = new JSONObject();
                         Common.LockBoardVsersion = lockboard_type.getSelectedItem().toString();
@@ -350,7 +350,7 @@ public class Config extends Fragment {
                         config_info.put("lock_board_version", Common.LockBoardVsersion);
                         config_info.put("lock_board_array", jsonArray);
                         message.obj = config_info.toString();
-                        Common.mainActivityHandler.sendMessage(message);
+                        message.sendToTarget();
                         Common.log.write("保存配置：" + message.obj.toString());
                     } else {
                         Common.sendError("请选择锁控板");

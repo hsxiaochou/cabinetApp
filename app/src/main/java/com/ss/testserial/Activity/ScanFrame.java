@@ -120,10 +120,10 @@ public class ScanFrame extends Fragment {
             Common.device.scanner.setOnScanerReaded(new Scanner.ScannerInterface() {
                 @Override
                 public void onScanerReaded(String readData) {
-                    Message message = new Message();
+                    Message message = handler.obtainMessage();
                     message.what = SCAN_RESULT_MESSAGE;
                     message.obj = readData;
-                    handler.sendMessage(message);
+                    message.sendToTarget();
                 }
             });
             Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
@@ -187,6 +187,7 @@ public class ScanFrame extends Fragment {
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                     lockId = Common.JUBU_ZeroId(lockId);
                     Jubu.openBox(boardId, lockId);
+                    Common.JuBuOpenAgain(boardId, lockId);
                     //回复开柜信息
                     try {
                         JSONObject reply = new JSONObject();

@@ -45,6 +45,7 @@ public class OpenDialogFrame extends Fragment {
         this.inflater = inflater;
         this.view = inflater.inflate(R.layout.open_again_dialog, container, false);
         Common.frame = "open_dialog";
+        Common.ISGETFRAGMENT = "";
         this.init();
         return this.view;
     }

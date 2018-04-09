@@ -44,6 +44,7 @@ public class GetFrame extends Fragment {
         this.inflater = inflater;
         this.view = inflater.inflate(R.layout.frame_layout2_get, container, false);
         Common.frame = "get";
+        Common.ISGETFRAGMENT = "get";
         this.init();
         //生成取件二维码
         ImageView getcode = (ImageView) view.findViewById(R.id.getcode);
@@ -214,10 +215,10 @@ public class GetFrame extends Fragment {
         JSONObject jsonObject = (JSONObject) message;
         try {
             //开柜完成
-            Message msg = new Message();
+            Message msg = Common.getFrameHandler.obtainMessage();
             msg.what = Constants.GET_PACKAGE_SUCCESS_MESSAGE;
             msg.obj = "";
-            Common.getFrameHandler.sendMessage(msg);
+            msg.sendToTarget();
             Common.endLoad();
             if (jsonObject.getJSONObject("data").getBoolean("success")) {
                 //板地址
@@ -238,6 +239,7 @@ public class GetFrame extends Fragment {
                     }
 
                     Jubu.openBox(boardId, lockId);
+                    Common.JuBuOpenAgain(boardId, lockId);
                     //回复开柜信息
                     try {
                         JSONObject reply = new JSONObject();
@@ -305,10 +307,10 @@ public class GetFrame extends Fragment {
                     Common.save("取件失败：" + jsonObject.getJSONObject("data").getString("msg"));//记录板子有关信息到文件中
                     //取件超时
                     String url = jsonObject.getJSONObject("data").getString("payUrl");
-                    Message message1 = new Message();
+                    Message message1 = Common.getFrameHandler.obtainMessage();
                     message1.obj = url;
                     message1.what = Constants.GET_PACKAGE_ERROR_MESSAGE;
-                    Common.getFrameHandler.sendMessage(message1);
+                    message1.sendToTarget();
                 } catch (Exception e) {
                     Common.save("取件异常");//记录板子有关信息到文件中
                     Common.sendError(jsonObject.getJSONObject("data").getString("msg"));

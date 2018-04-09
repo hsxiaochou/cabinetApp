@@ -23,7 +23,7 @@ import com.ss.testserial.R;
  * Created by Administrator on 2018/1/30 0030.
  */
 
-public class DoorOpenFrame extends Fragment {
+public class DoorOpenFrame extends Fragment  {
     private LayoutInflater inflater;
     private View view = null;
     private TextView tv_door_open;

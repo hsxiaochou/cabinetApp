@@ -51,6 +51,7 @@ public class MainFrame extends Fragment {
         this.view = inflater.inflate(R.layout.frame_layout1, container, false);
         this.init();
         Common.frame = "main";
+        Common.ISGETFRAGMENT = "";
         return this.view;
     }
 

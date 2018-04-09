@@ -2,25 +2,20 @@ package com.ss.testserial.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +29,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.google.gson.Gson;
+import com.networkbench.agent.impl.NBSAppAgent;
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 import com.ss.testserial.Common.CrashHandler;
@@ -44,6 +40,7 @@ import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Update;
+import com.ss.testserial.bean.GetVideoUrl;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,9 +55,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import com.networkbench.agent.impl.NBSAppAgent;
-import com.ss.testserial.bean.GetVideoUrl;
 
 public class MainActivity extends Activity {
     private ImageSwitcher bannerSwitch = null;
@@ -96,7 +90,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CrashHandler.getInstance().initCrashHandler(this);
+
+
         Common.mainActivity = this;
+        //隐藏状态栏
+        Common.hideBottomUIMenu();
         // Enable logging
         NBSAppAgent.setLicenseKey("f1122c57726f4d3ba066e525d981eeae").withLocationServiceEnabled(true).enableLogging(true).start(this.getApplicationContext());
         // Log last 100 messages
@@ -148,6 +146,42 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(connection);
+
+        if (Common.mainActivityHandler != null) {
+            Common.mainActivityHandler.removeCallbacksAndMessages(null);
+
+        }
+        if (Common.putFrameHandler != null) {
+            Common.putFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+        //更新收件handler
+        if (Common.getFrameHandler != null) {
+            Common.getFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+        //更新收件handler
+        if (Common.sendFrameHandler != null) {
+            Common.sendFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+        //更新登录界面handler
+        if (Common.loginFrameHandler != null) {
+            Common.loginFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+        //快递员投件页面handler
+        if (Common.putFrameHandler != null) {
+            Common.putFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+
+        //快递员回收handler
+        if (Common.RecyclingFrameHandler != null) {
+            Common.RecyclingFrameHandler.removeCallbacksAndMessages(null);
+
+        }
+
     }
 
 //    public void restartThread(int i) {
@@ -427,43 +461,46 @@ public class MainActivity extends Activity {
                             }
                             break;
                         case Constants.COUNT_DOWN_MESSAGE:
-                            if (Common.frame == "main" || Common.frame == "config" || Common.frame == "open_door") {
-                                return;
-                            }
-                            Common.count_down--;
-                            if (Common.count_down > 0) {
-                                //显示倒计时
-                                try {
-                                    ((TextView) findViewById(R.id.count_down)).setText(Common.count_down + "s");
-                                } catch (Exception e) {
+                            if (!TextUtils.isEmpty(Common.frame)) {
+                                if (Common.frame == "main" || Common.frame == "config" || Common.frame == "open_door") {
+                                    return;
                                 }
-                            } else {
-                                if (Common.frame.equals("determine")) {
-                                    Common.YTD();
-                                }
-                                //初始化返回首页
-                                Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
-                                Common.wechat_id = "";
-                                Common.user_name = "";
-                                Common.pay_qrcode = "";
-                                try {
-                                    Common.commonDialog.dismiss();
-                                } catch (Exception e) {
-                                }
+                                Common.count_down--;
+                                if (Common.count_down > 0) {
+                                    //显示倒计时
+                                    try {
+                                        ((TextView) findViewById(R.id.count_down)).setText(Common.count_down + "s");
+                                    } catch (Exception e) {
+                                    }
+                                } else {
+                                    if (Common.frame.equals("determine")) {
+                                        Common.YTD();
+                                    }
+                                    //初始化返回首页
+                                    Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
+                                    Common.wechat_id = "";
+                                    Common.user_name = "";
+                                    Common.pay_qrcode = "";
+                                    try {
+                                        Common.commonDialog.dismiss();
+                                    } catch (Exception e) {
+                                    }
                                 /*
                                 try {
                                     Common.loadDialog.dismiss();
                                 } catch (Exception e) {}
                                 */
-                                load.hide();
-                                try {
-                                    Common.device.scanner.close();
-                                } catch (Exception e) {
+                                    load.hide();
+                                    try {
+                                        Common.device.scanner.close();
+                                    } catch (Exception e) {
+                                    }
+                                    fragmentTransaction.replace(R.id.content, Common.mainFrame);
+                                    fragmentTransaction.commitAllowingStateLoss();
+                                    Common.frame2 = "";//还原
                                 }
-                                fragmentTransaction.replace(R.id.content, Common.mainFrame);
-                                fragmentTransaction.commitAllowingStateLoss();
-                                Common.frame2 = "";//还原
                             }
+
                             break;
                         case Constants.SWITCH_BANNER_MESSAGE:
                             if (Common.bannerIndex == Common.banners.length - 1) {

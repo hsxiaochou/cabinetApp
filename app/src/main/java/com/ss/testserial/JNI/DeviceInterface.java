@@ -41,10 +41,10 @@ public class DeviceInterface implements RS485Comm.RS485CommInterface {
             this.gridStatusListener = gridStatusListener;
             this.device.updateDoorStatusCmd(boardId);
         } catch (NullPointerException e) {
-            Message message = new Message();
+            Message message = Common.mainActivityHandler.obtainMessage();
             message.obj = "没有主板";
             message.what = Constants.COMMON_ERROR_MESSAGE;
-            Common.mainActivityHandler.sendMessage(message);
+            message.sendToTarget();
         }
     }
 

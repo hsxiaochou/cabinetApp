@@ -223,10 +223,10 @@ public class SendFrame extends Fragment {
         JSONObject jsonObject = (JSONObject) message;
         try {
             //开柜完成
-            Message msg = new Message();
+            Message msg = Common.sendFrameHandler.obtainMessage();
             msg.what = Constants.CODE_PUT_PACKAGE_SUCCESS_MESSAGE;
             msg.obj = "";
-            Common.sendFrameHandler.sendMessage(msg);
+            msg.sendToTarget();
             Common.endLoad();
             if (jsonObject.getJSONObject("data").getBoolean("success")) {
                 //板地址

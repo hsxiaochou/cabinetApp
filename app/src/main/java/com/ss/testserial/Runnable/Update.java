@@ -22,10 +22,10 @@ import java.net.URL;
  */
 public class Update {
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case Constants.APK_UPDATE_SUCCESS_MESSAGE:
                     install(msg.obj.toString());
                     break;
@@ -36,36 +36,36 @@ public class Update {
     };
     private Context context;
 
-    public Update(Context context){
+    public Update(Context context) {
         this.context = context;
     }
 
-    public void update(final String url){
+    public void update(final String url) {
         Common.startLoad();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    HttpURLConnection conn =  (HttpURLConnection) new URL(url).openConnection();
+                    HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
                     conn.setConnectTimeout(30000);
                     InputStream is = conn.getInputStream();
                     File file = new File(Environment.getExternalStorageDirectory(), "yougoto.apk");
                     FileOutputStream fos = new FileOutputStream(file);
                     BufferedInputStream bis = new BufferedInputStream(is);
                     byte[] buffer = new byte[1024];
-                    int len ;
-                    int total=0;
-                    while((len =bis.read(buffer))!=-1){
+                    int len;
+                    int total = 0;
+                    while ((len = bis.read(buffer)) != -1) {
                         fos.write(buffer, 0, len);
-                        total+= len;
+                        total += len;
                     }
                     fos.close();
                     bis.close();
                     is.close();
-                    Message message = new Message();
+                    Message message = handler.obtainMessage();
                     message.what = Constants.APK_UPDATE_SUCCESS_MESSAGE;
                     message.obj = file.getAbsolutePath();
-                    handler.sendMessage(message);
+                    message.sendToTarget();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Common.endLoad();
@@ -78,12 +78,12 @@ public class Update {
     /**
      * 升级
      */
-    private void install(String filePath){
+    private void install(String filePath) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Uri uri = Uri.fromFile(new File(filePath));
-        intent.setDataAndType(uri,"application/vnd.android.package-archive");
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
         this.context.startActivity(intent);
     }
 }

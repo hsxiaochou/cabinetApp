@@ -270,10 +270,10 @@ public class Layout3Frame extends Fragment {
         Common.sendError("获取成功");
         final int _countdown = Layout3Frame.countDown;
         //发送禁用按钮消息
-        Message msg = new Message();
+        Message msg = Common.loginFrameHandler.obtainMessage();
         msg.obj = "";
         msg.what = Constants.DISABLED_BUTTON_MESSAGE;
-        Common.loginFrameHandler.sendMessage(msg);
+        msg.sendToTarget();
         //开始倒计时
         Common.loginFrameHandler.postDelayed(new Runnable() {
             @Override
@@ -325,9 +325,9 @@ public class Layout3Frame extends Fragment {
      * 获取登录码成功回调
      */
     public static void loginSuccess() {
-        Message message = new Message();
+        Message message = Common.loginFrameHandler.obtainMessage();
         message.what = Constants.LOGIN_SUCCESS_MESSAGE;
         message.obj = "";
-        Common.loginFrameHandler.sendMessage(message);
+        message.sendToTarget();
     }
 }

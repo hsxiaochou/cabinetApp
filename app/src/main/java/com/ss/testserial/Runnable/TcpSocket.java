@@ -22,6 +22,7 @@ import com.ss.testserial.Common.Constants;
 import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.JNI.OpenGridListener;
+import com.ss.testserial.JNI.UartComm;
 import com.ss.testserial.R;
 
 import org.json.JSONArray;
@@ -146,9 +147,9 @@ public class TcpSocket implements Runnable {
                         if (Common.address == "null") {         // 新增
                             Common.address = "";               // 新增
                         }                                      // 新增
-                        Message message = new Message();
+                        Message message = Common.mainActivityHandler.obtainMessage();
                         message.what = Constants.REGISTER_SUCCESS_MESSAGE;
-                        Common.mainActivityHandler.sendMessage(message);
+                        message.sendToTarget();
                         Common.log.write("注册设备成功");
                     } else {
                         Common.register();
@@ -325,16 +326,16 @@ public class TcpSocket implements Runnable {
                     try {
                         if (jsonObject.getJSONObject("data").getBoolean("success")) {
                             if (Common.frame == "main") {                                         // 修改
-                                Message msg = new Message();
+                                Message msg = Common.mainActivityHandler.obtainMessage();
                                 msg.what = Constants.HOME_GET_GRID_LIST_MESSAGE;
                                 msg.obj = jsonObject.getJSONObject("data").getJSONArray("list");
-                                Common.mainActivityHandler.sendMessage(msg);
+                                msg.sendToTarget();
                             }
                             if (Common.frame == "put") {
-                                Message msg = new Message();
+                                Message msg = Common.putFrameHandler.obtainMessage();
                                 msg.what = Constants.GET_GRID_LIST_MESSAGE;
                                 msg.obj = jsonObject.getJSONObject("data").getJSONArray("list");
-                                Common.putFrameHandler.sendMessage(msg);
+                                msg.sendToTarget();
                             }                                                                   // 修改
                         } else {
                             Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
@@ -361,10 +362,10 @@ public class TcpSocket implements Runnable {
                             Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                             Common.endLoad();
                             //初始化
-                            Message msg = new Message();
+                            Message msg = Common.putFrameHandler.obtainMessage();
                             msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
                             msg.obj = "";
-                            Common.putFrameHandler.sendMessage(msg);
+                            msg.sendToTarget();
                         }
                     } catch (Exception e) {
                     }
@@ -389,12 +390,13 @@ public class TcpSocket implements Runnable {
                             Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                             Common.endLoad();
                             //初始化
-                            Message msg = new Message();
+                            Message msg = Common.putFrameHandler.obtainMessage();
                             msg.what = Constants.PUT_PACKAGE_SUCCESS_MESSAGE;
                             msg.obj = "";
-                            Common.putFrameHandler.sendMessage(msg);
+                            msg.sendToTarget();
                         }
                     } catch (Exception e) {
+
                     }
 
                 } else if (classString.equals(Constants.GET_LOGIN_CODE_CLASS) && method.equals(Constants.GET_LOGIN_CODE_METHOD)) {
@@ -418,23 +420,22 @@ public class TcpSocket implements Runnable {
                     }
                 } else if (classString.equals(Constants.VOLCLASS) && method.equals(Constants.VOLMETHOD)) {
                     final String volumn = jsonObject.getJSONObject("data").getString("volumn");
-                    Log.e("TAG", "调节音量");
                     Common.getUpVolume(Integer.parseInt(volumn));
                 } else if (classString.equals(Constants.QUERY_CLASS) && method.equals(Constants.QUERY_METHOD)) {
                     //自助查询信息返回
                     Common.endLoad();
                     //初始化
-                    Message msg = new Message();
+                    Message msg = Common.queryFrameHandler.obtainMessage();
                     msg.what = Constants.QUERY_INFO;
                     msg.obj = jsonObject.toString();
-                    Common.queryFrameHandler.sendMessage(msg);
+                    msg.sendToTarget();
                 } else if (classString.equals(Constants.GETQUERY_CODE_CLASS) && method.equals(Constants.GETQUERY_CODE_METHOD)) {
                     //一键发送短信的信息返回
                     Common.endLoad();
-                    Message msg = new Message();
+                    Message msg = Common.queryFrameHandler.obtainMessage();
                     msg.what = Constants.QUERY_SEND_INFO;
                     msg.obj = jsonObject.toString();
-                    Common.queryFrameHandler.sendMessage(msg);
+                    msg.sendToTarget();
 
                 } else if (classString.equals(Constants.LOG_UP_CLASS) && method.equals(Constants.LOG_UP_METHOD)) {
                     //回收日志
@@ -450,10 +451,10 @@ public class TcpSocket implements Runnable {
                     Common.rebot();
                 } else if (classString.equals(Constants.GETVIDEO_CLASS) && method.equals(Constants.GETVIDEO_METHOD)) {
                     //获取视频json
-                    Message msg = new Message();
+                    Message msg = Common.mainActivityHandler.obtainMessage();
                     msg.what = Constants.GET_VIDEO;
                     msg.obj = jsonObject.toString();
-                    Common.mainActivityHandler.sendMessage(msg);
+                    msg.sendToTarget();
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.SENDMSG)) {
 
                     Common.endLoad();
@@ -463,8 +464,6 @@ public class TcpSocket implements Runnable {
                     if (Common.count_down > 0) {
                         Common.determineFrameHandler.sendEmptyMessage(0);
                     }
-
-
                 } else if (classString.equals(Constants.GET_GRID_TYPE_CLASS) && method.equals(Constants.RESETLOCK)) {
                     Common.endLoad();
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
@@ -475,25 +474,27 @@ public class TcpSocket implements Runnable {
                     //获取快递员回收json
                     Common.endLoad();
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
-                        Message msg = new Message();
+                        Message msg = Common.RecyclingFrameHandler.obtainMessage();
                         msg.what = Constants.GET_COURIER;
                         msg.obj = jsonObject.toString();
-                        Common.RecyclingFrameHandler.sendMessage(msg);
+                        msg.sendToTarget();
                     }
 
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
-                    Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "为止信息：" + jsonObject.toString());
+                    Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "未知信息：" + jsonObject.toString());
                 }
             }
         } catch (final Exception e) {
             Common.save(e.toString());
-            Common.mainActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(Common.mainActivity, "异常：" + e.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (Common.mainActivity != null) {
+                Common.mainActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Common.mainActivity, "异常：" + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             e.printStackTrace();
         }
     }

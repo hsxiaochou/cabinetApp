@@ -80,4 +80,34 @@
             android:background="@drawable/kgcg_zckg" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注意："
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.如果柜门没开，请点击屏幕再次开柜按钮。"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.取件成功，请点击返回首页按钮。"
+            android:textSize="28sp" />
+    </LinearLayout>
 </LinearLayout>

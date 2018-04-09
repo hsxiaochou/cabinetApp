@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.ss.testserial.Activity.MainActivity;
 import com.ss.testserial.Activity.MainFrame;
 import com.ss.testserial.Activity.MyDialog;
 import com.ss.testserial.JNI.DeviceInterface;
+import com.ss.testserial.JNI.Jubu;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.BoardInfo;
 import com.ss.testserial.Runnable.TcpSocket;
@@ -104,7 +107,7 @@ public class Common {
     public static Thread countdownThread = null;
     public static Thread getBoxThread = null;
     public static Context context = null;
-
+    public static String ISGETFRAGMENT = "";
     /*handler*/
     //更新主界面handler
     public static Handler mainActivityHandler = null;
@@ -302,26 +305,26 @@ public class Common {
     }
 
     public static void startLoad() {
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.START_LOAD_MESSAGE;
         msg.obj = "";
-        Common.mainActivityHandler.sendMessage(msg);
+        msg.sendToTarget();
     }
 
     public static void endLoad() {
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.END_LOAD_MESSAGE;
         msg.obj = "";
-        Common.mainActivityHandler.sendMessage(msg);
+        msg.sendToTarget();
     }
 
     public static void sendError(String message) {
         Common.save(message);
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.COMMON_ERROR_MESSAGE;
         msg.obj = message;
         if (Common.mainActivityHandler != null) {
-            Common.mainActivityHandler.sendMessage(msg);
+            msg.sendToTarget();
         }
     }
 
@@ -334,26 +337,26 @@ public class Common {
 
     //回到主界面
     public static void backToMain() {
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.BACK_TO_MAIN_MESSAGE;
         msg.obj = "";
-        Common.mainActivityHandler.sendMessage(msg);
+        msg.sendToTarget();
     }
 
     //再次开柜
     public static void openAgain(JSONObject jsonObject) {
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.OPEN_AGAIN_MESSAGE;
         msg.obj = jsonObject;
-        Common.mainActivityHandler.sendMessage(msg);
+        msg.sendToTarget();
     }
 
     //快递员确定是否已投件
     public static void Determine(JSONObject jsonObject) {
-        Message msg = new Message();
+        Message msg = Common.mainActivityHandler.obtainMessage();
         msg.what = Constants.DETERMINE;
         msg.obj = jsonObject;
-        Common.mainActivityHandler.sendMessage(msg);
+        msg.sendToTarget();
     }
 
 
@@ -756,14 +759,51 @@ public class Common {
     }
 
 
-    public static void oPenDoor(int boardId, int lockId) {
+    public static void oPenDoor(final int boardId, final int lockId) {
+        Timer timer = new Timer();
         if (rs485 == null) {
             rs485 = new UartComm().new Rs485();
             rs485.rs485Init();
         }
-        int[] ints = new int[5];
+        final int[] ints = new int[5];
         rs485.rs485OpenGrid(boardId, lockId, ints);
+        //只有取件才开2次柜
+        if (Common.ISGETFRAGMENT.equals("get")) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    rs485.rs485OpenGrid(boardId, lockId, ints);
+                }
+            }, 100);
+        }
+
     }
 
+    /**
+     * 隐藏虚拟按键，并且全屏
+     */
+    public static void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = Common.mainActivity.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = Common.mainActivity.getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
 
+    //jubu发送2次开柜
+    public static void JuBuOpenAgain(final int boardId, final int lockId) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Jubu.openBox(boardId, lockId);
+            }
+        }, 500);
+    }
 }
