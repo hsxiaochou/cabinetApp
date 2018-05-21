@@ -122,7 +122,6 @@ public class OpenDialogFrame extends Fragment {
                         lockId = 0;
                     }
                     Jubu.openBox(boardId, lockId);
-
                 } else {
 //                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
 //                        @Override

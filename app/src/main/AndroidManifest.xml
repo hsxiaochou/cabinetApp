@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ss.testserial"
-    android:versionCode="475"
-    android:versionName="4.7.5">
+    android:versionCode="476"
+    android:versionName="4.7.6">
 
     <uses-sdk
         android:minSdkVersion="10"

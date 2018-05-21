@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.VideoView;
 
 import com.ss.testserial.Common.Common;
@@ -32,19 +33,9 @@ public class VideoActivity extends Activity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                finish();
-                break;
-            case MotionEvent.ACTION_UP:
-                finish();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                finish();
-            default:
-                break;
-        }
-        return super.dispatchTouchEvent(ev);
+        Common.save("点击退出广告");
+        finish();
+        return true;
     }
 
     private void setVideo() {
@@ -56,7 +47,6 @@ public class VideoActivity extends Activity {
                 mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
                     @Override
                     public boolean onInfo(MediaPlayer mp, int what, int extra) {
-
                         return true;
                     }
                 });
@@ -74,5 +64,8 @@ public class VideoActivity extends Activity {
                 my_video.start();
             }
         });
+
     }
+
+
 }

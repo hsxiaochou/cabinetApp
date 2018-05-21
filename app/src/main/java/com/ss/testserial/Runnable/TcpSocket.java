@@ -191,8 +191,6 @@ public class TcpSocket implements Runnable {
                             Common.save("板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
                             if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                                 lockId = Common.JUBU_ZeroId(lockId);
-                                //再次开柜
-                                Jubu.openBox(boardId, lockId);
                                 //回复开柜信息
                                 try {
                                     Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
@@ -200,28 +198,25 @@ public class TcpSocket implements Runnable {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                Jubu.openBox(boardId, lockId);
                             } else {
-                                //再次开柜
-                                Common.oPenDoor(boardId, lockId);
                                 try {
                                     Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
                                     Common.put.flush();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-
+                                Common.oPenDoor(boardId, lockId);
                             }
                             Common.Determine(grid_info);
                             Common.sendError("开柜成功");
                         } else {
                             // TODO:
-                            Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
                             Common.save("板子型号：" + Common.LockBoardVsersion + "开锁信息：" + jsonObject.getJSONObject("data").toString());//记录板子有关信息到文件中
                             if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                                 if (lockId == 22) {
                                     lockId = 0;
                                 }
-                                Jubu.openBox(boardId, lockId);
                                 try {
                                     JSONObject reply = new JSONObject();
                                     reply.put("logId", logId);
@@ -230,6 +225,8 @@ public class TcpSocket implements Runnable {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+
+                                Jubu.openBox(boardId, lockId);
                                 //再次开柜
                                 JSONObject grid_info = new JSONObject();
                                 try {
@@ -240,9 +237,7 @@ public class TcpSocket implements Runnable {
                                 }
                                 Common.openAgain(grid_info);
                             } else {
-
                                 final int finalLockId = lockId;
-                                Common.oPenDoor(boardId, lockId);
                                 try {
                                     JSONObject reply = new JSONObject();
                                     reply.put("logId", logId);
@@ -251,6 +246,7 @@ public class TcpSocket implements Runnable {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                Common.oPenDoor(boardId, lockId);
                                 //再次开柜
                                 JSONObject grid_info = new JSONObject();
                                 try {

@@ -90,8 +90,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CrashHandler.getInstance().initCrashHandler(this);
-
-
         Common.mainActivity = this;
         //隐藏状态栏
         Common.hideBottomUIMenu();
@@ -119,27 +117,6 @@ public class MainActivity extends Activity {
         if (!Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME) && Common.device == null) {
             Common.device = new DeviceInterface();
         }
-
-        //开启banner切换线程
-//        if (Common.bannerThread == null) {
-//            Common.bannerThread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    while (true) {
-//                        try {
-//                            Thread.sleep(Constants.SWITCH_BANNER_TIME);
-//                        } catch (Exception e) {
-//                        }
-//                        Common.mainActivityHandler.sendEmptyMessage(Constants.SWITCH_BANNER_MESSAGE);
-//                    }
-//                }
-//            });
-//            Common.bannerThread.start();
-//        }
-        // 开启倒计时线程
-//        restartThread(0);
-        // 获取柜子信息线程
-//        restartThread(1);
     }
 
     @Override
@@ -183,55 +160,6 @@ public class MainActivity extends Activity {
         }
 
     }
-
-//    public void restartThread(int i) {
-//        switch (i) {
-//            case 0:
-//                if (Common.countdownThread == null) {
-//                    Common.countdownThread = new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            while (true) {
-//                                try {
-//                                    Common.mainActivityHandler.sendEmptyMessage(Constants.COUNT_DOWN_MESSAGE);
-//                                    Thread.sleep(1000);
-//                                } catch (Exception e) {
-//                                    Common.countdownThread.interrupt();
-//                                    Common.countdownThread = null;
-//                                    restartThread(0);
-//                                }
-//                            }
-//                        }
-//                    });
-//                    Common.countdownThread.start();
-//                }
-//                break;
-//
-//            case 1:
-//                if (Common.getBoxThread == null) {
-//                    Common.getBoxThread = new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            while (true) {
-//                                try {
-//                                    if (Common.frame == "main") {
-//                                        Common.getCabinetLeft();
-//                                    }
-//                                    Thread.sleep(10 * 60 * 1000);
-//                                } catch (Exception e) {
-//                                    Common.getBoxThread.interrupt();
-//                                    Common.getBoxThread = null;
-//                                    restartThread(1);
-//                                }
-//                            }
-//                        }
-//                    });
-//                    Common.getBoxThread.start();
-//                }
-//                break;
-//        }
-//    }
-
 
     @Override
     protected void onRestart() {
@@ -379,11 +307,11 @@ public class MainActivity extends Activity {
                             */
                             try {
                                 Common.device.scanner.close();
+                                fragmentTransaction.replace(R.id.content, Common.mainFrame);
+                                fragmentTransaction.commitAllowingStateLoss();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            fragmentTransaction.replace(R.id.content, Common.mainFrame);
-                            fragmentTransaction.commitAllowingStateLoss();
                             break;
                         case Constants.OPEN_AGAIN_MESSAGE:
                             // 开柜信息

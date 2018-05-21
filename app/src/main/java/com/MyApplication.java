@@ -12,7 +12,6 @@ import com.ss.testserial.Common.TimerTask.BannerTimerTask;
 import com.ss.testserial.Common.TimerTask.GetBoxTimerTask;
 import com.ss.testserial.Common.TimerTask.RebotTimerTask;
 import com.ss.testserial.Common.TimerTask.RestartTimerTask;
-import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Wifi;
 
 import java.util.Timer;

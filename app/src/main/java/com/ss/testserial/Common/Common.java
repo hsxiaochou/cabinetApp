@@ -363,12 +363,11 @@ public class Common {
     //快递员已投件方法
     public static void YTD() {
         try {
-
+//            Common.startLoad();
             JSONObject reply = new JSONObject();
             reply.put("package_id", Common.package_id);
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
             Common.put.flush();
-            Common.startLoad();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -740,7 +739,6 @@ public class Common {
         JSONObject getCodeJson = new JSONObject();
         try {
             getCodeJson.put("mac", Common.mac);
-            Log.e("TAG", "mac :" + Common.mac);
             Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GETVIDEO_CLASS, Constants.GETVIDEO_METHOD, getCodeJson).toString(), Constants.DES_KEY));
             Common.put.flush();
         } catch (Exception e) {

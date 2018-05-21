@@ -34,7 +34,7 @@ public interface Constants {
     /*TCP相关*/
     //服务器地址:端口
     public static final String HOST = "kdg.tuyingmjy.com";
-    //            public static final String HOST = "139.129.233.252";//测试
+//                public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -74,7 +74,6 @@ public interface Constants {
     public static final int GET_GRID_LIST_MESSAGE = 0x0A;
     //快递员投件开柜成功返回消息
     public static final int PUT_PACKAGE_SUCCESS_MESSAGE = 0x0B;
-    //全局错误
     public static final int COMMON_ERROR_MESSAGE = 0x0C;
     //保存配置消息
     public static final int SAVE_CONFIG_MESSAGE = 0x0D;

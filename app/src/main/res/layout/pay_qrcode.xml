@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="550dp"
+    android:layout_width="550dp"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:gravity="center_horizontal"
-    android:background="#fff">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="94dp"
         android:background="#e20185"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="25dp"
-        android:paddingRight="25dp" >
+        android:paddingRight="25dp">
 
         <ImageView
+            android:id="@+id/back2layout1"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:id="@+id/back2layout1"
             android:clickable="true"
             android:src="@drawable/back" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="包裹超时"
-            android:id="@+id/textView"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
             android:gravity="center_horizontal"
+            android:text="包裹超时"
+            android:textColor="@android:color/white"
             android:textSize="40sp" />
 
         <TextView
+            android:id="@+id/count_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="60s"
-            android:id="@+id/count_down"
             android:textColor="@android:color/white"
             android:textSize="28sp" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/pay_qrcode_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="取件已超时，请使用微信扫码支付"
-        android:id="@+id/pay_qrcode_text"
-        android:textSize="24sp"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp" />
+        android:text="取件已超时，请使用微信扫码支付"
+        android:textSize="24sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -61,16 +62,49 @@
             android:layout_gravity="center">
 
             <ImageView
+                android:id="@+id/qrcode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/qrcode" />
+                android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView5"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_launcher" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:textColor="#000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="请用手遮挡阳光，扫小二维码———>"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/qrcode2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp" />
+
+            </LinearLayout>
+
+
         </FrameLayout>
 
     </FrameLayout>

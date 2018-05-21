@@ -67,11 +67,14 @@ public class PayQrcodeFrame extends Fragment {
         //
         this.pay_qrcode_text = (TextView)this.view.findViewById(R.id.pay_qrcode_text);
         this.qrcode = (ImageView) this.view.findViewById(R.id.qrcode);
+
+
         if(Common.pay_qrcode.equals("")){
             this.pay_qrcode_text.setText("包裹存放超时，获取支付二维码失败，请重试");
         }else{
             this.pay_qrcode_text.setText("包裹存放超时，请使用微信扫码支付");
             this.qrcode.setImageBitmap(QRCode.makeQrcode(Common.pay_qrcode,250));
+            ((ImageView)this.view.findViewById(R.id.qrcode2)).setImageBitmap(QRCode.makeQrcode(Common.pay_qrcode,150));
         }
     }
 }

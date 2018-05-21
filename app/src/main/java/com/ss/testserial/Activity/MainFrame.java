@@ -69,6 +69,20 @@ public class MainFrame extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        // TODO Auto-generated method stub
+        super.onDestroyView();
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * 初始化
@@ -189,7 +203,6 @@ public class MainFrame extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             try {
                 Common.address = config_info.getString("address");
                 this.address.setText(Common.address);
