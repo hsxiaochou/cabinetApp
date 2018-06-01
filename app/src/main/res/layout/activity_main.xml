@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activity.MainActivity"
     android:orientation="horizontal">
 
@@ -17,7 +18,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             // 新增图片修改
+
+            <com.youth.banner.Banner
+                android:id="@+id/eb_banner"
+                android:layout_width="match_parent"
+                android:layout_height="724dp"
+                android:layout_marginBottom="35dp"
+                app:delay_time="10000" />
+
             <ImageSwitcher
+                android:visibility="gone"
                 android:id="@+id/bannerSwitch1"
                 android:layout_width="match_parent"
                 android:layout_height="724dp"
@@ -32,28 +42,32 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageView_pc1"
                     android:layout_width="323dp"
                     android:layout_height="287dp"
                     android:layout_marginRight="26dp"
                     android:src="@drawable/static1" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageView_pc2"
                     android:layout_width="323dp"
                     android:layout_height="287dp"
                     android:layout_marginRight="26dp"
                     android:src="@drawable/static2" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageView_pc3"
                     android:layout_width="323dp"
                     android:layout_height="287dp"
                     android:layout_marginRight="26dp"
                     android:src="@drawable/static3" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageView_pc4"
                     android:layout_width="323dp"
                     android:layout_height="287dp"
                     android:src="@drawable/static4" />

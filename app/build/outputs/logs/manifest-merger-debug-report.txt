@@ -4,7 +4,19 @@ ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\And
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
+MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2c21984e48391840c16f8a67c9a46f31\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\a55b98c9d36fce2b0baebc655936cfb7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\14540590e9ed7ae1d9e63060973c127b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\3f3a89f7c0f237cac7a9797ad00012da\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\320a1ca82bd46906e9f45c3d8aac8744\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\c8c5ee21fa742e99042975efeb3fb282\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\f2db7619371dea0b5cdcf2726832b94b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\f007b36d71144f5a9cfc57f42ceafb03\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4a64c67c384fac5a614da88f764d7d7d\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cf6e32d49a836dbb708629bfe234ee9b\AndroidManifest.xml:17:1-22:12
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
@@ -26,8 +38,32 @@ uses-sdk
 ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:7:5-9:41
+MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2c21984e48391840c16f8a67c9a46f31\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2c21984e48391840c16f8a67c9a46f31\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\a55b98c9d36fce2b0baebc655936cfb7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\a55b98c9d36fce2b0baebc655936cfb7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\14540590e9ed7ae1d9e63060973c127b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\14540590e9ed7ae1d9e63060973c127b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\3f3a89f7c0f237cac7a9797ad00012da\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\3f3a89f7c0f237cac7a9797ad00012da\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\320a1ca82bd46906e9f45c3d8aac8744\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\320a1ca82bd46906e9f45c3d8aac8744\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\c8c5ee21fa742e99042975efeb3fb282\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\c8c5ee21fa742e99042975efeb3fb282\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\f2db7619371dea0b5cdcf2726832b94b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\f2db7619371dea0b5cdcf2726832b94b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\f007b36d71144f5a9cfc57f42ceafb03\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\f007b36d71144f5a9cfc57f42ceafb03\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4a64c67c384fac5a614da88f764d7d7d\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4a64c67c384fac5a614da88f764d7d7d\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cf6e32d49a836dbb708629bfe234ee9b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cf6e32d49a836dbb708629bfe234ee9b\AndroidManifest.xml:20:5-44
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion

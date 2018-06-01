@@ -25,6 +25,8 @@ public class VideoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+        //隐藏状态栏
+        Common.hideBottomUIMenu();
         index = 0;
         my_video = (VideoView) findViewById(R.id.my_video);
         file = Common.getFile(new File(Constants.path));

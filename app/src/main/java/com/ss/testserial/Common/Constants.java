@@ -33,8 +33,8 @@ public interface Constants {
 
     /*TCP相关*/
     //服务器地址:端口
-    public static final String HOST = "kdg.tuyingmjy.com";
-//                public static final String HOST = "139.129.233.252";//测试
+//    public static final String HOST = "kdg.tuyingmjy.com";
+    public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -200,6 +200,11 @@ public interface Constants {
     public static final String CONFIRM_CLASS = "DevOp";
     public static final String CONFIRM_METHOD = "recyclePackage";
 
+
+    //获取广告图片
+    public static final String GET_IMAGE_CLASS = "DevOp";
+    public static final String GET_IMAGE_METHOD = "getAdPic";
+
     /*其他*/
     //DES对称加密密钥
     public static final String DES_KEY = "ch2016sh";
@@ -234,5 +239,5 @@ public interface Constants {
     public static final int DETERMINE = 0X25;
 
 
-
+    public static final int GET_IMAGE = 0X27;
 }

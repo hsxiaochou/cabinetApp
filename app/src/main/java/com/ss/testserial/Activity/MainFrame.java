@@ -146,6 +146,7 @@ public class MainFrame extends Fragment {
                 fragmentTransaction.replace(R.id.content, layout3Frame);
                 Common.log.write("点击投件码登录界面登录按钮");
                 fragmentTransaction.commitAllowingStateLoss();
+
             }
         });
 
@@ -172,10 +173,6 @@ public class MainFrame extends Fragment {
      * 开始注册板信息
      */
     public void register() {
-//        if (Common.device == null) {
-//            Common.sendError("没有主板");
-//            return;
-//        }
         Common.lockBoard = new ArrayList<Integer>();
         //读取配置文件
         File file = new File(Environment.getExternalStorageDirectory(), Constants.SYSTEM_CONFIG);

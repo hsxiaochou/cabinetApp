@@ -476,6 +476,15 @@ public class TcpSocket implements Runnable {
                         msg.sendToTarget();
                     }
 
+                }else if (classString.equals(Constants.GET_IMAGE_CLASS) && method.equals(Constants.GET_IMAGE_METHOD)) {
+                    //获取快递员回收json
+                    if (jsonObject.getJSONObject("data").getBoolean("success")) {
+                        //获取视频json
+                        Message msg = Common.mainActivityHandler.obtainMessage();
+                        msg.what = Constants.GET_IMAGE;
+                        msg.obj = jsonObject.toString();
+                        msg.sendToTarget();
+                    }
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "未知信息：" + jsonObject.toString());

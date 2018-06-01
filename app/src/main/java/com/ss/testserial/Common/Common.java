@@ -745,15 +745,31 @@ public class Common {
             e.printStackTrace();
         }
     }
-
-
-    public static void delateFile(String path) {
-        if (!TextUtils.isEmpty(path)) {
-            File file = new File(path);
-            if (file != null) {
-                file.delete();
-            }
+    //获取视频下载json
+    public static void GetImageOnNet() {
+        JSONObject getCodeJson = new JSONObject();
+        try {
+            getCodeJson.put("mac", Common.mac);
+            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_IMAGE_CLASS, Constants.GET_IMAGE_METHOD, getCodeJson).toString(), Constants.DES_KEY));
+            Common.put.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public static void delateFile(final String path) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (!TextUtils.isEmpty(path)) {
+                    File file = new File(path);
+                    if (file != null) {
+                        file.delete();
+                    }
+                }
+            }
+        }).start();
+
     }
 
 

@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.networkbench.agent.impl.NBSAppAgent;
 import com.ss.testserial.Common.Common;
@@ -40,7 +41,10 @@ import com.ss.testserial.JNI.DeviceInterface;
 import com.ss.testserial.R;
 import com.ss.testserial.Runnable.TcpSocket;
 import com.ss.testserial.Runnable.Update;
+import com.ss.testserial.bean.GetImageBean;
 import com.ss.testserial.bean.GetVideoUrl;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +56,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -84,6 +89,8 @@ public class MainActivity extends Activity {
     private GetVideoUrl getVideoUrl;
     private boolean isswitchx = false;
     private boolean door_sate_breack;
+    private Banner banner;
+    private String imagejson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +220,10 @@ public class MainActivity extends Activity {
     //初始化
     @SuppressLint("HandlerLeak")
     private void init() {
+
+        Integer[] images = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
+        List<Integer> integers = Arrays.asList(images);
+        setBanner(integers);
         this.load = new Loading(this);
         //初始更新
         if (Common.update == null) {
@@ -243,32 +254,11 @@ public class MainActivity extends Activity {
                     switch (msg.what) {
                         case Constants.START_LOAD_MESSAGE:
                             load.show();
-                            /*
-                            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                            View layout = inflater.inflate(R.layout.load, null);
-                            AlertDialog.Builder loadBuilder = new AlertDialog.Builder(MainActivity.this).setView(layout);
-                            loadBuilder.create();
-                            loadBuilder.setCancelable(false);
-                            Common.loadDialog = loadBuilder.show();
-                            window = Common.loadDialog.getWindow();
-                            lp = window.getAttributes();
-                            lp.width = 550;
-                            lp.gravity = Gravity.RIGHT;
-                            window.setAttributes(lp);
-                            */
                             break;
                         case Constants.END_LOAD_MESSAGE:
-                            /*
-                            try {
-                                Common.loadDialog.dismiss();
-                            }catch (Exception e){e.printStackTrace();}
-                            */
                             load.hide();
                             break;
                         case Constants.COMMON_ERROR_MESSAGE:
-//                            Toast toast = Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_LONG);
-//                            toast.setGravity(Gravity.BOTTOM, 685 + toast.getXOffset(), 50);
-//                            toast.show();
                             ToastUtil toastUtil = new ToastUtil();
                             Toast show = toastUtil.Long(MainActivity.this, msg.obj.toString()).setPostion(685, 50).setToastBackground(Color.WHITE, R.drawable.toast_radius).show();
                             Common.showMyToast(show, 5000);
@@ -384,6 +374,8 @@ public class MainActivity extends Activity {
                                     Common.GetVideoJson();
                                 }
 
+                                //获取网络图片
+                                Common.GetImageOnNet();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -498,17 +490,10 @@ public class MainActivity extends Activity {
                                         fileName.remove(substring);
                                     }
                                 }
-                                new Thread(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                for (int i = 0; i < fileName.size(); i++) {
-                                                    Common.delateFile(Constants.path +
-                                                            fileName.get(i));
-                                                }
-                                            }
-                                        }
-                                ).start();
+                                for (int i = 0; i < fileName.size(); i++) {
+                                    Common.delateFile(Constants.path +
+                                            fileName.get(i));
+                                }
                                 index_video = 0;
                                 Log.e("TAG", video_new.size() + "  ");
                                 if (video_new.size() > 0) {
@@ -561,12 +546,69 @@ public class MainActivity extends Activity {
 //                                Jubu.getDoorStatus(Integer.parseInt(check_boardId), Integer.parseInt(check_lockId));
                             }
                             break;
+
+                        case Constants.GET_IMAGE:
+                            imagejson = (String) msg.obj;
+                            Log.e("TAG", imagejson);
+                            GetImageBean getImageBean = new Gson().fromJson(imagejson, GetImageBean.class);
+                            List<String> big = getImageBean.getData().getList().getBig();
+                            List<String> bigs = new ArrayList<>();
+                            List<String> small = getImageBean.getData().getList().getSmall();
+                            for (String item : big) {
+                                bigs.add("http://" + Constants.HOST + ":8080" + item);
+                            }
+                            setBanner(bigs);
+                            getPc(small);
+                            break;
                         default:
                             break;
                     }
                 }
             };
         }
+
+    }
+
+    private void getPc(List<String> list) {
+        ArrayList<ImageView> imageview_pcs = new ArrayList<>();
+        ImageView imageView_pc1 = findViewById(R.id.imageView_pc1);
+        ImageView imageView_pc2 = findViewById(R.id.imageView_pc2);
+        ImageView imageView_pc3 = findViewById(R.id.imageView_pc3);
+        ImageView imageView_pc4 = findViewById(R.id.imageView_pc4);
+        imageview_pcs.add(imageView_pc1);
+        imageview_pcs.add(imageView_pc2);
+        imageview_pcs.add(imageView_pc3);
+        imageview_pcs.add(imageView_pc4);
+        for (int i = 0; i < list.size(); i++) {
+            Log.e("TAG", Constants.HOST + ":8080" + list.get(i));
+            Glide.with(this).load("http://" + Constants.HOST + ":8080" + list.get(i)).placeholder(R.drawable.static2).into(imageview_pcs.get(i));
+        }
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        banner.startAutoPlay();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
+    }
+
+    private void setBanner(List<?> list) {
+        banner = (Banner) findViewById(R.id.eb_banner);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(list);
+        //banner设置方法全部调用完毕时最后调用
+        banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
+        banner.start();
 
     }
 
