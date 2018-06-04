@@ -554,8 +554,9 @@ public class MainActivity extends Activity {
                             List<String> big = getImageBean.getData().getList().getBig();
                             List<String> bigs = new ArrayList<>();
                             List<String> small = getImageBean.getData().getList().getSmall();
+
                             for (String item : big) {
-                                bigs.add("http://" + Constants.HOST + ":8080" + item);
+                                bigs.add("http://" + Constants.HOST + item);
                             }
                             setBanner(bigs);
                             getPc(small);
@@ -580,8 +581,8 @@ public class MainActivity extends Activity {
         imageview_pcs.add(imageView_pc3);
         imageview_pcs.add(imageView_pc4);
         for (int i = 0; i < list.size(); i++) {
-            Log.e("TAG", Constants.HOST + ":8080" + list.get(i));
-            Glide.with(this).load("http://" + Constants.HOST + ":8080" + list.get(i)).placeholder(R.drawable.static2).into(imageview_pcs.get(i));
+
+            Glide.with(this).load("http://" + Constants.HOST + list.get(i)).placeholder(R.drawable.static2).error(R.drawable.static1).into(imageview_pcs.get(i));
         }
 
 

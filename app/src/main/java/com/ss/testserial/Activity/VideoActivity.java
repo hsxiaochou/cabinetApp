@@ -41,6 +41,7 @@ public class VideoActivity extends Activity {
     }
 
     private void setVideo() {
+        
         my_video.setVideoPath(file.get(index).getAbsolutePath());
         my_video.start();
         my_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {

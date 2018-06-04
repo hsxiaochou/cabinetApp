@@ -3,6 +3,86 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d968b9bd0011800e0d333d1571b8d34bcb8a0b6e">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\c8c5ee21fa742e99042975efeb3fb282\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="23dcb4803d3103bde3f3f5db978a726338fe49ae">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\320a1ca82bd46906e9f45c3d8aac8744\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c9a721adcd7dbae7a197b0ef81102336539f63ff">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.1.1\39ded76b5e1ce1c5b2688e1d25cdc20ecee32007\support-annotations-27.1.1.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="39ded76b5e1ce1c5b2688e1d25cdc20ecee32007">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\f007b36d71144f5a9cfc57f42ceafb03\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1fd3ceac7f415975323d52c6c6057db409a907f6">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.googlecode.mp4parser\isoparser\1.1.21\76ccc70b6b23997e8424f4460f8c88a3d591f972\isoparser-1.1.21.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="76ccc70b6b23997e8424f4460f8c88a3d591f972">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2c21984e48391840c16f8a67c9a46f31\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3304d33470ff64cf83bce9189ff3648a42eb2aa7">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
         jumboMode="false"
         min-sdk-version="17"
@@ -10,6 +90,96 @@
         revision="26.0.2"
         sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
         <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.1.0\8007981f7d7540d89cd18471b8e5dcd2b4f99167\common-1.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8007981f7d7540d89cd18471b8e5dcd2b4f99167">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\3f3a89f7c0f237cac7a9797ad00012da\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ec657bb192b20229696216bf233779b16bf75a54">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.2\3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf\gson-2.8.2.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4a64c67c384fac5a614da88f764d7d7d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e2bbe48deed35056023eed2cdc0cc92e5c7d3617">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a06299b94845356c731524654ba386d0877e6b53">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.1.0\edf3f7bfb84a7521d0599efa3b0113a0ee90f85\common-1.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0edf3f7bfb84a7521d0599efa3b0113a0ee90f85">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\a55b98c9d36fce2b0baebc655936cfb7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2feadd535770271ca57b7b431f42151aa4af324a">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\f2db7619371dea0b5cdcf2726832b94b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8a9fd7c97f1d13f97f3b52f9d2e54cd857d5acf9">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\21.jar" />
     </item>
     <item
         is-multidex="false"
@@ -43,43 +213,33 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\jars\classes.jar"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cf6e32d49a836dbb708629bfe234ee9b\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="17"
         optimize="true"
         revision="26.0.2"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\7.jar" />
+        sha1="71d380aeac037e63bab7bda2ba211777e16a2f42">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\25.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.googlecode.mp4parser\isoparser\1.1.21\76ccc70b6b23997e8424f4460f8c88a3d591f972\isoparser-1.1.21.jar"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
         jumboMode="false"
         min-sdk-version="17"
         optimize="true"
         revision="26.0.2"
-        sha1="76ccc70b6b23997e8424f4460f8c88a3d591f972">
-        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\6.jar" />
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\11.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.2\3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf\gson-2.8.2.jar"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\14540590e9ed7ae1d9e63060973c127b\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="17"
         optimize="true"
         revision="26.0.2"
-        sha1="3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf">
-        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
-        jumboMode="false"
-        min-sdk-version="17"
-        optimize="true"
-        revision="26.0.2"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\3.jar" />
+        sha1="874f1143c11f5d38533efe512bf913e3e847e7df">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\16.jar" />
     </item>
     <item
         is-multidex="false"
@@ -90,16 +250,6 @@
         revision="26.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AppData\Local\Android\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
-        jumboMode="false"
-        min-sdk-version="17"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\8.jar" />
     </item>
 
 </items>
