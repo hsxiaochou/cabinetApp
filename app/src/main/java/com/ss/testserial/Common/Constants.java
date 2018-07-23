@@ -34,7 +34,7 @@ public interface Constants {
     /*TCP相关*/
     //服务器地址:端口
     public static final String HOST = "kdg.tuyingmjy.com";
-//    public static final String HOST = "139.129.233.252";//测试
+    //    public static final String HOST = "139.129.233.252";//测试
     //public static final String HOST = "106.75.146.181";
     public static final String DOMAIN = "http://kdg.tuyingmjy.com";
     //    public static final String DOMAIN = "139.129.233.252";//测试
@@ -205,6 +205,15 @@ public interface Constants {
     public static final String GET_IMAGE_CLASS = "DevOp";
     public static final String GET_IMAGE_METHOD = "getAdPic";
 
+
+    //确定寄件
+    public static final String COMFIRM_SENd_class = "DevOp";
+    public static final String COMFIRM_SENd_method = "comfirmSend";
+
+    //取消寄件
+    public static final String CANCEL_SENd_class = "DevOp";
+    public static final String CANCEL_SENd_method = "cancelSend";
+
     /*其他*/
     //DES对称加密密钥
     public static final String DES_KEY = "ch2016sh";
@@ -214,12 +223,9 @@ public interface Constants {
     public static final String DEVICE_COMMAND_PREFIX = "device_command";
     //配置文件名
     public static final String SYSTEM_CONFIG = "system_config.txt";
-    //崩溃日志名
-    public static final String UNCAUGHT_EXCEPTION_LOG_FIEL = "yougoto_";
     //返回主界面操作延时
     public static final int RETURN_MAIN_ACTIVITY_TIME = 60;
     //切换banner时间
-    public static final int SWITCH_BANNER_TIME = 10 * 1000;
     public static final int REBOOT_COUNT_DOWN = 18;
     public static final int LOAD_RUN_TIME_OUT = 15000; // 加载超时
     public static final int KEY_BOARD_NUM = 1; // 数字键盘

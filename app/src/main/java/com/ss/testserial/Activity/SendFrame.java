@@ -238,11 +238,15 @@ public class SendFrame extends Fragment {
                 //锁编号
                 final int logId = jsonObject.getJSONObject("data").getInt("logId");
 
+                //获得是否是寄件开柜
+                Common.type = jsonObject.getJSONObject("data").has("type");
                 Common.package_id = jsonObject.getJSONObject("data").getString("package_id");
                 Common.sendError("打开柜子");
                 // TODO:
-                Common.confirm_LockBoardVsersion();//2次判断LockBoardVsersion
+                Common.confirm_LockBoardVsersion();
                 Common.save("预约投件：  " + "板子型号：" + Common.LockBoardVsersion + " boardId: " + boardId + " lockId " + lockId);//记录板子有关信息到文件中
+
+
                 if (Common.LockBoardVsersion.equals(Constants.THIRD_BOX_NAME)) {
                     lockId = Common.JUBU_ZeroId(lockId);
                     Jubu.openBox(boardId, lockId);
@@ -263,8 +267,14 @@ public class SendFrame extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                    Common.openAgain(grid_info);
-                    Common.Determine(grid_info);
+
+                    if (Common.type) {
+                        //如果有这个字段，跳到确定寄件。
+                        Common.mainActivity.getFragmentManager().beginTransaction().replace(R.id.content, new DetermineFrame()).commitAllowingStateLoss();
+                    } else {
+                        Common.Determine(grid_info);
+                    }
+
 
                 } else {
                     final int finalLockId = lockId;
@@ -285,35 +295,14 @@ public class SendFrame extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Common.Determine(grid_info);
 
+                    if (Common.type) {
+                        //如果有这个字段，跳到确定寄件。
+                        Common.mainActivity.getFragmentManager().beginTransaction().replace(R.id.content, new DetermineFrame()).commitAllowingStateLoss();
+                    } else {
+                        Common.Determine(grid_info);
+                    }
 
-//                    Common.device.openGrid(boardId, lockId, new OpenGridListener() {
-//                        @Override
-//                        public void openEnd() {
-//                            //回复开柜信息
-//                            try {
-//                                JSONObject reply = new JSONObject();
-//                                reply.put("logId", logId);
-//                                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.OPEN_GRID_REPLY_JSON_CLASS, Constants.OPEN_GRID_REPLY_JSON_METHOD, reply).toString(), Constants.DES_KEY));
-//                                Common.put.flush();
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            //再次开柜
-//                            JSONObject grid_info = new JSONObject();
-//                            try {
-//                                grid_info.put("boardId", boardId);
-//                                grid_info.put("lockId", finalLockId);
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-////                            Common.openAgain(grid_info);
-//                            Common.Determine(grid_info);
-//
-//
-//                        }
-//                    });
                 }
             } else {
                 Common.save("预约投件失败：" + jsonObject.getJSONObject("data").getString("msg"));

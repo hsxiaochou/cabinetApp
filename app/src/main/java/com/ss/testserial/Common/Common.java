@@ -185,10 +185,16 @@ public class Common {
     public static UartComm.Rs485 rs485 = null;
     //获取门状态的判断
     public static int Door_status = -1;
-
-
     public static MyDialog myDialog = null;
 
+
+    //判断是否有视频下载失败
+    public static boolean HaveFailVideo = false;
+    //判断视频是否下载完毕
+    public static boolean isSuccessDown = false;
+
+    //判断是否是用户寄件
+    public static boolean type = false;
 
     /**
      * MD5加密
@@ -363,11 +369,18 @@ public class Common {
     //快递员已投件方法
     public static void YTD() {
         try {
-//            Common.startLoad();
+            Common.startLoad();
             JSONObject reply = new JSONObject();
             reply.put("package_id", Common.package_id);
-            Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
-            Common.put.flush();
+            if (Common.type) {
+                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.COMFIRM_SENd_class, Constants.COMFIRM_SENd_method, reply).toString(), Constants.DES_KEY));
+                Common.put.flush();
+                Common.type = false;
+            } else {
+                Common.put.println(Common.encryptByDES(Common.packageJsonData(Constants.GET_GRID_TYPE_CLASS, Constants.SENDMSG, reply).toString(), Constants.DES_KEY));
+                Common.put.flush();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -745,6 +758,7 @@ public class Common {
             e.printStackTrace();
         }
     }
+
     //获取视频下载json
     public static void GetImageOnNet() {
         JSONObject getCodeJson = new JSONObject();

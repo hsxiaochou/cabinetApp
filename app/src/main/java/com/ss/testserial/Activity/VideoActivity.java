@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
 
 import com.ss.testserial.Common.Common;
@@ -30,18 +31,34 @@ public class VideoActivity extends Activity {
         index = 0;
         my_video = (VideoView) findViewById(R.id.my_video);
         file = Common.getFile(new File(Constants.path));
+
+        Button bt_back_vedio = findViewById(R.id.bt_back_vedio);
+        bt_back_vedio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("TAG", "点击退出按钮" +
+                        "");
+                finish();
+                overridePendingTransition(R.anim.activity_right_out, R.anim.activity_left_in);
+            }
+        });
         setVideo();
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Common.save("点击退出广告");
-        finish();
-        return true;
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.e("TAG", "触摸事件");
+                Common.save("点击退出广告");
+                finish();
+                overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private void setVideo() {
-        
         my_video.setVideoPath(file.get(index).getAbsolutePath());
         my_video.start();
         my_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -67,7 +84,6 @@ public class VideoActivity extends Activity {
                 my_video.start();
             }
         });
-
     }
 
 

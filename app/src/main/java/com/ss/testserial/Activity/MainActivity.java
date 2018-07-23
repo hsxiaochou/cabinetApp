@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -91,6 +92,7 @@ public class MainActivity extends Activity {
     private boolean door_sate_breack;
     private Banner banner;
     private String imagejson;
+    private CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,41 +167,29 @@ public class MainActivity extends Activity {
             Common.RecyclingFrameHandler.removeCallbacksAndMessages(null);
 
         }
-
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (isswitchx) {
-            recLen = 0;
-//        handler.postDelayed(runnable, 1000);
-            runnable.run();
+        if (isswitchx && Common.isSuccessDown) {
+            timer.cancel();
+            timer.start();
         }
-
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        recLen = 0;
+        if (Common.isSuccessDown) {
+            timer.cancel();
+            timer.start();
+        }
+
         door_sate_breack = true;
         Common.count_down = Constants.RETURN_MAIN_ACTIVITY_TIME;
         return super.dispatchTouchEvent(ev);
     }
 
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            recLen++;
-            Log.e("TAG", recLen + " ");
-            if (recLen > 100) {
-                Common.mainActivity.startActivity(new Intent(MainActivity.this, VideoActivity.class));
-            } else {
-                handler.postDelayed(this, 1000);
-            }
-
-        }
-    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -220,7 +210,6 @@ public class MainActivity extends Activity {
     //初始化
     @SuppressLint("HandlerLeak")
     private void init() {
-
         Integer[] images = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
         List<Integer> integers = Arrays.asList(images);
         setBanner(integers);
@@ -242,6 +231,23 @@ public class MainActivity extends Activity {
         }
         //初始化界面
         this.initView();
+        //初始化播放视频倒计时
+        // TODO Auto-generated method stub
+        timer = new CountDownTimer(80 * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // TODO Auto-generated method stub
+                Log.e("TAG", millisUntilFinished / 1000 + "秒");
+            }
+
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(MainActivity.this, VideoActivity.class));
+                overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
+            }
+        };
+
+
         //初始化handler
         if (Common.mainActivityHandler == null) {
             Common.mainActivityHandler = new Handler() {
@@ -262,8 +268,6 @@ public class MainActivity extends Activity {
                             ToastUtil toastUtil = new ToastUtil();
                             Toast show = toastUtil.Long(MainActivity.this, msg.obj.toString()).setPostion(685, 50).setToastBackground(Color.WHITE, R.drawable.toast_radius).show();
                             Common.showMyToast(show, 5000);
-
-
                             break;
                         //保存配置文件
                         case Constants.SAVE_CONFIG_MESSAGE:
@@ -484,13 +488,12 @@ public class MainActivity extends Activity {
                                 for (int i = 0; i < video_new_size; i++) {
                                     String s = list_video.get(i);
                                     String substring = s.substring(s.lastIndexOf("/") + 1);
-
-                                    if (fileName.contains(substring) && getVideoUrl.getData().getVideo().get(i).getSize() == new File(Constants.path + substring).length()) {
-                                        video_new.remove(s);
+                                    if (fileName.contains(substring)) {
                                         fileName.remove(substring);
                                     }
                                 }
                                 for (int i = 0; i < fileName.size(); i++) {
+                                    Log.e("TAG", "删除" + fileName.get(i));
                                     Common.delateFile(Constants.path +
                                             fileName.get(i));
                                 }
@@ -501,8 +504,8 @@ public class MainActivity extends Activity {
                                 } else {
                                     List<File> file_video = Common.getFile(new File(Constants.path));
                                     if (file_video.size() > 0) {
-                                        recLen = 0;
-                                        handler.postDelayed(runnable, 10000);
+                                        timer.cancel();
+                                        timer.start();
                                     }
                                 }
                             } else {
@@ -514,8 +517,10 @@ public class MainActivity extends Activity {
                             if (index_video < video_new.size()) {
                                 startService(video_new.get(index_video));
                             } else {
-                                recLen = 0;
-                                handler.postDelayed(runnable, 10000);
+                                Common.isSuccessDown = true;
+                                Common.HaveFailVideo = false;
+                                timer.cancel();
+                                timer.start();
                             }
                             break;
                         //JUBU柜子判断柜门的打开状态
@@ -581,7 +586,6 @@ public class MainActivity extends Activity {
         imageview_pcs.add(imageView_pc3);
         imageview_pcs.add(imageView_pc4);
         for (int i = 0; i < list.size(); i++) {
-
             Glide.with(this).load("http://" + Constants.HOST + list.get(i)).placeholder(R.drawable.static2).error(R.drawable.static1).into(imageview_pcs.get(i));
         }
 
@@ -610,7 +614,6 @@ public class MainActivity extends Activity {
         //banner设置方法全部调用完毕时最后调用
         banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         banner.start();
-
     }
 
 

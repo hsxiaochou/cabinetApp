@@ -7,8 +7,31 @@
     tools:context="com.ss.testserial.Activity.VideoActivity">
 
 
-    <VideoView
-        android:id="@+id/my_video"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+
+        <com.ss.testserial.Common.fullScreen
+            android:id="@+id/my_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/bt_back_vedio"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#44ffffff"
+            android:text="点击这里退出广告"
+            android:textColor="#fff"
+            android:textSize="34sp" />
+
+
+    </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>

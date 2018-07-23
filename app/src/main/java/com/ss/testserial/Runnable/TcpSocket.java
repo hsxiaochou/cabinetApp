@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.MyApplication;
+import com.ss.testserial.Activity.DetermineFrame;
 import com.ss.testserial.Activity.GetFrame;
 import com.ss.testserial.Activity.Layout3Frame;
 import com.ss.testserial.Activity.MainActivity;
@@ -71,6 +72,10 @@ public class TcpSocket implements Runnable {
                 Common.put = new PrintWriter(Common.socket.getOutputStream());
                 Common.isBoardRegister = false;
                 Common.log.write("网络连接成功");
+                //判断是否有视频因断网下载失败
+                if (Common.HaveFailVideo) {
+                    Common.GetVideoJson();
+                }
                 if (Common.IS_REGIST) {
                     Common.register();
                     Common.IS_REGIST = false;
@@ -476,8 +481,7 @@ public class TcpSocket implements Runnable {
                         msg.sendToTarget();
                     }
 
-                }else if (classString.equals(Constants.GET_IMAGE_CLASS) && method.equals(Constants.GET_IMAGE_METHOD)) {
-                    //获取快递员回收json
+                } else if (classString.equals(Constants.GET_IMAGE_CLASS) && method.equals(Constants.GET_IMAGE_METHOD)) {
                     if (jsonObject.getJSONObject("data").getBoolean("success")) {
                         //获取视频json
                         Message msg = Common.mainActivityHandler.obtainMessage();
@@ -485,6 +489,11 @@ public class TcpSocket implements Runnable {
                         msg.obj = jsonObject.toString();
                         msg.sendToTarget();
                     }
+                } else if ((classString.equals(Constants.COMFIRM_SENd_class) && method.equals(Constants.COMFIRM_SENd_method)) || (classString.equals(Constants.CANCEL_SENd_class) && method.equals(Constants.CANCEL_SENd_method))) {
+                    //用户寄件
+                    Common.endLoad();
+                    Common.mainActivity.getFragmentManager().beginTransaction().replace(R.id.content, new SendFrame()).commitAllowingStateLoss();
+                    Common.sendError(jsonObject.getJSONObject("data").getString("msg"));
                 } else {
                     Common.save("未知操作：[class:" + classString + "][method:" + method + "]");
                     Common.log.write("未知操作：[class:" + classString + "][method:" + method + "]" + "未知信息：" + jsonObject.toString());
