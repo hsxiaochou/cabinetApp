@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/pink_radius"
+            android:background="@drawable/login_btn_selector"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
             android:text="登录"

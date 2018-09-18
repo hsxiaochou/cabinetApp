@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/ytd" />
+                android:background="@drawable/ytd_selector" />
 
             <Button
                 android:id="@+id/bt_wtd"
@@ -66,16 +66,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/wtd" />
+                android:background="@drawable/wtd_selector" />
 
         </LinearLayout>
 
         <Button
+            android:text="再次开柜"
+            android:textSize="24dp"
+            android:textColor="#fff"
             android:id="@+id/bt_open_agin"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/zckg" />
+            android:background="@drawable/login_btn_selector" />
     </LinearLayout>
 
 

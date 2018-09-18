@@ -217,7 +217,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="11dp"
                 android:layout_weight="1"
-                android:src="@drawable/put" />
+                android:src="@drawable/put_send" />
 
             <ImageButton
                 android:id="@+id/send2login"

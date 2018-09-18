@@ -45,7 +45,7 @@
         android:id="@+id/pay_qrcode_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginTop="20dp"
         android:text="取件已超时，请使用微信扫码支付"
         android:textSize="24sp" />
@@ -59,7 +59,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/qrcode"
@@ -93,9 +93,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="请用手遮挡阳光，扫小二维码———>"
+                    android:text="请用手遮挡阳光，扫小二维码—>"
                     android:textSize="24sp" />
-
                 <ImageView
                     android:id="@+id/qrcode2"
                     android:layout_width="wrap_content"

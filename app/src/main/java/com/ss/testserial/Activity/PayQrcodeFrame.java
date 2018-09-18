@@ -74,7 +74,7 @@ public class PayQrcodeFrame extends Fragment {
         }else{
             this.pay_qrcode_text.setText("包裹存放超时，请使用微信扫码支付");
             this.qrcode.setImageBitmap(QRCode.makeQrcode(Common.pay_qrcode,250));
-            ((ImageView)this.view.findViewById(R.id.qrcode2)).setImageBitmap(QRCode.makeQrcode(Common.pay_qrcode,150));
+            ((ImageView)this.view.findViewById(R.id.qrcode2)).setImageBitmap(QRCode.makeQrcode(Common.pay_qrcode,190));
         }
     }
 }

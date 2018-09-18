@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/kgcg" />
+            android:background="@drawable/zckg_btn_fhsy" />
 
         <Button
 
@@ -77,7 +77,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/kgcg_zckg" />
+            android:background="@drawable/zckg_btn_selector" />
 
     </LinearLayout>
 
