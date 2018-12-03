@@ -9,6 +9,10 @@ android {
         applicationId "com.ss.testserial"
         minSdkVersion 17
         targetSdkVersion 26
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
 
     buildTypes {
@@ -36,4 +40,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.googlecode.mp4parser:isoparser:1.1.21'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    compile 'cn.jzvd:jiaozivideoplayer:6.3.1'
 }

@@ -195,6 +195,7 @@ public class Common {
 
     //判断是否是用户寄件
     public static boolean type = false;
+    public static Context applicationContext;
 
     /**
      * MD5加密
@@ -788,6 +789,17 @@ public class Common {
 
 
     public static void oPenDoor(final int boardId, final int lockId) {
+
+        //再次开柜
+        JSONObject grid_info = new JSONObject();
+        try {
+            grid_info.put("boardId", boardId);
+            grid_info.put("lockId", lockId);
+            Common.open_again_data=grid_info;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Timer timer = new Timer();
         if (rs485 == null) {
             rs485 = new UartComm().new Rs485();

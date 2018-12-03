@@ -9,6 +9,9 @@ import android.widget.Toast;
 import com.ss.testserial.Common.Common;
 import com.ss.testserial.Common.Constants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by leon on 2017/9/11.
  */
@@ -24,6 +27,17 @@ public class Jubu {
         Intent intent = new Intent(Jubu.OPEN_DOOR);
         intent.putExtra("iBoardId", boardId);
         intent.putExtra("iLockId", lockId);
+
+        //再次开柜
+        JSONObject grid_info = new JSONObject();
+        try {
+            grid_info.put("boardId", boardId);
+            grid_info.put("lockId", lockId);
+            Common.open_again_data=grid_info;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Common.mainActivity.sendBroadcast(intent);
 //        Message msg = new Message();
 //        msg.what = Constants.OPEN_DOOR;

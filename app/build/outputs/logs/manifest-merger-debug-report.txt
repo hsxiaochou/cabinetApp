@@ -1,10 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
+ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
 MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:2:1-11:12
+MERGED from [com.tencent.bugly:crashreport:2.6.6.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\crashreport-2.6.6.1.aar\2378bab5635f68898119f817288617f9\AndroidManifest.xml:2:1-9:12
+MERGED from [com.tencent.bugly:nativecrashreport:3.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\nativecrashreport-3.3.1.aar\6cf6747c33340c98576883fe3921e136\AndroidManifest.xml:2:1-9:12
+MERGED from [cn.jzvd:jiaozivideoplayer:6.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2c21984e48391840c16f8a67c9a46f31\AndroidManifest.xml:17:1-22:12
@@ -17,9 +20,9 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Administrator\
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\f007b36d71144f5a9cfc57f42ceafb03\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4a64c67c384fac5a614da88f764d7d7d\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cf6e32d49a836dbb708629bfe234ee9b\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-65:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
+INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:2:1-68:12
 	package
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:3:5-32
 		INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml
@@ -40,6 +43,12 @@ INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\
 INJECTED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:7:5-9:41
 MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:7:5-9:41
 MERGED from [com.youth.banner:banner:1.4.10] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\banner-1.4.10.aar\c63cc2115f0ce2dc437ff14299a3c2e8\AndroidManifest.xml:7:5-9:41
+MERGED from [com.tencent.bugly:crashreport:2.6.6.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\crashreport-2.6.6.1.aar\2378bab5635f68898119f817288617f9\AndroidManifest.xml:5:5-7:41
+MERGED from [com.tencent.bugly:crashreport:2.6.6.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\crashreport-2.6.6.1.aar\2378bab5635f68898119f817288617f9\AndroidManifest.xml:5:5-7:41
+MERGED from [com.tencent.bugly:nativecrashreport:3.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\nativecrashreport-3.3.1.aar\6cf6747c33340c98576883fe3921e136\AndroidManifest.xml:5:5-7:41
+MERGED from [com.tencent.bugly:nativecrashreport:3.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\nativecrashreport-3.3.1.aar\6cf6747c33340c98576883fe3921e136\AndroidManifest.xml:5:5-7:41
+MERGED from [cn.jzvd:jiaozivideoplayer:6.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\AndroidManifest.xml:7:5-9:41
+MERGED from [cn.jzvd:jiaozivideoplayer:6.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\7679d785d1a83bbf2007b53f3c60c1ab\AndroidManifest.xml:20:5-44
@@ -84,6 +93,8 @@ ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\And
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:13:22-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:15:5-79
+MERGED from [cn.jzvd:jiaozivideoplayer:6.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\AndroidManifest.xml:11:5-79
+MERGED from [cn.jzvd:jiaozivideoplayer:6.3.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:15:22-76
 uses-permission#android.permission.ACCESS_WIFI_STATE
@@ -131,7 +142,7 @@ ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\And
 	android:name
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:30:22-81
 application
-ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:32:5-63:19
+ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:32:5-66:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\879bd68bb0cd27eb67d07a3b508320d1\AndroidManifest.xml:9:5-20
 	android:label
@@ -185,14 +196,18 @@ ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\And
 	android:name
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:54:25-73
 activity#com.ss.testserial.Activity.VideoActivity
-ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:58:9-69
+ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:58:9-60
 	android:name
 		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:58:19-57
 service#com.ss.testserial.Common.download.DownloadService
-ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:59:9-62:47
+ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:60:9-63:39
 	android:enabled
-		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:61:13-35
+		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:62:13-35
 	android:exported
-		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:62:13-36
+		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:63:13-36
 	android:name
-		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:60:13-60
+		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:61:13-60
+activity#com.ss.testserial.Activity.VideoActivity2
+ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:65:9-70
+	android:name
+		ADDED from C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\src\main\AndroidManifest.xml:65:19-58

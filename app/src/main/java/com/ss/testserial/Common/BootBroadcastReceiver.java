@@ -68,7 +68,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 break;
             case JUBU_SCAN:
                 String code = intent.getStringExtra("sBarcode");
-                if (!TextUtils.isEmpty(code)) {
+                if (!TextUtils.isEmpty(code)&&!TextUtils.isEmpty(Common.frame)) {
                     switch (Common.frame) {
                         case "scaner":
                             ((TextView) Common.mainActivity.findViewById(R.id.express)).setText(code);

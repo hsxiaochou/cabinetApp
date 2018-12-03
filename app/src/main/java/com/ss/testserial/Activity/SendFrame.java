@@ -130,7 +130,7 @@ public class SendFrame extends Fragment {
         this.code[4] = (EditText) this.view.findViewById(R.id.getCode5);
         this.code[5] = (EditText) this.view.findViewById(R.id.getCode6);
         //软键盘
-        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD);
+        this.keyBoard = new KeyBoard(this.view, Constants.KEY_BOARD_NUM);
         this.keyBoard.setKeyBoardListener(new KeyBoard.KeyBoardListener() {
             @Override
             public void delete() {
@@ -292,6 +292,8 @@ public class SendFrame extends Fragment {
                     try {
                         grid_info.put("boardId", boardId);
                         grid_info.put("lockId", finalLockId);
+                        Common.open_again_data=grid_info;
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

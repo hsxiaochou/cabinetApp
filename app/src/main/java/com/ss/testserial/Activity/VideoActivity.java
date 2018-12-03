@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import com.ss.testserial.Common.Common;
@@ -17,7 +18,7 @@ import com.ss.testserial.R;
 import java.io.File;
 import java.util.List;
 
-public class VideoActivity extends Activity {
+public class VideoActivity extends Activity implements View.OnClickListener {
     private VideoView my_video;
     private List<File> file;
     private int index;
@@ -31,33 +32,22 @@ public class VideoActivity extends Activity {
         index = 0;
         my_video = (VideoView) findViewById(R.id.my_video);
         file = Common.getFile(new File(Constants.path));
-
-        Button bt_back_vedio = findViewById(R.id.bt_back_vedio);
-        bt_back_vedio.setOnClickListener(new View.OnClickListener() {
+        my_video.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                Log.e("TAG", "点击退出按钮" +
-                        "");
-                finish();
-                overridePendingTransition(R.anim.activity_right_out, R.anim.activity_left_in);
-            }
-        });
-        setVideo();
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.e("TAG", "触摸事件");
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.e("TAG","antouch");
                 Common.save("点击退出广告");
                 finish();
                 overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
-                break;
-        }
-        return super.dispatchTouchEvent(ev);
+                return true;
+            }
+        });
+        Button bt_back_vedio = findViewById(R.id.bt_back_vedio);
+        bt_back_vedio.setOnClickListener(this);
+        RelativeLayout rl_tc = findViewById(R.id.rl_tc);
+        rl_tc.setOnClickListener(this);
+        setVideo();
     }
-
     private void setVideo() {
         my_video.setVideoPath(file.get(index).getAbsolutePath());
         my_video.start();
@@ -86,5 +76,23 @@ public class VideoActivity extends Activity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        my_video.stopPlayback();
+        my_video=null;
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_back_vedio:
+            case R.id.rl_tc:
+                Log.e("TAg","点击");
+                Common.save("点击退出广告按钮");
+                finish();
+                overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+                break;
+        }
+    }
 }

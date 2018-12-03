@@ -43,6 +43,16 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\crashreport-2.6.6.1.aar\2378bab5635f68898119f817288617f9\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="56b24cbd303368a3dc7a0cf1efbeb4f59b9ad742">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\27.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.1.1\39ded76b5e1ce1c5b2688e1d25cdc20ecee32007\support-annotations-27.1.1.jar"
         jumboMode="false"
         min-sdk-version="17"
@@ -60,6 +70,16 @@
         revision="26.0.2"
         sha1="1fd3ceac7f415975323d52c6c6057db409a907f6">
         <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.3.1.aar\ea7730e745ecbdc96140fbcbb9ba43a7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.2"
+        sha1="fb1f9d922d86dc28c771e93b7738a41250d2f07d">
+        <dex dex="C:\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\build\intermediates\transforms\preDex\release\28.jar" />
     </item>
     <item
         is-multidex="false"

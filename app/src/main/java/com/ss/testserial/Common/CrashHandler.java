@@ -40,7 +40,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     // CrashHandler 实例
     private static CrashHandler INSTANCE = new CrashHandler();
     // 程序的 Context 对象
-    private Context mContext;
 
     // 用来存储设备信息和异常信息
     private Map<String, String> infos = new HashMap<String, String>();

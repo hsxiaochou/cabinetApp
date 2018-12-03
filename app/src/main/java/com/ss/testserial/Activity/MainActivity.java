@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
         this.initView();
         //初始化播放视频倒计时
         // TODO Auto-generated method stub
-        timer = new CountDownTimer(80 * 1000, 1000) {
+        timer = new CountDownTimer(10 * 8000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // TODO Auto-generated method stub
@@ -242,6 +242,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onFinish() {
+                Log.e("TAG","这是onfinish方法");
                 startActivity(new Intent(MainActivity.this, VideoActivity.class));
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
             }
@@ -295,7 +296,7 @@ public class MainActivity extends Activity {
                             }
                             load.hide();
                             /*
-                            try {
+                        try {
                                 Common.loadDialog.dismiss();
                             } catch (Exception e) {}
                             */
@@ -409,18 +410,13 @@ public class MainActivity extends Activity {
                                         Common.commonDialog.dismiss();
                                     } catch (Exception e) {
                                     }
-                                /*
-                                try {
-                                    Common.loadDialog.dismiss();
-                                } catch (Exception e) {}
-                                */
                                     load.hide();
                                     try {
                                         Common.device.scanner.close();
                                     } catch (Exception e) {
                                     }
-                                    fragmentTransaction.replace(R.id.content, Common.mainFrame);
-                                    fragmentTransaction.commitAllowingStateLoss();
+                                    fragmentTransaction.replace(R.id.content,Common.mainFrame.instantiate(MainActivity.this, Common.mainFrame.getClass().getName()));
+                                        fragmentTransaction.commitAllowingStateLoss();
                                     Common.frame2 = "";//还原
                                 }
                             }
@@ -480,7 +476,6 @@ public class MainActivity extends Activity {
                                 for (int i = 0; i < getVideoUrl.getData().getVideo().size(); i++) {
                                     video_new.add(getVideoUrl.getData().getVideo().get(i).getName());
                                 }
-                                ;
                                 ArrayList<String> list_video = new ArrayList<>();
                                 list_video.addAll(video_new);
                                 fileName = Common.getFileName(new File(Constants.path));
@@ -586,7 +581,7 @@ public class MainActivity extends Activity {
         imageview_pcs.add(imageView_pc3);
         imageview_pcs.add(imageView_pc4);
         for (int i = 0; i < list.size(); i++) {
-            Glide.with(this).load("http://" + Constants.HOST + list.get(i)).placeholder(R.drawable.static2).error(R.drawable.static1).into(imageview_pcs.get(i));
+            Glide.with(Common.applicationContext).load("http://" + Constants.HOST + list.get(i)).placeholder(R.drawable.static2).error(R.drawable.static1).into(imageview_pcs.get(i));
         }
 
 
@@ -659,4 +654,7 @@ public class MainActivity extends Activity {
         //提交事务
         fragmentTransaction.commitAllowingStateLoss();
     }
+
+
+
 }

@@ -172,6 +172,4 @@ public class DetermineFrame extends Fragment {
             }
         });
     }
-
-
 }

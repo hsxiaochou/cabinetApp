@@ -203,6 +203,7 @@
             </LinearLayout>
 
             <Button
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="扫码投件"
@@ -252,7 +253,7 @@
         android:layout_height="372dp" >
 
         <include
-            layout="@layout/keyboard"
+            layout="@layout/keyboard_num"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>

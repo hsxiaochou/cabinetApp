@@ -56,20 +56,6 @@ public class MainFrame extends Fragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e1) {
-            throw new RuntimeException(e1);
-        } catch (IllegalAccessException e2) {
-            throw new RuntimeException(e2);
-        }
-    }
-
-    @Override
     public void onDestroyView() {
         // TODO Auto-generated method stub
         super.onDestroyView();
@@ -161,6 +147,9 @@ public class MainFrame extends Fragment {
                 fragmentTransaction.replace(R.id.content, queryFrame);
                 Common.log.write("点击查询按钮");
                 fragmentTransaction.commitAllowingStateLoss();
+//                String s =null;
+//                Log.e("TAG",s.toString());
+
 
             }
         });

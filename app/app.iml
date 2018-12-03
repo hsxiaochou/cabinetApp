@@ -113,10 +113,12 @@
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.1.1" level="project" />
     <orderEntry type="library" name="android.arch.core:common:1.1.0@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\Administrator\Desktop\cabinetApp\cabinetApp\app\libs\zxing.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.tencent.bugly:crashreport-2.6.6.1" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-27.1.1" level="project" />
+    <orderEntry type="library" name="com.tencent.bugly:nativecrashreport-3.3.1" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:runtime-1.1.0" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:common:1.1.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp3:okhttp:3.4.1@jar" level="project" />
@@ -128,6 +130,7 @@
     <orderEntry type="library" name="android.arch.lifecycle:livedata-core-1.1.0" level="project" />
     <orderEntry type="library" name="com.networkbench.newlens.agent.android:nbs.newlens.agent:2.5.3@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-27.1.1" level="project" />
+    <orderEntry type="library" name="cn.jzvd:jiaozivideoplayer-6.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.1.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:27.1.1@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:3.7.0@jar" level="project" />
